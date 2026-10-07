@@ -1,0 +1,81 @@
+-- Esquema de la base de Team Anexo (Neon Postgres).
+-- Se aplica con: npm run db:migrar  (es idempotente, se puede correr varias veces).
+
+create table if not exists series (
+  id          text primary key,
+  nombre      text not null,
+  corto       text not null,
+  juego       text not null,
+  activa      boolean not null default true,
+  rankeable   boolean not null default false,
+  -- Tabla de puntos: [{ "desde": 1, "puntos": 100 }, ...]
+  puntos      jsonb,
+  descripcion text not null default '',
+  orden       int not null default 0
+);
+
+create table if not exists torneos (
+  slug                text primary key,
+  nombre              text not null,
+  serie               text not null references series(id),
+  -- ISO completo, "AAAA-MM-DD" o solo "AAAA"
+  fecha               text not null,
+  temporada           int not null,
+  sede                text,
+  direccion           text,
+  valor               text,
+  afiche              text,
+  slug_startgg        text unique,
+  inscripcion_abierta boolean not null default false,
+  actualizado         timestamptz not null default now()
+);
+
+create table if not exists eventos (
+  id           serial primary key,
+  torneo       text not null references torneos(slug) on delete cascade on update cascade,
+  orden        int not null default 0,
+  nombre       text not null,
+  juego        text not null,
+  slug_startgg text,
+  inscriptos   int,
+  suma_ranking boolean not null default false
+);
+create index if not exists eventos_torneo on eventos(torneo);
+
+create table if not exists standings (
+  evento     int not null references eventos(id) on delete cascade,
+  puesto     int not null,
+  -- "sgg:<id de jugador de start.gg>", un slug local o "equipo:<slug>" en dobles
+  jugador    text not null,
+  gamer_tag  text not null,
+  personaje  text,
+  -- Games jugados con cada personaje: { "corrin": 12, "byleth": 3 }
+  personajes jsonb,
+  primary key (evento, jugador)
+);
+create index if not exists standings_jugador on standings(jugador);
+
+create table if not exists jugadores (
+  id           text primary key,
+  slug         text not null unique,
+  gamer_tag    text not null,
+  prefijo      text,
+  -- Main elegido a mano; si es null se calcula con los personajes reportados
+  personaje    text,
+  slug_startgg text
+);
+
+-- Cuentas duplicadas: la secundaria suma a la principal.
+create table if not exists alias (
+  secundario text primary key,
+  principal  text not null
+);
+
+create table if not exists resultados (
+  id     serial primary key,
+  titulo text not null,
+  evento text not null,
+  imagen text not null,
+  alt    text not null,
+  orden  int not null default 0
+);

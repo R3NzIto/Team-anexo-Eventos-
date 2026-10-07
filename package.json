@@ -10,9 +10,12 @@
     "importar": "node --env-file-if-exists=.env.local --no-warnings scripts/importar-startgg.ts",
     "typecheck": "tsc --noEmit",
     "mis-torneos": "node --env-file-if-exists=.env.local --no-warnings scripts/mis-torneos.ts",
-    "actualizar": "node --env-file-if-exists=.env.local --no-warnings scripts/actualizar-todo.ts"
+    "actualizar": "node --env-file-if-exists=.env.local --no-warnings scripts/actualizar-todo.ts",
+    "db:migrar": "node --env-file-if-exists=.env.local --no-warnings scripts/db-migrar.ts",
+    "db:semilla": "node --env-file-if-exists=.env.local --no-warnings scripts/db-semilla.ts"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^1.2.0",
     "next": "16.4.0",
     "react": "19.3.0",
     "react-dom": "19.3.0",

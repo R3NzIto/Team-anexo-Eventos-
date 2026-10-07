@@ -1,4 +1,8 @@
-import type { Serie, TablaPuntos } from "@/lib/types";
+/*
+  Series iniciales. Se cargan en la base con `npm run db:semilla`; después se
+  editan desde la base (y más adelante desde el panel de admin).
+*/
+import type { Serie, TablaPuntos } from "../lib/types.ts";
 
 /**
  * Tabla de puntos propuesta para la Premier: más peso a los primeros puestos
@@ -84,7 +88,3 @@ export const SERIES: Serie[] = [
     descripcion: "La primera copa del Anexo, en 2022.",
   },
 ];
-
-export function getSerieConfig(id: string): Serie | undefined {
-  return SERIES.find((s) => s.id === id);
-}

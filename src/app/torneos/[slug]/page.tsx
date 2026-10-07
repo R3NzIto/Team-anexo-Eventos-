@@ -6,9 +6,8 @@ import { Suspense } from "react";
 import { Countdown } from "@/components/Countdown";
 import { StockIcon } from "@/components/Ranking";
 import { SerieChip } from "@/components/Torneo";
-import { getJugadores, getProximos, getTorneo } from "@/lib/data";
+import { getJugadores, getProximos, getTorneo, getSerie } from "@/lib/data";
 import { fechaLarga, urlStartgg } from "@/lib/format";
-import { getSerieConfig } from "@/data/series";
 import { puntosPorPuesto } from "@/lib/ranking";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -31,7 +30,7 @@ async function Torneo({ slug }: { slug: string }) {
   const [torneo, proximos, jugadores] = await Promise.all([getTorneo(slug), getProximos(), getJugadores()]);
   if (!torneo) notFound();
   const esProximo = proximos.some((t) => t.slug === torneo.slug);
-  const serie = getSerieConfig(torneo.serie);
+  const serie = await getSerie(torneo.serie);
   const porId = new Map(jugadores.map((j) => [j.id, j]));
   const hero = torneo.serie === "premier" ? "page-hero--premier" : "page-hero--carbon";
 

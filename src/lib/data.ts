@@ -1,39 +1,37 @@
 import "server-only";
 import { cacheLife, cacheTag } from "next/cache";
-import torneosSeed from "@/data/torneos.json";
-import jugadoresSeed from "@/data/jugadores.json";
-import resultadosSeed from "@/data/resultados.json";
-import aliasSeed from "@/data/alias.json";
-import { SERIES, getSerieConfig } from "@/data/series";
+import { leerDatos } from "./db";
 import { calcularRanking, slugify } from "./ranking";
 import { masUsado, sumarUsos } from "./personajes";
 import { fechaOrdenable } from "./format";
 import type { FilaRanking, Jugador, Resultado, Serie, SerieId, Torneo } from "./types";
 
 /*
-  Capa de datos del sitio. Hoy lee los archivos de src/data; cuando se conecte
-  Supabase, solo cambia la implementación de estas funciones. Las páginas no se tocan.
-  Las etiquetas (cacheTag) permiten que el panel de admin refresque al guardar.
+  Capa de datos del sitio: única puerta a la base. Las páginas solo llaman a
+  estas funciones. Todo queda en caché con la etiqueta "datos"; el panel de
+  admin la invalida al guardar (updateTag("datos")) y el sitio se actualiza.
 */
 
 /*
-  alias.json une cuentas duplicadas de un mismo jugador en start.gg:
-  { "sgg:<id-secundario>": "sgg:<id-principal>" }. Los puntos y el historial
-  de la cuenta secundaria pasan a la principal.
+  Lee la base una vez y prepara:
+  - Los standings con los alias aplicados: la cuenta secundaria de un jugador
+    (tabla alias) suma a la principal.
+  - Todos los jugadores individuales con su main: el elegido a mano o, si no hay,
+    el personaje con más games sumando todos sus torneos.
 */
-const alias = aliasSeed as Record<string, string>;
-const principal = (id: string) => alias[id] ?? id;
+async function getBase() {
+  "use cache";
+  cacheLife("hours");
+  cacheTag("datos");
+  const datos = await leerDatos();
+  const principal = (id: string) => datos.alias[id] ?? id;
 
-const torneos = (torneosSeed as Torneo[]).map((t) => ({
-  ...t,
-  events: t.events.map((e) => ({ ...e, standings: e.standings.map((s) => ({ ...s, jugador: principal(s.jugador) })) })),
-}));
-/*
-  Todos los jugadores individuales con su main: el elegido a mano en jugadores.json
-  o, si no hay, el personaje con más games sumando todos sus torneos.
-*/
-const jugadores: Jugador[] = (() => {
-  const porId = new Map((jugadoresSeed as Jugador[]).filter((j) => !alias[j.id]).map((j) => [j.id, { ...j }]));
+  const torneos: Torneo[] = datos.torneos.map((t) => ({
+    ...t,
+    events: t.events.map((e) => ({ ...e, standings: e.standings.map((s) => ({ ...s, jugador: principal(s.jugador) })) })),
+  }));
+
+  const porId = new Map(datos.jugadores.filter((j) => !datos.alias[j.id]).map((j) => [j.id, { ...j }]));
   const usos = new Map<string, Record<string, number>>();
   for (const t of torneos) {
     for (const e of t.events) {
@@ -48,65 +46,77 @@ const jugadores: Jugador[] = (() => {
       }
     }
   }
-  return [...porId.values()].map((j) => ({ ...j, personaje: j.personaje ?? masUsado(usos.get(j.id)) }));
-})();
+  const jugadores: Jugador[] = [...porId.values()].map((j) => ({ ...j, personaje: j.personaje ?? masUsado(usos.get(j.id)) }));
+
+  return { series: datos.series, torneos, jugadores, resultados: datos.resultados };
+}
 
 function ordenarRecientes(lista: Torneo[]) {
   return [...lista].sort((a, b) => fechaOrdenable(b.fecha) - fechaOrdenable(a.fecha));
 }
 
+/** Un torneo pasó si ya transcurrieron 12 h desde su inicio (o si solo se sabe el año). */
+const yaPaso = (t: Torneo) => t.fecha.length === 4 || fechaOrdenable(t.fecha) <= Date.now() - 12 * 3600 * 1000;
+
 export async function getSeries(): Promise<Serie[]> {
   "use cache";
-  cacheLife("days");
-  cacheTag("series");
-  return SERIES;
+  cacheLife("hours");
+  cacheTag("datos");
+  return (await getBase()).series;
+}
+
+export async function getSerie(id: string): Promise<Serie | undefined> {
+  "use cache";
+  cacheLife("hours");
+  cacheTag("datos");
+  return (await getBase()).series.find((s) => s.id === id);
 }
 
 export async function getTorneos(): Promise<Torneo[]> {
   "use cache";
   cacheLife("hours");
-  cacheTag("torneos");
-  return ordenarRecientes(torneos);
+  cacheTag("datos");
+  return ordenarRecientes((await getBase()).torneos);
 }
 
 export async function getTorneo(slug: string): Promise<Torneo | undefined> {
   "use cache";
   cacheLife("hours");
-  cacheTag("torneos", `torneo:${slug}`);
-  return torneos.find((t) => t.slug === slug);
+  cacheTag("datos");
+  return (await getBase()).torneos.find((t) => t.slug === slug);
 }
 
 /** Próximos torneos (fecha con día en el futuro), el más cercano primero. */
 export async function getProximos(): Promise<Torneo[]> {
   "use cache";
   cacheLife("hours");
-  cacheTag("torneos");
-  const ahora = Date.now() - 12 * 3600 * 1000;
-  return torneos
-    .filter((t) => t.fecha.length > 4 && fechaOrdenable(t.fecha) > ahora)
+  cacheTag("datos");
+  return (await getBase()).torneos
+    .filter((t) => !yaPaso(t))
     .sort((a, b) => fechaOrdenable(a.fecha) - fechaOrdenable(b.fecha));
 }
 
 export async function getPasados(): Promise<Torneo[]> {
   "use cache";
   cacheLife("hours");
-  cacheTag("torneos");
-  const ahora = Date.now() - 12 * 3600 * 1000;
-  return ordenarRecientes(torneos.filter((t) => t.fecha.length === 4 || fechaOrdenable(t.fecha) <= ahora));
+  cacheTag("datos");
+  return ordenarRecientes((await getBase()).torneos.filter(yaPaso));
 }
 
 export async function getTemporadas(serie: SerieId): Promise<number[]> {
   "use cache";
   cacheLife("hours");
-  cacheTag("torneos");
+  cacheTag("datos");
+  const { torneos } = await getBase();
   return [...new Set(torneos.filter((t) => t.serie === serie).map((t) => t.temporada))].sort((a, b) => b - a);
 }
 
 export async function getRanking(serie: SerieId, temporada: number): Promise<FilaRanking[]> {
   "use cache";
   cacheLife("hours");
-  cacheTag("torneos", "jugadores", `ranking:${serie}`);
-  const config = getSerieConfig(serie);
+  cacheTag("datos");
+  const { series, torneos, jugadores } = await getBase();
+  const config = series.find((s) => s.id === serie);
   if (!config?.puntos) return [];
   const delTemporada = torneos.filter((t) => t.serie === serie && t.temporada === temporada);
   return calcularRanking(delTemporada, config.puntos, new Map(jugadores.map((j) => [j.id, j])));
@@ -115,8 +125,8 @@ export async function getRanking(serie: SerieId, temporada: number): Promise<Fil
 export async function getJugadores(): Promise<Jugador[]> {
   "use cache";
   cacheLife("hours");
-  cacheTag("jugadores", "torneos");
-  return [...jugadores].sort((a, b) => a.gamerTag.localeCompare(b.gamerTag, "es"));
+  cacheTag("datos");
+  return [...(await getBase()).jugadores].sort((a, b) => a.gamerTag.localeCompare(b.gamerTag, "es"));
 }
 
 export type Participacion = { torneo: Torneo; evento: string; puesto: number; personaje?: string };
@@ -124,9 +134,9 @@ export type Participacion = { torneo: Torneo; evento: string; puesto: number; pe
 export async function getJugador(slug: string): Promise<{ jugador: Jugador; historial: Participacion[] } | undefined> {
   "use cache";
   cacheLife("hours");
-  cacheTag("jugadores", "torneos", `jugador:${slug}`);
-  const todos = await getJugadores();
-  const jugador = todos.find((j) => j.slug === slug);
+  cacheTag("datos");
+  const { torneos, jugadores } = await getBase();
+  const jugador = jugadores.find((j) => j.slug === slug);
   if (!jugador) return undefined;
   const historial: Participacion[] = [];
   for (const t of ordenarRecientes(torneos)) {
@@ -140,8 +150,7 @@ export async function getJugador(slug: string): Promise<{ jugador: Jugador; hist
 
 export async function getResultadosDestacados(): Promise<Resultado[]> {
   "use cache";
-  cacheLife("days");
-  cacheTag("resultados");
-  return resultadosSeed as Resultado[];
+  cacheLife("hours");
+  cacheTag("datos");
+  return (await getBase()).resultados;
 }
-

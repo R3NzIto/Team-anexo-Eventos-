@@ -4,8 +4,7 @@ import Link from "next/link";
 import { Icon } from "@/components/Icon";
 import { RankingTable, RankingVacio } from "@/components/Ranking";
 import { TorneoCard } from "@/components/TorneoCard";
-import { getProximos, getRanking, getTemporadas, getTorneos } from "@/lib/data";
-import { getSerieConfig } from "@/data/series";
+import { getProximos, getRanking, getTemporadas, getTorneos, getSerie } from "@/lib/data";
 import { LINKS } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -19,7 +18,7 @@ export default async function PremierPage() {
   const ranking = await getRanking("premier", temporada);
   const ediciones = torneos.filter((t) => t.serie === "premier");
   const proxima = proximos.find((t) => t.serie === "premier");
-  const tabla = getSerieConfig("premier")?.puntos ?? [];
+  const tabla = (await getSerie("premier"))?.puntos ?? [];
 
   return (
     <>

@@ -8,7 +8,7 @@ web
 
 ## Stack
 
-Next.js 16 (App Router, Cache Components, TypeScript) deployed on Vercel. Chosen by the user over plain HTML to support player accounts and an admin panel. Planned: Supabase for database and auth (Google login, plus start.gg OAuth linking), and the start.gg GraphQL API for tournaments, standings and players. Registration itself always happens on start.gg (the API has no registration mutation); the site links to it or embeds start.gg's registration widget.
+Next.js 16 (App Router, Cache Components, TypeScript) deployed on Vercel. Chosen by the user over plain HTML to support player accounts and an admin panel. Data lives in Neon Postgres (connected through Vercel). Planned: Auth.js for login (Google and start.gg OAuth) and an admin panel. The start.gg GraphQL API feeds tournaments, standings, players and characters. Registration itself always happens on start.gg (the API has no registration mutation); the site links to it or embeds start.gg's registration widget.
 
 ## Users
 
