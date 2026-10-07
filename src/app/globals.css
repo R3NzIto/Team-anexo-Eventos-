@@ -1106,3 +1106,34 @@ button.link-arrow { background: none; border: 0; padding: 0; font: inherit; curs
     .admin-torneos th:nth-child(3), .admin-torneos td:nth-child(3) { display: none; }
     .admin-torneos__acciones { white-space: normal; }
 }
+
+.admin-tabs { margin-top: 1.6rem; }
+.admin-intro { max-width: 70ch; margin-bottom: 1.2rem; }
+.admin-num, .admin-select {
+    font: inherit;
+    font-size: 1rem;
+    padding: .45rem .6rem;
+    color: var(--white);
+    background: var(--carbon);
+    border: 2px solid var(--carbon-3);
+    border-radius: 0;
+}
+.admin-num { width: 6.5rem; font-variant-numeric: tabular-nums; }
+.admin-num[readonly] { opacity: .6; }
+.admin-select { max-width: 100%; }
+.admin-num:focus-visible, .admin-select:focus-visible { outline: none; border-color: var(--yellow); }
+.admin-puntos { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 3rem); align-items: start; }
+.admin-puntos > div > * + * { margin-top: 1rem; }
+.admin-puntos__tabla td { padding-block: .5rem; vertical-align: middle; }
+.admin-puntos__previa { padding: clamp(1rem, 3vw, 1.6rem); background: var(--carbon); }
+.admin-puntos__previa > * + * { margin-top: 1rem; }
+.admin-puntos__previa[aria-busy="true"] { opacity: .6; transition: opacity .2s; }
+.admin-mov { margin-left: .6rem; font-size: .8rem; font-weight: 800; }
+.admin-mov--sube { color: #7CE38B; }
+.admin-mov--baja { color: #FF8A8A; }
+.admin-mains > * + *, .admin-cuentas > * + * { margin-top: 1.2rem; }
+.admin-mains .admin-form { align-items: center; }
+.admin-mains a { color: var(--white); }
+@media (max-width: 56rem) {
+    .admin-puntos { grid-template-columns: 1fr; }
+}
