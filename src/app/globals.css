@@ -1014,3 +1014,37 @@ ul { list-style: none; padding: 0; }
 }
 
 .puntos { margin-top: 1.5rem; max-width: 26rem; }
+
+/* ===================================================================
+   Cuenta: botón en la barra, ingresar y mi cuenta
+   =================================================================== */
+
+.topbar__cuenta {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .25rem .6rem .25rem .25rem;
+    color: var(--white);
+    font-weight: 700;
+    text-decoration: none;
+    border: 2px solid var(--carbon-3);
+}
+.topbar__cuenta:hover { border-color: var(--yellow); color: var(--yellow); }
+.topbar__cuenta img, .topbar__cuenta > span[aria-hidden] {
+    width: 28px; height: 28px; object-fit: cover;
+    display: grid; place-items: center;
+    background: var(--purple); color: var(--white); text-transform: uppercase;
+}
+.topbar__cuenta-nombre { max-width: 10ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.aviso {
+    margin-top: 1.2rem;
+    max-width: 56ch;
+    padding: .8rem 1rem;
+    border-left: 4px solid var(--yellow);
+    background: rgba(255, 240, 1, .08);
+}
+.page-hero .actions { margin-top: 1.6rem; }
+.ingresar__nota { margin-top: 1.4rem; max-width: 56ch; color: var(--mute); font-size: .95rem; }
+.ingresar__nota a { color: var(--white); }
+button.link-arrow { background: none; border: 0; padding: 0; font: inherit; cursor: pointer; }

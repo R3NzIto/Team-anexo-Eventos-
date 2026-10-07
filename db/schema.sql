@@ -79,3 +79,19 @@ create table if not exists resultados (
   alt    text not null,
   orden  int not null default 0
 );
+
+-- Cuentas del sitio. Se entra con start.gg (y más adelante con Google).
+create table if not exists usuarios (
+  id               serial primary key,
+  startgg_user_id  text unique,
+  google_sub       text unique,
+  email            text,
+  nombre           text not null,
+  imagen           text,
+  -- Perfil de jugador vinculado: "sgg:<id de jugador de start.gg>"
+  jugador          text,
+  -- "miembro" o "admin"
+  rol              text not null default 'miembro',
+  creado           timestamptz not null default now(),
+  ultimo_ingreso   timestamptz not null default now()
+);

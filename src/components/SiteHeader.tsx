@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { Suspense } from "react";
+import { CuentaHeader, IngresarLink } from "./CuentaHeader";
 import { Logo } from "./Logo";
 
 export function SiteHeader() {
@@ -12,6 +14,9 @@ export function SiteHeader() {
         <Link className="topbar__link" href="/torneos">Torneos</Link>
         <Link className="tag tag--p1" href="/jugadores"><span className="tag__p">P1</span> Jugadores</Link>
         <Link className="tag tag--p2" href="/#organizar"><span className="tag__p">P2</span> Organizar</Link>
+        <Suspense fallback={<IngresarLink />}>
+          <CuentaHeader />
+        </Suspense>
       </nav>
     </header>
   );
