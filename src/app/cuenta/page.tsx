@@ -23,7 +23,7 @@ async function Cuenta() {
   return (
     <section className="page-hero page-hero--carbon">
       <div>
-        <p className="player"><span className="player__p">{usuario.rol === "admin" ? "Admin" : "P1"}</span></p>
+        <p className="player"><span className="player__p">{usuario.rol === "admin" ? "P2" : "P1"}</span></p>
         <h1 className="page-hero__title">Hola, {usuario.nombre}</h1>
         <p className="page-hero__lead">
           {perfil
@@ -31,7 +31,8 @@ async function Cuenta() {
             : "Todavía no jugaste un torneo de Team Anexo con esta cuenta. Cuando juegues uno, tu perfil aparece solo."}
         </p>
         <div className="actions">
-          {perfil && <Link className="btn btn--p2" href={`/jugadores/${perfil.slug}`}>Ver mi perfil</Link>}
+          {usuario.rol === "admin" && <Link className="btn btn--p2" href="/admin">Panel de admin</Link>}
+          {perfil && <Link className="btn btn--ghost-light" href={`/jugadores/${perfil.slug}`}>Ver mi perfil</Link>}
           <Link className="btn btn--ghost-light" href="/torneos">Próximos torneos</Link>
           <form action="/api/auth/salir" method="post">
             <button className="link-arrow" type="submit">Cerrar sesión</button>

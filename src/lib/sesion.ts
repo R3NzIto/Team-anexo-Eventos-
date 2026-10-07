@@ -1,6 +1,7 @@
 import "server-only";
 import { createHmac, timingSafeEqual } from "node:crypto";
 import { cookies } from "next/headers";
+import { connection } from "next/server";
 import { sql } from "./db";
 
 /*
@@ -62,6 +63,8 @@ export function cookieSesion(usuarioId: number) {
 
 /** El usuario que está navegando, o undefined si no inició sesión. Va siempre dentro de un <Suspense>. */
 export async function getUsuarioActual(): Promise<Usuario | undefined> {
+  // El vencimiento se compara con la hora actual: esto solo puede correr con un pedido real, nunca al prerenderizar.
+  await connection();
   const sesion = verificar<{ uid: number; exp: number }>((await cookies()).get(COOKIE_SESION)?.value);
   if (!sesion || sesion.exp < Date.now() / 1000) return undefined;
   const [u] = await sql()`select id, nombre, imagen, jugador, rol from usuarios where id = ${sesion.uid}`;

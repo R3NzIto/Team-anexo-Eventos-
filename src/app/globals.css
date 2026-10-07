@@ -1048,3 +1048,61 @@ ul { list-style: none; padding: 0; }
 .ingresar__nota { margin-top: 1.4rem; max-width: 56ch; color: var(--mute); font-size: .95rem; }
 .ingresar__nota a { color: var(--white); }
 button.link-arrow { background: none; border: 0; padding: 0; font: inherit; cursor: pointer; }
+
+/* ===================================================================
+   Panel de admin
+   =================================================================== */
+
+.admin-form { display: flex; flex-wrap: wrap; align-items: end; gap: 1rem; }
+.campo { display: grid; gap: .4rem; font-weight: 700; font-size: .9rem; }
+.campo--ancho { flex: 1 1 22rem; }
+.campo input, .campo select {
+    font: inherit;
+    font-weight: 400;
+    font-size: 1rem;
+    padding: .75rem .9rem;
+    color: var(--white);
+    background: var(--carbon);
+    border: 2px solid var(--carbon-3);
+    border-radius: 0;
+    min-width: 0;
+}
+.campo input:focus-visible, .campo select:focus-visible { outline: none; border-color: var(--yellow); }
+.btn:disabled { opacity: .6; cursor: progress; transform: none; }
+
+.admin-nota { color: var(--mute); font-size: .95rem; font-weight: 400; }
+.admin-carga > * + * { margin-top: 1.2rem; }
+.admin-previa { padding: clamp(1rem, 3vw, 1.8rem); background: var(--carbon); }
+.admin-previa > * + * { margin-top: 1.4rem; }
+.admin-previa__cabecera { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; align-items: start; }
+.admin-previa__titulo { font-size: 1.5rem; font-weight: 900; line-height: 1.1; }
+.admin-chip { padding: .3rem .6rem; background: var(--purple); font-weight: 700; font-size: .85rem; }
+.admin-eventos { border: 0; padding: 0; margin: 0; display: grid; gap: .5rem; }
+.admin-eventos legend { font-weight: 800; margin-bottom: .6rem; }
+.admin-evento { display: flex; gap: .7rem; align-items: baseline; cursor: pointer; }
+.admin-evento input { accent-color: var(--yellow); }
+.admin-evento:has(input:disabled) { opacity: .55; cursor: default; }
+.admin-tabla caption { text-align: left; font-weight: 800; padding-bottom: .6rem; }
+.admin-ok { padding: 1.2rem 1.4rem; border-left: 4px solid var(--yellow); background: rgba(255, 240, 1, .08); display: grid; gap: .6rem; }
+
+.admin-torneos a { color: var(--white); font-weight: 700; }
+.admin-torneos__acciones { text-align: right; white-space: nowrap; }
+.admin-boton {
+    font: inherit;
+    font-weight: 700;
+    font-size: .85rem;
+    padding: .4rem .7rem;
+    margin-left: .4rem;
+    color: var(--white);
+    background: var(--carbon-3);
+    border: 0;
+    cursor: pointer;
+}
+.admin-boton:hover { background: #3a3a3a; }
+.admin-boton:focus-visible { outline: 2px solid var(--yellow); outline-offset: 2px; }
+.admin-boton--peligro:hover { background: #7a1f1f; }
+.admin-boton:disabled { opacity: .5; cursor: progress; }
+@media (max-width: 40rem) {
+    .admin-torneos th:nth-child(3), .admin-torneos td:nth-child(3) { display: none; }
+    .admin-torneos__acciones { white-space: normal; }
+}
