@@ -1,0 +1,75 @@
+{
+  "title": "Estructura del sitio Team Anexo",
+  "question": "La marca ya está definida (carbón, blanco, amarillo #FFF001, violeta Premier, Rubik y el clip). Esto elige cómo se arma la página. Fijá una, pedí otra tirada o dame una indicación.",
+  "options": [
+    {
+      "id": "vs-select",
+      "label": "Selección de jugador: P1 / P2",
+      "kicker": "THE ROLL",
+      "lineage": "Pantallas de selección de personaje y VS de los fighting games",
+      "thesis": "La portada es una pantalla de selección: P1 «Quiero competir» y P2 «Quiero llevar la competencia a mi espacio», las dos puertas con el mismo peso.",
+      "palette": ["#1E1E1E", "#FFF001", "#553589", "#FFFFFF"],
+      "materials": ["patrón amarillo de logos", "fotos reales de eventos como retratos de personaje", "Rubik Black"],
+      "viewport": "Pantalla partida en diagonal: a la izquierda, P1 (amarillo) con el próximo torneo y el botón para inscribirse; a la derecha, P2 (violeta) con los logos de los socios y el botón de contacto; en el centro, el logo con el clip como el «VS». Al tocar un lado, el sitio sigue por ese camino.",
+      "risk": "Si la diagonal y el VS se ven tímidos, termina pareciendo un hero partido genérico. Tiene que sentirse como una pantalla de juego, con selección y bloqueo.",
+      "wireframe": {
+        "cols": 12,
+        "rows": 10,
+        "regions": [
+          { "label": "logo + nav", "x": 0, "y": 0, "w": 12, "h": 1 },
+          { "label": "P1 · JUGADOR: próximo torneo + Inscribirme", "x": 0, "y": 1, "w": 6, "h": 6, "accent": true },
+          { "label": "P2 · ORGANIZADOR: socios + Contactar", "x": 6, "y": 1, "w": 6, "h": 6 },
+          { "label": "VS (clip Anexo)", "x": 5, "y": 3, "w": 2, "h": 2, "accent": true },
+          { "label": "series activas", "x": 0, "y": 7, "w": 12, "h": 2 },
+          { "label": "galería / historial", "x": 0, "y": 9, "w": 12, "h": 1 }
+        ]
+      }
+    },
+    {
+      "id": "attract-mode",
+      "label": "Arcade en modo demo",
+      "lineage": "El attract mode de los gabinetes arcade y las tablas de récords",
+      "thesis": "El sitio se comporta como un gabinete encendido: fotos de los eventos pasan solas y un «PRESS START» lleva al próximo torneo.",
+      "palette": ["#141414", "#FFF001", "#FFFFFF", "#553589"],
+      "materials": ["fotos de eventos a pantalla completa", "textos con estética de marquesina", "tabla de resultados como high score"],
+      "viewport": "Foto real a pantalla completa, alternando entre torneos, con el logo arriba como marquesina. Abajo, un panel con el próximo torneo, la fecha y un «PRESS START · Inscribirme» que parpadea suave. Los resultados aparecen como tabla de récords.",
+      "risk": "Las fotos son de celular y de calidad despareja. Si rotan muy rápido o tapan el texto, cuesta leer. Pide una buena curaduría.",
+      "wireframe": {
+        "cols": 12,
+        "rows": 10,
+        "regions": [
+          { "label": "marquesina: logo", "x": 0, "y": 0, "w": 12, "h": 1 },
+          { "label": "foto de evento rotando (attract)", "x": 0, "y": 1, "w": 12, "h": 5 },
+          { "label": "PRESS START · próximo torneo", "x": 3, "y": 4, "w": 6, "h": 2, "accent": true },
+          { "label": "HIGH SCORES · últimos podios", "x": 0, "y": 6, "w": 6, "h": 3 },
+          { "label": "series + organizadores", "x": 6, "y": 6, "w": 6, "h": 3 },
+          { "label": "comunidad", "x": 0, "y": 9, "w": 12, "h": 1 }
+        ]
+      }
+    },
+    {
+      "id": "clip-wall",
+      "label": "Muro de afiches anexados",
+      "lineage": "La pared de flyers del local, cada uno sujeto con el clip del logo",
+      "thesis": "«Anexo» es adjuntar: cada evento es un afiche real sujeto con el clip. El próximo está arriba y bien grande, y la historia del equipo se forma con los anteriores.",
+      "palette": ["#1E1E1E", "#FFF001", "#3B1858", "#26ACAD"],
+      "materials": ["afiches reales de cada torneo", "clip del logo como sujetador", "fondo con el patrón de logos"],
+      "viewport": "Fondo carbón con el patrón de logos tenue. Un afiche grande del próximo torneo, sujeto con el clip y algo inclinado; al lado, los datos (fecha, sede, valor) y el botón para inscribirse. Detrás asoman los afiches anteriores (Premier, SF6/KOF, 2XKO como historial).",
+      "risk": "Depende de que haya un afiche para cada evento. Cuando todavía no hay afiche del próximo, hace falta una versión «Próximamente» bien resuelta.",
+      "wireframe": {
+        "cols": 12,
+        "rows": 10,
+        "regions": [
+          { "label": "logo + nav", "x": 0, "y": 0, "w": 12, "h": 1 },
+          { "label": "afiche próximo torneo (clip)", "x": 0, "y": 1, "w": 5, "h": 6, "accent": true },
+          { "label": "fecha · sede · valor · Inscribirme", "x": 5, "y": 1, "w": 7, "h": 3 },
+          { "label": "¿Organizás un evento? → Contacto", "x": 5, "y": 4, "w": 7, "h": 3 },
+          { "label": "muro de afiches anteriores", "x": 0, "y": 7, "w": 12, "h": 3 }
+        ]
+      }
+    }
+  ],
+  "reroll": true,
+  "buildPath": { "value": "code" },
+  "steer": true
+}

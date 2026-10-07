@@ -1,0 +1,168 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-07T12:40:00Z",
+  "title": "Design System: Team Anexo",
+  "extensions": {
+    "colorMeta": {
+      "carbon": { "role": "neutral", "displayName": "Carbon", "canonical": "#1E1E1E", "cssVar": "--carbon", "tonalRamp": ["oklch(15% 0 0)", "oklch(23.5% 0 0)", "oklch(35% 0 0)", "oklch(47% 0 0)", "oklch(59% 0 0)", "oklch(71% 0 0)", "oklch(83% 0 0)", "oklch(95% 0 0)"] },
+      "carbon-deep": { "role": "neutral", "displayName": "Carbon Deep", "canonical": "#161616", "cssVar": "--carbon-2", "tonalRamp": ["oklch(15% 0 0)", "oklch(20% 0 0)", "oklch(32% 0 0)", "oklch(44% 0 0)", "oklch(56% 0 0)", "oklch(68% 0 0)", "oklch(82% 0 0)", "oklch(95% 0 0)"] },
+      "carbon-raised": { "role": "neutral", "displayName": "Carbon Raised", "canonical": "#2A2A2A", "cssVar": "--carbon-3", "tonalRamp": ["oklch(15% 0 0)", "oklch(28.5% 0 0)", "oklch(38% 0 0)", "oklch(50% 0 0)", "oklch(62% 0 0)", "oklch(73% 0 0)", "oklch(84% 0 0)", "oklch(95% 0 0)"] },
+      "ink": { "role": "neutral", "displayName": "Ink", "canonical": "#0E0E0E", "cssVar": "--ink", "tonalRamp": ["oklch(16.4% 0 0)", "oklch(27% 0 0)", "oklch(39% 0 0)", "oklch(51% 0 0)", "oklch(63% 0 0)", "oklch(75% 0 0)", "oklch(85% 0 0)", "oklch(95% 0 0)"] },
+      "white": { "role": "neutral", "displayName": "White", "canonical": "#FFFFFF", "cssVar": "--white", "tonalRamp": ["oklch(15% 0 0)", "oklch(27% 0 0)", "oklch(39% 0 0)", "oklch(51% 0 0)", "oklch(63% 0 0)", "oklch(75% 0 0)", "oklch(87% 0 0)", "oklch(100% 0 0)"] },
+      "mute": { "role": "neutral", "displayName": "Mute", "canonical": "#B9B9B9", "cssVar": "--mute", "tonalRamp": ["oklch(15% 0 0)", "oklch(27% 0 0)", "oklch(39% 0 0)", "oklch(51% 0 0)", "oklch(63% 0 0)", "oklch(78.6% 0 0)", "oklch(87% 0 0)", "oklch(95% 0 0)"] },
+      "signal-yellow": { "role": "primary", "displayName": "Signal Yellow", "canonical": "oklch(93.7% 0.199 105)", "cssVar": "--yellow", "tonalRamp": ["oklch(25% 0.05 105)", "oklch(35% 0.075 105)", "oklch(48% 0.1 105)", "oklch(60% 0.125 105)", "oklch(72% 0.15 105)", "oklch(82% 0.175 105)", "oklch(93.7% 0.199 105)", "oklch(97% 0.09 105)"] },
+      "premier-purple-deep": { "role": "secondary", "displayName": "Premier Purple Deep", "canonical": "oklch(29.7% 0.111 305.7)", "cssVar": "--purple-deep", "tonalRamp": ["oklch(18% 0.07 305)", "oklch(29.7% 0.111 305.7)", "oklch(40% 0.13 302)", "oklch(51% 0.13 300)", "oklch(62% 0.11 300)", "oklch(73% 0.08 302)", "oklch(84% 0.05 304)", "oklch(95% 0.02 304)"] },
+      "premier-purple": { "role": "secondary", "displayName": "Premier Purple", "canonical": "oklch(41.2% 0.135 297.8)", "cssVar": "--purple", "tonalRamp": ["oklch(18% 0.07 298)", "oklch(29% 0.1 298)", "oklch(41.2% 0.135 297.8)", "oklch(52% 0.13 298)", "oklch(63% 0.11 298)", "oklch(74% 0.08 300)", "oklch(85% 0.05 302)", "oklch(95% 0.02 304)"] },
+      "lilac-ink": { "role": "secondary", "displayName": "Lilac Ink", "canonical": "oklch(91.1% 0.038 304.1)", "cssVar": "--purple-ink", "tonalRamp": ["oklch(18% 0.03 304)", "oklch(29% 0.04 304)", "oklch(41% 0.05 304)", "oklch(53% 0.05 304)", "oklch(65% 0.05 304)", "oklch(77% 0.045 304)", "oklch(91.1% 0.038 304.1)", "oklch(97% 0.015 304)"] },
+      "series-teal": { "role": "tertiary", "displayName": "Series Teal", "canonical": "oklch(67.8% 0.108 195.7)", "cssVar": "--teal", "tonalRamp": ["oklch(18% 0.04 196)", "oklch(30% 0.06 196)", "oklch(42% 0.08 196)", "oklch(54% 0.1 196)", "oklch(67.8% 0.108 195.7)", "oklch(78% 0.09 196)", "oklch(88% 0.05 196)", "oklch(96% 0.02 196)"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero panel titles, 900 uppercase, balanced; P2 title steps down to clamp(2.2rem, 4.3vw, 4.4rem); closing contact title runs clamp(2.6rem, 7vw, 6rem) at -0.03em." },
+      "headline": { "displayName": "Headline", "purpose": "Route titles beside the P1/P2 badge; gallery and upcoming titles one step down in the same voice." },
+      "title": { "displayName": "Title", "purpose": "Uppercase block titles inside a route (series, results, history, community, partners)." },
+      "body": { "displayName": "Body", "purpose": "Spanish prose at 400; leads 1.1-1.45rem; measures 30-62ch." },
+      "label": { "displayName": "Label", "purpose": "Button text, uppercase 800; tags 700 at 0.95rem." },
+      "caption": { "displayName": "Caption", "purpose": "Table headers, uppercase 700 tracked +0.1em; chips 800 at 0.72rem; READY state 900 at +0.12em." }
+    },
+    "shadows": [
+      { "name": "medallion", "value": "0 0 0 5px #FFFFFF, 0 14px 34px rgba(0, 0, 0, .45)", "purpose": "VS avatar only: white coin ring plus drop on the hero seam." },
+      { "name": "poster-yellow", "value": "0 12px 30px rgba(0, 0, 0, .3)", "purpose": "Tournament poster on the yellow upcoming plate." },
+      { "name": "poster-purple", "value": "0 16px 34px rgba(0, 0, 0, .45)", "purpose": "Premier poster on purple, paired with a 3deg rotation." },
+      { "name": "ring-ghost", "value": "inset 0 0 0 2px #2A2A2A", "purpose": "Ghost button ring (not elevation); Ink on yellow, 35% white on purple." }
+    ],
+    "motion": [
+      { "name": "ease-out", "value": "cubic-bezier(.16, 1, .3, 1)", "purpose": "Every state transition and entrance." },
+      { "name": "color", "value": "200ms", "purpose": "Fill and text color changes on buttons, tags, community items." },
+      { "name": "lift", "value": "250ms", "purpose": "Button translateY(-2px) hover / translateY(1px) active; arrow nudge 4px." },
+      { "name": "ready-wipe", "value": "350ms", "purpose": "READY plate clip-path wipe on panel hover/focus." },
+      { "name": "split", "value": "550ms", "purpose": "--split 50% to 56%/44% when a side is selected; registered via @property." },
+      { "name": "portrait", "value": "500ms", "purpose": "Hero photo brighten/dim." },
+      { "name": "gallery-zoom", "value": "600ms", "purpose": "Gallery image scale 1.04 on hover." },
+      { "name": "panel-entrance", "value": "800ms", "purpose": "Panels slide in from +/-18% on load (no-preference only, desktop only)." },
+      { "name": "vs-stamp", "value": "550ms delay 550ms", "purpose": "VS medallion drops from 1.6x scale and fades in." }
+    ],
+    "breakpoints": [
+      { "name": "phone", "value": "max-width: 47.99rem", "purpose": "Diagonal becomes horizontal; stacked P1/VS/P2; READY hidden; tables become rows." },
+      { "name": "tablet", "value": "max-width: 60rem", "purpose": "About collapses to one column; partners 3-up; Premier poster hidden." },
+      { "name": "mosaic", "value": "min-width: 48rem", "purpose": "Gallery switches to named-area mosaic." }
+    ],
+    "texture": {
+      "logoPattern": "assets/img/patron.svg as CSS mask, 260px tile, rotated -12deg, inset -40%; tint via --pattern-color: rgba(255,255,255,.035) default, rgba(0,0,0,.06) on yellow, rgba(255,255,255,.05) on P2 panel, rgba(255,240,1,.035) on P1 route, rgba(255,255,255,.04) on P2 route.",
+      "duotone": "grayscale(1) contrast(1.25) brightness(1.05); multiply over yellow (P1), luminosity over purple (P2); masked by a linear gradient fading toward the text side."
+    },
+    "focus": {
+      "bracket": "Four 16x3px corner brackets drawn with background-image on ::after, inset -7px. Color via --bk: Ink on .panel--p1 and .upcoming, White on .panel--p2 and .route--p2, Yellow elsewhere. Applies to buttons, tags, community items, top-bar logo.",
+      "outline": "3px solid Signal Yellow, offset 4px, for all other focusable elements."
+    }
+  },
+  "components": [
+    {
+      "name": "P1 Button",
+      "kind": "button",
+      "refersTo": "button-p1",
+      "description": "Ink cut-corner plate with yellow caps; the player action.",
+      "html": "<a class=\"ds-btn ds-btn-p1\" href=\"#\"><svg class=\"ds-btn__icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M13.2 4.6 11.8 6l5 5H3v2h13.8l-5 5 1.4 1.4L20.6 12z\"/></svg>Unirme al grupo</a>",
+      "css": ".ds-btn { --bg: #0E0E0E; --fg: #FFF001; position: relative; display: inline-flex; align-items: center; gap: .6rem; padding: .95rem 1.4rem .95rem 1.15rem; font: 800 1.05rem/1 Rubik, system-ui, sans-serif; text-transform: uppercase; letter-spacing: .02em; text-decoration: none; color: var(--fg); isolation: isolate; transition: transform .25s cubic-bezier(.16,1,.3,1), color .2s; } .ds-btn::before { content: \"\"; position: absolute; inset: 0; z-index: -1; background: var(--bg); box-shadow: var(--ring, none); clip-path: polygon(0 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%); transition: background-color .2s; } .ds-btn__icon { width: 1.25rem; height: 1.25rem; fill: currentColor; flex: none; } .ds-btn:hover { transform: translateY(-2px); } .ds-btn:active { transform: translateY(1px); } .ds-btn-p1:hover { --fg: #FFFFFF; } .ds-btn:focus-visible { outline: none; } .ds-btn:focus-visible::after { content: \"\"; position: absolute; inset: -7px; pointer-events: none; background-image: linear-gradient(#FFF001 0 0), linear-gradient(#FFF001 0 0), linear-gradient(#FFF001 0 0), linear-gradient(#FFF001 0 0), linear-gradient(#FFF001 0 0), linear-gradient(#FFF001 0 0), linear-gradient(#FFF001 0 0), linear-gradient(#FFF001 0 0); background-size: 16px 3px, 3px 16px, 16px 3px, 3px 16px, 16px 3px, 3px 16px, 16px 3px, 3px 16px; background-position: left top, left top, right top, right top, left bottom, left bottom, right bottom, right bottom; background-repeat: no-repeat; }"
+    },
+    {
+      "name": "P2 Button",
+      "kind": "button",
+      "refersTo": "button-p2",
+      "description": "White cut-corner plate with purple caps on P2 surfaces; flips to yellow on hover.",
+      "html": "<div style=\"background:#3B1858;padding:24px\"><a class=\"ds-btn2\" href=\"#\">Contactar</a></div>",
+      "css": ".ds-btn2 { position: relative; display: inline-flex; align-items: center; padding: .95rem 1.4rem .95rem 1.15rem; font: 800 1.05rem/1 Rubik, system-ui, sans-serif; text-transform: uppercase; letter-spacing: .02em; text-decoration: none; color: #3B1858; isolation: isolate; transition: transform .25s cubic-bezier(.16,1,.3,1), color .2s; } .ds-btn2::before { content: \"\"; position: absolute; inset: 0; z-index: -1; background: #FFFFFF; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%); transition: background-color .2s; } .ds-btn2:hover { transform: translateY(-2px); color: #0E0E0E; } .ds-btn2:hover::before { background: #FFF001; } .ds-btn2:active { transform: translateY(1px); } .ds-btn2:focus-visible { outline: none; } .ds-btn2:focus-visible::after { content: \"\"; position: absolute; inset: -7px; pointer-events: none; background-image: linear-gradient(#fff 0 0), linear-gradient(#fff 0 0), linear-gradient(#fff 0 0), linear-gradient(#fff 0 0), linear-gradient(#fff 0 0), linear-gradient(#fff 0 0), linear-gradient(#fff 0 0), linear-gradient(#fff 0 0); background-size: 16px 3px, 3px 16px, 16px 3px, 3px 16px, 16px 3px, 3px 16px, 16px 3px, 3px 16px; background-position: left top, left top, right top, right top, left bottom, left bottom, right bottom, right bottom; background-repeat: no-repeat; }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Transparent plate with a 2px inset ring for secondary actions on charcoal.",
+      "html": "<div style=\"background:#1E1E1E;padding:24px\"><a class=\"ds-btn-ghost\" href=\"#\">@team_anexo.mza</a></div>",
+      "css": ".ds-btn-ghost { position: relative; display: inline-flex; align-items: center; padding: .95rem 1.4rem .95rem 1.15rem; font: 800 1.05rem/1 Rubik, system-ui, sans-serif; text-transform: uppercase; letter-spacing: .02em; text-decoration: none; color: #FFFFFF; isolation: isolate; transition: transform .25s cubic-bezier(.16,1,.3,1); } .ds-btn-ghost::before { content: \"\"; position: absolute; inset: 0; z-index: -1; background: transparent; box-shadow: inset 0 0 0 2px #2A2A2A; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%); transition: background-color .2s; } .ds-btn-ghost:hover { transform: translateY(-2px); } .ds-btn-ghost:hover::before { background: #2A2A2A; } .ds-btn-ghost:focus-visible { outline: 3px solid #FFF001; outline-offset: 4px; }"
+    },
+    {
+      "name": "Player Tag",
+      "kind": "nav",
+      "refersTo": "tag-p1",
+      "description": "Top-bar jump link: slanted-tail plate with a square P1/P2 pip.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-tag ds-tag-p1\" href=\"#\"><span class=\"ds-tag__p\">P1</span>Competir</a><a class=\"ds-tag ds-tag-p2\" href=\"#\"><span class=\"ds-tag__p\">P2</span>Organizar</a></nav>",
+      "css": ".ds-nav { display: flex; gap: .5rem; padding: .7rem 1rem; background: #0E0E0E; } .ds-tag { --fill: #2A2A2A; position: relative; display: inline-flex; align-items: center; gap: .5rem; padding: .35rem .8rem .35rem .35rem; font: 700 .95rem/1.2 Rubik, system-ui, sans-serif; text-transform: uppercase; letter-spacing: .02em; text-decoration: none; color: #FFFFFF; isolation: isolate; transition: color .2s cubic-bezier(.16,1,.3,1); } .ds-tag::before { content: \"\"; position: absolute; inset: 0; z-index: -1; background: var(--fill); clip-path: polygon(0 0, 100% 0, calc(100% - 8px) 100%, 0 100%); transition: background-color .2s cubic-bezier(.16,1,.3,1); } .ds-tag__p { display: grid; place-items: center; min-width: 2rem; height: 1.75rem; font-weight: 900; font-size: .85rem; color: #0E0E0E; } .ds-tag-p1 .ds-tag__p { background: #FFF001; } .ds-tag-p2 .ds-tag__p { background: #E7DCF7; color: #3B1858; } .ds-tag-p1:hover { --fill: #FFF001; color: #0E0E0E; } .ds-tag-p1:hover .ds-tag__p { background: #0E0E0E; color: #FFF001; } .ds-tag-p2:hover { --fill: #553589; } .ds-tag:focus-visible { outline: 3px solid #FFF001; outline-offset: 4px; }"
+    },
+    {
+      "name": "Player Badge with READY",
+      "kind": "custom",
+      "refersTo": "route-tag-p1",
+      "description": "Hero player pip with a READY plate that wipes in when the side is selected.",
+      "html": "<div class=\"ds-sel\"><p class=\"ds-player\"><span class=\"ds-player__p\">P1</span><span class=\"ds-player__state\">Ready</span></p></div>",
+      "css": ".ds-sel { background: #FFF001; padding: 24px; } .ds-player { display: inline-flex; align-items: stretch; font: 900 1rem/1 Rubik, system-ui, sans-serif; text-transform: uppercase; margin: 0; } .ds-player__p { display: grid; place-items: center; width: 3.4rem; height: 3.4rem; font-size: 1.6rem; background: #0E0E0E; color: #FFF001; } .ds-player__state { display: grid; place-items: center; padding: 0 .9rem; font-size: .95rem; letter-spacing: .12em; background: #0E0E0E; color: #FFF001; border-left: 2px solid #FFF001; clip-path: inset(0 100% 0 0); transition: clip-path .35s cubic-bezier(.16,1,.3,1); } .ds-sel:hover .ds-player__state { clip-path: inset(0 0 0 0); }"
+    },
+    {
+      "name": "Upcoming Plate",
+      "kind": "card",
+      "refersTo": "upcoming-card",
+      "description": "Yellow announce plate with a 28px corner cut and Ink countdown cells.",
+      "html": "<div class=\"ds-upcoming\"><h3 class=\"ds-upcoming__title\">Estamos armando la próxima fecha</h3><div class=\"ds-countdown\"><span>12<small>DÍAS</small></span><span>04<small>HS</small></span></div></div>",
+      "css": ".ds-upcoming { display: grid; gap: 1.2rem; padding: clamp(1.75rem, 4vw, 3rem); background: #FFF001; color: #0E0E0E; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 28px), calc(100% - 28px) 100%, 0 100%); font-family: Rubik, system-ui, sans-serif; } .ds-upcoming__title { margin: 0; font-size: clamp(1.8rem, 3.6vw, 2.9rem); font-weight: 900; line-height: 1; letter-spacing: -.02em; text-transform: uppercase; } .ds-countdown { display: flex; gap: .5rem; font-variant-numeric: tabular-nums; } .ds-countdown span { display: grid; place-items: center; min-width: 4.2rem; padding: .5rem .4rem; background: #0E0E0E; color: #FFF001; font-size: 1.8rem; font-weight: 900; line-height: 1; } .ds-countdown small { display: block; margin-top: .3rem; font-size: .7rem; font-weight: 700; letter-spacing: .08em; color: #FFFFFF; }"
+    },
+    {
+      "name": "Community Item",
+      "kind": "card",
+      "refersTo": "community-item",
+      "description": "Flat tonal tile linking to a channel; the main channel is yellow.",
+      "html": "<div class=\"ds-comm\"><a class=\"ds-comm__item ds-comm__item--main\" href=\"#\"><svg viewBox=\"0 0 24 24\"><path d=\"M13.2 4.6 11.8 6l5 5H3v2h13.8l-5 5 1.4 1.4L20.6 12z\"/></svg><span>WhatsApp</span><small>Grupo de la comunidad</small></a><a class=\"ds-comm__item\" href=\"#\"><svg viewBox=\"0 0 24 24\"><path d=\"M13.2 4.6 11.8 6l5 5H3v2h13.8l-5 5 1.4 1.4L20.6 12z\"/></svg><span>Twitch</span><small>Torneos en vivo</small></a></div>",
+      "css": ".ds-comm { display: grid; gap: .6rem; background: #1E1E1E; padding: 16px; font-family: Rubik, system-ui, sans-serif; } .ds-comm__item { position: relative; display: grid; grid-template-columns: 2.4rem 1fr; grid-template-rows: auto auto; column-gap: .9rem; align-items: center; padding: 1rem 1.1rem; text-decoration: none; color: #FFFFFF; background: #161616; transition: background-color .2s, color .2s; } .ds-comm__item svg { grid-row: span 2; width: 2rem; height: 2rem; fill: currentColor; } .ds-comm__item span { font-weight: 800; } .ds-comm__item small { color: #B9B9B9; font-size: .9rem; } .ds-comm__item:hover { background: #2A2A2A; } .ds-comm__item--main { background: #FFF001; color: #0E0E0E; } .ds-comm__item--main small { color: #3a3700; } .ds-comm__item--main:hover { background: #FFFFFF; } .ds-comm__item:focus-visible { outline: 3px solid #FFF001; outline-offset: 4px; }"
+    },
+    {
+      "name": "Series Chips",
+      "kind": "chip",
+      "refersTo": "chip-premier",
+      "description": "Square uppercase series labels colored by series identity.",
+      "html": "<div class=\"ds-chips\"><span class=\"ds-chip ds-chip--premier\">Premier</span><span class=\"ds-chip ds-chip--sf6\">SF6 / KOF</span><span class=\"ds-chip ds-chip--2xko\">2XKO</span><span class=\"ds-chip ds-chip--stand\">Stand</span><span class=\"ds-chip ds-chip--anexo\">Anexo</span></div>",
+      "css": ".ds-chips { display: flex; gap: .6rem; padding: 16px; background: #1E1E1E; } .ds-chip { display: inline-block; padding: .15rem .5rem; font: 800 .72rem/1.4 Rubik, system-ui, sans-serif; letter-spacing: .06em; text-transform: uppercase; } .ds-chip--premier { background: #553589; color: #FFFFFF; } .ds-chip--sf6 { background: #FFFFFF; color: #0E0E0E; } .ds-chip--2xko { background: #26ACAD; color: #0E0E0E; } .ds-chip--stand { background: #2A2A2A; color: #FFFFFF; } .ds-chip--anexo { background: #FFF001; color: #0E0E0E; }"
+    },
+    {
+      "name": "Move List",
+      "kind": "custom",
+      "description": "Character command list for P2 services: uppercase terms, lilac descriptions, hairline rules.",
+      "html": "<dl class=\"ds-moves\"><div class=\"ds-moves__row\"><dt>Torneos competitivos</dt><dd>Llaves en start.gg, reglamento, setups y premiación.</dd></div><div class=\"ds-moves__row\"><dt>Transmisión en vivo</dt><dd>Stream del evento con overlay y comentaristas.</dd></div></dl>",
+      "css": ".ds-moves { display: grid; margin: 0; padding: 24px; background: #3B1858; color: #FFFFFF; font-family: Rubik, system-ui, sans-serif; } .ds-moves__row { display: grid; grid-template-columns: minmax(11rem, 15rem) 1fr; gap: .4rem 1.5rem; padding: 1.05rem 0; border-top: 1px solid rgba(255,255,255,.18); } .ds-moves__row:last-child { border-bottom: 1px solid rgba(255,255,255,.18); } .ds-moves dt { font-weight: 800; text-transform: uppercase; letter-spacing: .01em; } .ds-moves dd { margin: 0; color: #E7DCF7; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Player-Select Screen",
+    "overview": "The site is a fighting-game character-select screen that keeps going. The hero is two players split by a hard diagonal: P1 owns yellow with black ink, P2 owns Premier purple with white ink, and the Anexo avatar sits on the seam as the VS medallion. Everything below the hero is the route each player picked, built from the same select-screen chrome: P1/P2 badges, cut-corner plates, bracket cursors on focus, uppercase Rubik Black headlines.\n\nDensity is arcade-loud but disciplined. Grounds are flat charcoal, carrying the brand's repeating-logo pattern at very low opacity, rotated -12°. Color shows up in solid blocks owned by a player, never as gradients or glow. Real event photos sit behind the hero text as grayscale duotone portraits, multiplied into yellow on P1 and luminosity-blended into purple on P2. They are fighter portraits, not decoration.\n\nThe world rejects the centered link-in-bio stack and the headline-over-cards hero. Its chrome comes from the game screen (player tags, the READY lock, VS, the move list), not from generic UI kits.",
+    "keyCharacteristics": [
+      "Two owned sides: yellow/ink (P1) and purple/white (P2), on a charcoal ground.",
+      "Rubik at 800–900 in uppercase for every heading and action; regular-weight Rubik for prose.",
+      "Square or diagonally cut corners; the only circle is the VS medallion.",
+      "Focus is a four-corner select-cursor bracket, recolored to stay visible on whichever side it sits.",
+      "Motion is select-screen motion: panels slide in from the sides, VS stamps down, a hovered side widens along the diagonal."
+    ],
+    "rules": [
+      { "name": "The Owned Side Rule", "body": "Yellow belongs to P1 and purple belongs to P2. A P1 surface uses Ink text and Ink controls. A P2 surface uses White and Lilac text and White controls. Don't mix the two sides on one surface. The one deliberate crossover is the P2 button turning yellow on hover.", "section": "colors" },
+      { "name": "The Flat Field Rule", "body": "Player colors are solid fills. Depth and texture come from the masked logo pattern and the duotone photos, never from gradients on the colors themselves.", "section": "colors" },
+      { "name": "The Caps Are Loud Rule", "body": "Every heading, button, tag and badge is uppercase at weight 800–900. Body copy is never uppercase and never heavier than 400, except bold facts.", "section": "typography" },
+      { "name": "The Tabular Numbers Rule", "body": "Dates, the countdown and the history table use tabular-nums so numbers line up like a timer.", "section": "typography" },
+      { "name": "The Text Outside the Diagonal Rule", "body": "Hero copy always sits on the outer edge of its panel. The diagonal, the photo and the VS share the middle.", "section": "layout" },
+      { "name": "The Objects Cast Shadows Rule", "body": "Only physical things cast shadows: posters and the VS coin. Buttons, cards, tags and plates never do.", "section": "elevation" },
+      { "name": "The Select Cursor Rule", "body": "Buttons, tags, community items and the logo show four 16×3px corner brackets 7px outside the element instead of an outline. Bracket color follows the surface: Ink on yellow (P1 panel, upcoming plate), White on purple (P2 panel, P2 route), Yellow everywhere else. Every other focusable element gets a 3px Signal Yellow outline at a 4px offset.", "section": "components" }
+    ],
+    "dos": [
+      "Do give each new surface to one player. Yellow surfaces get Ink text and Ink controls. Purple surfaces get White or Lilac text and White controls.",
+      "Do set headings, buttons, tags and badges in Rubik 800–900 uppercase, with tracking between -0.03em and -0.01em on large sizes and +0.02em to +0.12em on small labels.",
+      "Do cut pressable plates at the bottom-right corner (14px, or 28px on large plates) with clip-path, and keep badges, chips and cells square.",
+      "Do use the four-corner select-cursor bracket for focus on pressable chrome, recolored per surface (Ink on yellow, White on purple, Yellow elsewhere).",
+      "Do carry texture with the masked logo pattern (260px tile, rotated -12°, 3.5–6% opacity) and real event photos in grayscale duotone.",
+      "Do use the ease-out curve cubic-bezier(.16, 1, .3, 1) for all state motion, and keep hero entrance and split motion behind prefers-reduced-motion: no-preference.",
+      "Do use tabular figures for dates, timers and results."
+    ],
+    "donts": [
+      "Don't round corners on UI. The only circle is the VS medallion.",
+      "Don't put shadows on buttons, cards or tags. Shadows belong to posters and the VS coin.",
+      "Don't use gradients on the player colors. Gradients appear only as photo masks.",
+      "Don't mix the player sides on one surface. P2 hover turning yellow is the single sanctioned crossover.",
+      "Don't introduce a second typeface or system display fonts. Rubik is self-hosted and carries every role.",
+      "Don't use icon fonts or glyph characters as icons. Icons are inline SVG symbols that inherit currentColor."
+    ]
+  }
+}

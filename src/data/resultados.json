@@ -1,0 +1,26 @@
+[
+  {
+    "titulo": "Ganadores Super Smash Bros",
+    "evento": "Mendotaku 2025",
+    "imagen": "/assets/img/resultados/mendotaku-2025-smash.jpg",
+    "alt": "Los ganadores del torneo de Smash posando con sus premios frente al banner de Team Anexo"
+  },
+  {
+    "titulo": "Grand Final: Xindrome vs Devil‑1",
+    "evento": "Torneo KOF XV",
+    "imagen": "/assets/img/series/kof-grandfinals.jpg",
+    "alt": "Miniatura de la gran final de King of Fighters XV entre Xindrome y Devil-1"
+  },
+  {
+    "titulo": "Losers Final: Skynessito vs Caos",
+    "evento": "Torneo Street Fighter 6",
+    "imagen": "/assets/img/series/sf6.jpg",
+    "alt": "Miniatura de la final de perdedores de Street Fighter 6 entre Skynessito y Caos"
+  },
+  {
+    "titulo": "Ganadores Mario Kart",
+    "evento": "Mendotaku 2025",
+    "imagen": "/assets/img/resultados/mendotaku-2025-mariokart.jpg",
+    "alt": "Podio del torneo de Mario Kart en Mendotaku 2025"
+  }
+]

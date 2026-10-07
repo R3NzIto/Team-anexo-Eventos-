@@ -1,0 +1,1299 @@
+[
+  {
+    "slug": "torneo-sf6-2026",
+    "nombre": "Torneo Street Fighter 6",
+    "serie": "sf6-kof",
+    "fecha": "2026",
+    "temporada": 2026,
+    "events": [
+      {
+        "nombre": "Street Fighter 6",
+        "juego": "Street Fighter 6",
+        "sumaRanking": true,
+        "standings": []
+      }
+    ]
+  },
+  {
+    "slug": "torneo-kof-2026",
+    "nombre": "Torneo King of Fighters XV",
+    "serie": "sf6-kof",
+    "fecha": "2026",
+    "temporada": 2026,
+    "events": [
+      {
+        "nombre": "KOF XV",
+        "juego": "King of Fighters XV",
+        "sumaRanking": true,
+        "standings": []
+      }
+    ]
+  },
+  {
+    "slug": "2xko-mendoza-fighting-cup-1",
+    "nombre": "2XKO Mendoza Fighting Cup #1",
+    "serie": "2xko",
+    "fecha": "2026-05-08",
+    "temporada": 2026,
+    "sede": "Planeta Comics",
+    "direccion": "Av. San Martín 1245, local 100",
+    "valor": "$4500",
+    "afiche": "/assets/img/series/2xko-mendoza-cup.jpg",
+    "events": [
+      {
+        "nombre": "2XKO",
+        "juego": "2XKO",
+        "sumaRanking": false,
+        "standings": []
+      }
+    ]
+  },
+  {
+    "slug": "pre-premier-smash-league",
+    "nombre": "Pre-Premier Smash League",
+    "serie": "premier",
+    "fecha": "2026-04-24T10:01:00-03:00",
+    "temporada": 2026,
+    "direccion": "1245, Av. San Martín 1233, M5500 Mendoza, Argentina",
+    "afiche": "/assets/img/series/premier-pretemporada.jpg",
+    "slugStartgg": "pre-premier-smash-league",
+    "inscripcionAbierta": false,
+    "events": [
+      {
+        "nombre": "Pre-Premier Smash League",
+        "juego": "Ultimate",
+        "slugStartgg": "tournament/pre-premier-smash-league/event/pre-premier-smash-league",
+        "inscriptos": 25,
+        "sumaRanking": true,
+        "standings": [
+          {
+            "puesto": 1,
+            "jugador": "sgg:3475602",
+            "gamerTag": "benu",
+            "personaje": "kazuya",
+            "personajes": {
+              "kazuya": 13,
+              "isabelle": 2
+            }
+          },
+          {
+            "puesto": 2,
+            "jugador": "sgg:3343760",
+            "gamerTag": "Fabluc3",
+            "personaje": "samus",
+            "personajes": {
+              "samus": 13,
+              "dark-samus": 8,
+              "terry": 2
+            }
+          },
+          {
+            "puesto": 3,
+            "jugador": "sgg:3361640",
+            "gamerTag": "SourBlaze",
+            "personaje": "mario",
+            "personajes": {
+              "mario": 8,
+              "lucina": 4,
+              "pyra-and-mythra": 1
+            }
+          },
+          {
+            "puesto": 4,
+            "jugador": "sgg:5085020",
+            "gamerTag": "ANX King of Knight",
+            "personaje": "little-mac",
+            "personajes": {
+              "little-mac": 10,
+              "ike": 7,
+              "roy": 3
+            }
+          },
+          {
+            "puesto": 5,
+            "jugador": "sgg:3284252",
+            "gamerTag": "StA1t",
+            "personaje": "byleth",
+            "personajes": {
+              "byleth": 5,
+              "captain-falcon": 3,
+              "ike": 3
+            }
+          },
+          {
+            "puesto": 5,
+            "jugador": "sgg:5096812",
+            "gamerTag": "S4ntu",
+            "personaje": "piranha-plant",
+            "personajes": {
+              "piranha-plant": 13
+            }
+          },
+          {
+            "puesto": 7,
+            "jugador": "sgg:3846478",
+            "gamerTag": "Rfrisk",
+            "personaje": "pyra-and-mythra",
+            "personajes": {
+              "pyra-and-mythra": 11,
+              "sephiroth": 1
+            }
+          },
+          {
+            "puesto": 7,
+            "jugador": "sgg:2381628",
+            "gamerTag": "TIOCHECHI",
+            "personaje": "mario",
+            "personajes": {
+              "mario": 10,
+              "cloud": 1,
+              "terry": 2
+            }
+          },
+          {
+            "puesto": 9,
+            "jugador": "sgg:5323753",
+            "gamerTag": "D4C",
+            "personaje": "donkey-kong",
+            "personajes": {
+              "donkey-kong": 1,
+              "ike": 1
+            }
+          },
+          {
+            "puesto": 9,
+            "jugador": "sgg:5296440",
+            "gamerTag": "ANX Lukitas_011",
+            "personaje": "corrin",
+            "personajes": {
+              "corrin": 4
+            }
+          },
+          {
+            "puesto": 9,
+            "jugador": "sgg:4591571",
+            "gamerTag": "The_Senpai",
+            "personaje": "link",
+            "personajes": {
+              "link": 7
+            }
+          },
+          {
+            "puesto": 9,
+            "jugador": "sgg:2389294",
+            "gamerTag": "Trinki76",
+            "personaje": "pikachu",
+            "personajes": {
+              "pikachu": 3,
+              "joker": 3,
+              "robin": 1
+            }
+          },
+          {
+            "puesto": 13,
+            "jugador": "sgg:5332521",
+            "gamerTag": "xXTI_ZIXx",
+            "personaje": "marth",
+            "personajes": {
+              "marth": 5,
+              "sheik": 4
+            }
+          },
+          {
+            "puesto": 13,
+            "jugador": "sgg:5321101",
+            "gamerTag": "ErrorMacro",
+            "personaje": "sonic",
+            "personajes": {
+              "sonic": 9
+            }
+          },
+          {
+            "puesto": 13,
+            "jugador": "sgg:5160608",
+            "gamerTag": "Profesor Celiaco",
+            "personaje": "bowser",
+            "personajes": {
+              "bowser": 5,
+              "luigi": 1
+            }
+          },
+          {
+            "puesto": 13,
+            "jugador": "sgg:5318244",
+            "gamerTag": "J_u@ni",
+            "personaje": "mario",
+            "personajes": {
+              "mario": 2,
+              "palutena": 2
+            }
+          },
+          {
+            "puesto": 17,
+            "jugador": "sgg:5326602",
+            "gamerTag": "Marto212"
+          },
+          {
+            "puesto": 17,
+            "jugador": "sgg:5089118",
+            "gamerTag": "Savitar",
+            "personaje": "samus",
+            "personajes": {
+              "samus": 6
+            }
+          },
+          {
+            "puesto": 17,
+            "jugador": "sgg:5317359",
+            "gamerTag": "Gabyneitor27",
+            "personaje": "bowser",
+            "personajes": {
+              "bowser": 4
+            }
+          },
+          {
+            "puesto": 17,
+            "jugador": "sgg:5330837",
+            "gamerTag": "Nico",
+            "personaje": "sonic",
+            "personajes": {
+              "sonic": 2,
+              "terry": 2
+            }
+          },
+          {
+            "puesto": 17,
+            "jugador": "sgg:5328311",
+            "gamerTag": "Trazh_X",
+            "personaje": "dr-mario",
+            "personajes": {
+              "dr-mario": 4
+            }
+          },
+          {
+            "puesto": 17,
+            "jugador": "sgg:5328981",
+            "gamerTag": "Zheta_11"
+          },
+          {
+            "puesto": 17,
+            "jugador": "sgg:5320732",
+            "gamerTag": "Fanencio"
+          },
+          {
+            "puesto": 17,
+            "jugador": "sgg:5089251",
+            "gamerTag": "SerenaMoon31"
+          },
+          {
+            "puesto": 25,
+            "jugador": "sgg:5317127",
+            "gamerTag": "Luchidisc"
+          }
+        ]
+      }
+    ],
+    "valor": "$4500"
+  },
+  {
+    "slug": "mendotaku-2025",
+    "nombre": "Mendotaku 2025",
+    "serie": "stand",
+    "fecha": "2025",
+    "temporada": 2025,
+    "events": [
+      {
+        "nombre": "Super Smash Bros Ultimate",
+        "juego": "Super Smash Bros Ultimate",
+        "sumaRanking": false,
+        "standings": []
+      },
+      {
+        "nombre": "Mario Kart",
+        "juego": "Mario Kart",
+        "sumaRanking": false,
+        "standings": []
+      }
+    ]
+  },
+  {
+    "slug": "multigeek-2024",
+    "nombre": "Multigeek 2024",
+    "serie": "stand",
+    "fecha": "2024",
+    "temporada": 2024,
+    "events": []
+  },
+  {
+    "slug": "evento-las-heras-2023",
+    "nombre": "Evento gamer de Las Heras",
+    "serie": "stand",
+    "fecha": "2023",
+    "temporada": 2023,
+    "events": []
+  },
+  {
+    "slug": "anexo-world-cup-2022",
+    "nombre": "Anexo World Cup · Mendoza Cup #1",
+    "serie": "anexo",
+    "fecha": "2022",
+    "temporada": 2022,
+    "events": []
+  },
+  {
+    "slug": "premier-smash-league-1",
+    "nombre": "Premier Smash League #1",
+    "serie": "premier",
+    "fecha": "2025-11-16T15:00:00-03:00",
+    "temporada": 2025,
+    "direccion": "Mendoza, Capital, Mendoza, Argentina, Mendoza",
+    "afiche": "https://images.start.gg/images/tournament/851545/image-667328bd9d1972c28be07259fcac552b.png",
+    "slugStartgg": "premier-smash-league-1",
+    "inscripcionAbierta": false,
+    "events": [
+      {
+        "nombre": "Premier Smash League #1",
+        "juego": "Ultimate",
+        "slugStartgg": "tournament/premier-smash-league-1/event/premier-smash-league-1",
+        "inscriptos": 50,
+        "sumaRanking": true,
+        "standings": [
+          {
+            "puesto": 1,
+            "jugador": "sgg:3475602",
+            "gamerTag": "benu"
+          },
+          {
+            "puesto": 2,
+            "jugador": "sgg:4591571",
+            "gamerTag": "The_Senpai"
+          },
+          {
+            "puesto": 3,
+            "jugador": "sgg:5089265",
+            "gamerTag": "Sebastian"
+          },
+          {
+            "puesto": 4,
+            "jugador": "sgg:5089283",
+            "gamerTag": "Joaquin Ricci"
+          },
+          {
+            "puesto": 5,
+            "jugador": "sgg:5089281",
+            "gamerTag": "Pablo vivas"
+          },
+          {
+            "puesto": 5,
+            "jugador": "sgg:5089185",
+            "gamerTag": "Alan"
+          },
+          {
+            "puesto": 5,
+            "jugador": "sgg:3343760",
+            "gamerTag": "FabriFN"
+          },
+          {
+            "puesto": 5,
+            "jugador": "sgg:5089260",
+            "gamerTag": "Gabriel Impellizzeri"
+          },
+          {
+            "puesto": 9,
+            "jugador": "sgg:5089124",
+            "gamerTag": "Gabriel"
+          },
+          {
+            "puesto": 9,
+            "jugador": "sgg:5089127",
+            "gamerTag": "Juani"
+          },
+          {
+            "puesto": 9,
+            "jugador": "sgg:5089151",
+            "gamerTag": "Omar"
+          },
+          {
+            "puesto": 9,
+            "jugador": "sgg:5089187",
+            "gamerTag": "Guida"
+          },
+          {
+            "puesto": 9,
+            "jugador": "sgg:3934574",
+            "gamerTag": "Khada"
+          },
+          {
+            "puesto": 9,
+            "jugador": "sgg:5089378",
+            "gamerTag": "King of Knight"
+          },
+          {
+            "puesto": 9,
+            "jugador": "sgg:5089258",
+            "gamerTag": "Lautaro Ojeda"
+          },
+          {
+            "puesto": 9,
+            "jugador": "sgg:5089263",
+            "gamerTag": "Ismael"
+          },
+          {
+            "puesto": 17,
+            "jugador": "sgg:5089121",
+            "gamerTag": "Uriel"
+          },
+          {
+            "puesto": 17,
+            "jugador": "sgg:5089122",
+            "gamerTag": "Geronimo"
+          },
+          {
+            "puesto": 17,
+            "jugador": "sgg:5089125",
+            "gamerTag": "Leonel"
+          },
+          {
+            "puesto": 17,
+            "jugador": "sgg:5089271",
+            "gamerTag": "Luciano Mur"
+          },
+          {
+            "puesto": 17,
+            "jugador": "sgg:5089150",
+            "gamerTag": "MR"
+          },
+          {
+            "puesto": 17,
+            "jugador": "sgg:5089152",
+            "gamerTag": "Demian"
+          },
+          {
+            "puesto": 17,
+            "jugador": "sgg:5089154",
+            "gamerTag": "Lautaro Heredia"
+          },
+          {
+            "puesto": 17,
+            "jugador": "sgg:5089186",
+            "gamerTag": "Victoria Vivas"
+          },
+          {
+            "puesto": 17,
+            "jugador": "sgg:5089188",
+            "gamerTag": "Santi Senpai"
+          },
+          {
+            "puesto": 17,
+            "jugador": "sgg:5089189",
+            "gamerTag": "Aitiana Vivas"
+          },
+          {
+            "puesto": 17,
+            "jugador": "sgg:5089309",
+            "gamerTag": "Alexis"
+          },
+          {
+            "puesto": 17,
+            "jugador": "sgg:5089191",
+            "gamerTag": "Santiago ramos"
+          },
+          {
+            "puesto": 17,
+            "jugador": "sgg:5089257",
+            "gamerTag": "Lautaro Davila"
+          },
+          {
+            "puesto": 17,
+            "jugador": "sgg:5089259",
+            "gamerTag": "Nahuel Figueroa"
+          },
+          {
+            "puesto": 17,
+            "jugador": "sgg:5089262",
+            "gamerTag": "Juan Ignacio"
+          },
+          {
+            "puesto": 17,
+            "jugador": "sgg:5089264",
+            "gamerTag": "Fernando"
+          }
+        ]
+      },
+      {
+        "nombre": "Singles",
+        "juego": "Ultimate",
+        "slugStartgg": "tournament/premier-smash-league-1/event/singles",
+        "inscriptos": 0,
+        "sumaRanking": false,
+        "standings": []
+      }
+    ]
+  },
+  {
+    "slug": "pre-torneo-premier-smash-league",
+    "nombre": "Pre Torneo Premier Smash League",
+    "serie": "premier",
+    "fecha": "2025-11-23T00:00:00-03:00",
+    "temporada": 2025,
+    "direccion": "Beltrán, M5501 Godoy Cruz, Mendoza, Argentina, Godoy Cruz",
+    "afiche": "https://images.start.gg/images/tournament/855178/image-58962185a3cc3f0315e922db3e4edda7.jpg",
+    "slugStartgg": "pre-torneo-premier-smash-league",
+    "inscripcionAbierta": false,
+    "events": [
+      {
+        "nombre": "Pre Torneo Premier Smash",
+        "juego": "Ultimate",
+        "slugStartgg": "tournament/pre-torneo-premier-smash-league/event/pre-torneo-premier-smash",
+        "inscriptos": 12,
+        "sumaRanking": true,
+        "standings": [
+          {
+            "puesto": 1,
+            "jugador": "sgg:4793119",
+            "gamerTag": "Lukitas_011",
+            "personaje": "corrin",
+            "personajes": {
+              "corrin": 15
+            }
+          },
+          {
+            "puesto": 2,
+            "jugador": "sgg:3934574",
+            "gamerTag": "Khada",
+            "personaje": "falco",
+            "personajes": {
+              "falco": 12,
+              "cloud": 10,
+              "joker": 2
+            }
+          },
+          {
+            "puesto": 3,
+            "jugador": "sgg:3284252",
+            "gamerTag": "StA1t",
+            "personaje": "byleth",
+            "personajes": {
+              "byleth": 9,
+              "shulk": 2,
+              "sonic": 2,
+              "snake": 1
+            }
+          },
+          {
+            "puesto": 4,
+            "jugador": "sgg:5200973",
+            "gamerTag": "Fabluc3",
+            "personaje": "fox",
+            "personajes": {
+              "fox": 6,
+              "samus": 1,
+              "wolf": 3
+            }
+          },
+          {
+            "puesto": 5,
+            "jugador": "sgg:4591571",
+            "gamerTag": "The_Senpai",
+            "personaje": "link",
+            "personajes": {
+              "link": 12
+            }
+          },
+          {
+            "puesto": 5,
+            "jugador": "sgg:3361640",
+            "gamerTag": "SourBlaze",
+            "personaje": "mario",
+            "personajes": {
+              "mario": 4,
+              "joker": 1,
+              "inkling": 2
+            }
+          },
+          {
+            "puesto": 7,
+            "jugador": "sgg:5096812",
+            "gamerTag": "S4ntu",
+            "personaje": "pyra-and-mythra",
+            "personajes": {
+              "pyra-and-mythra": 9
+            }
+          },
+          {
+            "puesto": 7,
+            "jugador": "sgg:3846478",
+            "gamerTag": "Rfrisk",
+            "personaje": "pyra-and-mythra",
+            "personajes": {
+              "pyra-and-mythra": 8
+            }
+          },
+          {
+            "puesto": 9,
+            "jugador": "sgg:2381628",
+            "gamerTag": "JACK",
+            "personaje": "kazuya",
+            "personajes": {
+              "kazuya": 4,
+              "terry": 1
+            }
+          },
+          {
+            "puesto": 9,
+            "jugador": "sgg:5097762",
+            "gamerTag": "Australfyre",
+            "personaje": "roy",
+            "personajes": {
+              "roy": 3,
+              "byleth": 1
+            }
+          },
+          {
+            "puesto": 9,
+            "jugador": "sgg:5210725",
+            "gamerTag": "Trinki76",
+            "personaje": "pichu",
+            "personajes": {
+              "pichu": 2
+            }
+          },
+          {
+            "puesto": 9,
+            "jugador": "sgg:5097566",
+            "gamerTag": "Wegorz",
+            "personaje": "incineroar",
+            "personajes": {
+              "incineroar": 4
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "torneo-en-negro-2",
+    "nombre": "Torneo en negro #2",
+    "serie": "premier",
+    "fecha": "2025-12-05T20:00:00-03:00",
+    "temporada": 2025,
+    "direccion": "Río Cobre, M5523, Mendoza, Argentina",
+    "afiche": "https://images.start.gg/images/tournament/859231/image-d7b7c418a87f5c3871dbbc7c13b26aa9.jpg",
+    "slugStartgg": "torneo-en-negro-2",
+    "inscripcionAbierta": false,
+    "events": [
+      {
+        "nombre": "Pre Torneo Premier Smash",
+        "juego": "Ultimate",
+        "slugStartgg": "tournament/torneo-en-negro-2/event/pre-torneo-premier-smash",
+        "inscriptos": 11,
+        "sumaRanking": true,
+        "standings": [
+          {
+            "puesto": 1,
+            "jugador": "sgg:3361640",
+            "gamerTag": "SourBlaze",
+            "personaje": "roy",
+            "personajes": {
+              "joker": 3,
+              "inkling": 4,
+              "roy": 5,
+              "mario": 2,
+              "peach": 2
+            }
+          },
+          {
+            "puesto": 2,
+            "jugador": "sgg:4793119",
+            "gamerTag": "Lukitas_011",
+            "personaje": "corrin",
+            "personajes": {
+              "corrin": 18,
+              "captain-falcon": 1
+            }
+          },
+          {
+            "puesto": 3,
+            "jugador": "sgg:3284252",
+            "gamerTag": "StA1t",
+            "personaje": "byleth",
+            "personajes": {
+              "byleth": 11
+            }
+          },
+          {
+            "puesto": 4,
+            "jugador": "sgg:4591571",
+            "gamerTag": "The_Senpai",
+            "personaje": "link",
+            "personajes": {
+              "link": 12
+            }
+          },
+          {
+            "puesto": 5,
+            "jugador": "sgg:3934574",
+            "gamerTag": "Khada",
+            "personaje": "falco",
+            "personajes": {
+              "cloud": 2,
+              "falco": 4,
+              "joker": 1
+            }
+          },
+          {
+            "puesto": 5,
+            "jugador": "sgg:5080233",
+            "gamerTag": "renzito",
+            "personaje": "greninja",
+            "personajes": {
+              "greninja": 6,
+              "marth": 1,
+              "inkling": 3
+            }
+          },
+          {
+            "puesto": 7,
+            "jugador": "sgg:2381628",
+            "gamerTag": "JACK",
+            "personaje": "terry",
+            "personajes": {
+              "terry": 5,
+              "ken": 1
+            }
+          },
+          {
+            "puesto": 7,
+            "jugador": "sgg:2256836",
+            "gamerTag": "Rioluman55",
+            "personaje": "pyra-and-mythra",
+            "personajes": {
+              "pyra-and-mythra": 7,
+              "cloud": 1
+            }
+          },
+          {
+            "puesto": 9,
+            "jugador": "sgg:5096812",
+            "gamerTag": "S4ntu",
+            "personaje": "piranha-plant",
+            "personajes": {
+              "pyra-and-mythra": 2,
+              "piranha-plant": 3
+            }
+          },
+          {
+            "puesto": 9,
+            "jugador": "sgg:3846478",
+            "gamerTag": "Rfrisk",
+            "personaje": "pyra-and-mythra",
+            "personajes": {
+              "pyra-and-mythra": 5
+            }
+          },
+          {
+            "puesto": 9,
+            "jugador": "sgg:4442416",
+            "gamerTag": "Trinki",
+            "personaje": "joker",
+            "personajes": {
+              "pikachu": 3,
+              "joker": 4
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "torneo-especial-cumplea-os-blaze",
+    "nombre": "Torneo Especial cumpleaños Blaze",
+    "serie": "premier",
+    "fecha": "2025-12-19T20:00:00-03:00",
+    "temporada": 2025,
+    "direccion": "Río Cobre, M5523, Mendoza, Argentina",
+    "afiche": "https://images.start.gg/images/tournament/861521/image-eb8667e6505ad888b6ff60396fce0387.jpg",
+    "slugStartgg": "torneo-especial-cumplea-os-blaze",
+    "inscripcionAbierta": false,
+    "events": [
+      {
+        "nombre": "Doubles",
+        "juego": "Ultimate",
+        "slugStartgg": "tournament/torneo-especial-cumplea-os-blaze/event/doubles",
+        "inscriptos": 5,
+        "sumaRanking": false,
+        "standings": [
+          {
+            "puesto": 1,
+            "jugador": "equipo:khada-king-of-knight",
+            "gamerTag": "Khada / King of Knight"
+          },
+          {
+            "puesto": 2,
+            "jugador": "equipo:sourblaze-jack",
+            "gamerTag": "SourBlaze / JACK"
+          },
+          {
+            "puesto": 3,
+            "jugador": "equipo:lukitas-011-australfyre",
+            "gamerTag": "Lukitas_011 / Australfyre"
+          },
+          {
+            "puesto": 4,
+            "jugador": "equipo:sta1t-trinki",
+            "gamerTag": "StA1t / Trinki"
+          },
+          {
+            "puesto": 5,
+            "jugador": "equipo:the-senpai-wegorz",
+            "gamerTag": "The_Senpai / Wegorz"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "premier-smash-league",
+    "nombre": "Premier Smash League",
+    "serie": "premier",
+    "fecha": "2026-05-23T01:01:00-03:00",
+    "temporada": 2026,
+    "direccion": "1245, Av. San Martín 1233, M5500 Mendoza, Argentina",
+    "afiche": "https://images.start.gg/images/tournament/910791/image-2b4ad73d7c6bb138c06ce3ec009865e6.jpg",
+    "slugStartgg": "premier-smash-league",
+    "inscripcionAbierta": false,
+    "events": [
+      {
+        "nombre": "Premier Smash League",
+        "juego": "Ultimate",
+        "slugStartgg": "tournament/premier-smash-league/event/premier-smash-league",
+        "inscriptos": 26,
+        "sumaRanking": true,
+        "standings": [
+          {
+            "puesto": 1,
+            "jugador": "sgg:3475602",
+            "gamerTag": "benu",
+            "personaje": "kazuya",
+            "personajes": {
+              "isabelle": 7,
+              "kazuya": 8
+            }
+          },
+          {
+            "puesto": 2,
+            "jugador": "sgg:5296440",
+            "gamerTag": "ANX Lukitas_011",
+            "personaje": "corrin",
+            "personajes": {
+              "corrin": 16,
+              "captain-falcon": 5
+            }
+          },
+          {
+            "puesto": 3,
+            "jugador": "sgg:5080233",
+            "gamerTag": "renzito",
+            "personaje": "greninja",
+            "personajes": {
+              "greninja": 21
+            }
+          },
+          {
+            "puesto": 4,
+            "jugador": "sgg:3284252",
+            "gamerTag": "StA1t",
+            "personaje": "byleth",
+            "personajes": {
+              "byleth": 12,
+              "pyra-and-mythra": 1
+            }
+          },
+          {
+            "puesto": 5,
+            "jugador": "sgg:5085020",
+            "gamerTag": "ANX King of Knight",
+            "personaje": "little-mac",
+            "personajes": {
+              "little-mac": 10,
+              "ike": 1,
+              "shulk": 1
+            }
+          },
+          {
+            "puesto": 5,
+            "jugador": "sgg:5096812",
+            "gamerTag": "S4ntu",
+            "personaje": "piranha-plant",
+            "personajes": {
+              "piranha-plant": 16
+            }
+          },
+          {
+            "puesto": 7,
+            "jugador": "sgg:5373211",
+            "gamerTag": "ErrorMacro",
+            "personaje": "sonic",
+            "personajes": {
+              "sonic": 13,
+              "incineroar": 1
+            }
+          },
+          {
+            "puesto": 7,
+            "jugador": "sgg:4591571",
+            "gamerTag": "The_Senpai",
+            "personaje": "link",
+            "personajes": {
+              "kazuya": 1,
+              "link": 10
+            }
+          },
+          {
+            "puesto": 9,
+            "jugador": "sgg:2389294",
+            "gamerTag": "Trinki76",
+            "personaje": "pyra-and-mythra",
+            "personajes": {
+              "steve": 2,
+              "pyra-and-mythra": 6,
+              "pikachu": 1
+            }
+          },
+          {
+            "puesto": 9,
+            "jugador": "sgg:5089118",
+            "gamerTag": "Savitar",
+            "personaje": "samus",
+            "personajes": {
+              "samus": 4,
+              "fox": 1,
+              "toon-link": 1
+            }
+          },
+          {
+            "puesto": 9,
+            "jugador": "sgg:3846478",
+            "gamerTag": "Rfrisk",
+            "personaje": "pyra-and-mythra",
+            "personajes": {
+              "pyra-and-mythra": 12
+            }
+          },
+          {
+            "puesto": 9,
+            "jugador": "sgg:5382551",
+            "gamerTag": "yosant",
+            "personaje": "yoshi",
+            "personajes": {
+              "yoshi": 4
+            }
+          },
+          {
+            "puesto": 13,
+            "jugador": "sgg:5387869",
+            "gamerTag": "Naiki"
+          },
+          {
+            "puesto": 13,
+            "jugador": "sgg:5097566",
+            "gamerTag": "Wegorz",
+            "personaje": "incineroar",
+            "personajes": {
+              "incineroar": 4,
+              "wolf": 2
+            }
+          },
+          {
+            "puesto": 13,
+            "jugador": "sgg:2381628",
+            "gamerTag": "TIOCHECHI",
+            "personaje": "terry",
+            "personajes": {
+              "terry": 8
+            }
+          },
+          {
+            "puesto": 13,
+            "jugador": "sgg:5389841",
+            "gamerTag": "Zacarias",
+            "personaje": "little-mac",
+            "personajes": {
+              "little-mac": 8
+            }
+          },
+          {
+            "puesto": 17,
+            "jugador": "sgg:5160608",
+            "gamerTag": "Profesor Celiaco",
+            "personaje": "bowser",
+            "personajes": {
+              "bowser": 5
+            }
+          },
+          {
+            "puesto": 17,
+            "jugador": "sgg:5318244",
+            "gamerTag": "POPSTAR",
+            "personaje": "kirby",
+            "personajes": {
+              "kirby": 5
+            }
+          },
+          {
+            "puesto": 17,
+            "jugador": "sgg:5089251",
+            "gamerTag": "SerenaMoon31"
+          },
+          {
+            "puesto": 17,
+            "jugador": "sgg:5317359",
+            "gamerTag": "Gabyneitor27",
+            "personaje": "bowser",
+            "personajes": {
+              "bowser": 4
+            }
+          },
+          {
+            "puesto": 17,
+            "jugador": "sgg:5332521",
+            "gamerTag": "xXTI_ZIXx"
+          },
+          {
+            "puesto": 17,
+            "jugador": "sgg:2244138",
+            "gamerTag": "CAOS",
+            "personaje": "banjo-and-kazooie",
+            "personajes": {
+              "banjo-and-kazooie": 3,
+              "little-mac": 1
+            }
+          },
+          {
+            "puesto": 17,
+            "jugador": "sgg:3343760",
+            "gamerTag": "Fabluc3"
+          },
+          {
+            "puesto": 17,
+            "jugador": "sgg:4331354",
+            "gamerTag": "Vitah",
+            "personaje": "incineroar",
+            "personajes": {
+              "incineroar": 6
+            }
+          },
+          {
+            "puesto": 25,
+            "jugador": "sgg:5341258",
+            "gamerTag": "Coffee_00",
+            "personaje": "roy",
+            "personajes": {
+              "roy": 4
+            }
+          },
+          {
+            "puesto": 25,
+            "jugador": "sgg:3361640",
+            "gamerTag": "SourBlaze"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "premier-smash-league-2-1",
+    "nombre": "Premier Smash League #2",
+    "serie": "premier",
+    "fecha": "2026-08-28T15:00:00-03:00",
+    "temporada": 2026,
+    "direccion": "1245, Av. San Martín 1233, M5500 Mendoza, Argentina",
+    "afiche": "https://images.start.gg/images/tournament/944449/image-a1423b4d5596d3954bd8b894520d4bdd.jpg",
+    "slugStartgg": "premier-smash-league-2-1",
+    "inscripcionAbierta": false,
+    "events": [
+      {
+        "nombre": "Premier Smash League",
+        "juego": "Ultimate",
+        "slugStartgg": "tournament/premier-smash-league-2-1/event/premier-smash-league",
+        "inscriptos": 20,
+        "sumaRanking": true,
+        "standings": [
+          {
+            "puesto": 1,
+            "jugador": "sgg:3475602",
+            "gamerTag": "benu",
+            "personaje": "kazuya",
+            "personajes": {
+              "isabelle": 3,
+              "kazuya": 17,
+              "sonic": 7
+            }
+          },
+          {
+            "puesto": 2,
+            "jugador": "sgg:5296440",
+            "gamerTag": "ANX Lukitas_011",
+            "personaje": "corrin",
+            "personajes": {
+              "corrin": 20,
+              "captain-falcon": 3
+            }
+          },
+          {
+            "puesto": 3,
+            "jugador": "sgg:3361640",
+            "gamerTag": "SourBlaze",
+            "personaje": "mario",
+            "personajes": {
+              "mario": 14,
+              "roy": 2,
+              "inkling": 2
+            }
+          },
+          {
+            "puesto": 4,
+            "jugador": "sgg:3284252",
+            "gamerTag": "StA1t",
+            "personaje": "byleth",
+            "personajes": {
+              "byleth": 14,
+              "cloud": 5,
+              "joker": 1
+            }
+          },
+          {
+            "puesto": 5,
+            "jugador": "sgg:5080233",
+            "gamerTag": "renzito",
+            "personaje": "greninja",
+            "personajes": {
+              "greninja": 7,
+              "marth": 3,
+              "mr-game-and-watch": 1
+            }
+          },
+          {
+            "puesto": 5,
+            "jugador": "sgg:5096812",
+            "gamerTag": "S4ntu",
+            "personaje": "piranha-plant",
+            "personajes": {
+              "piranha-plant": 14
+            }
+          },
+          {
+            "puesto": 7,
+            "jugador": "sgg:5318244",
+            "gamerTag": "Knuckles.(popstar)",
+            "personaje": "incineroar",
+            "personajes": {
+              "incineroar": 8,
+              "captain-falcon": 3
+            }
+          },
+          {
+            "puesto": 7,
+            "jugador": "sgg:4591571",
+            "gamerTag": "The_Senpai",
+            "personaje": "kazuya",
+            "personajes": {
+              "kazuya": 9
+            }
+          },
+          {
+            "puesto": 9,
+            "jugador": "sgg:2381628",
+            "gamerTag": "TIOCHECHI",
+            "personaje": "terry",
+            "personajes": {
+              "terry": 7
+            }
+          },
+          {
+            "puesto": 9,
+            "jugador": "sgg:5373211",
+            "gamerTag": "nicx",
+            "personaje": "sonic",
+            "personajes": {
+              "sonic": 4
+            }
+          },
+          {
+            "puesto": 9,
+            "jugador": "sgg:5542864",
+            "gamerTag": "Rfrisk",
+            "personaje": "pyra-and-mythra",
+            "personajes": {
+              "pyra-and-mythra": 6
+            }
+          },
+          {
+            "puesto": 9,
+            "jugador": "sgg:5317359",
+            "gamerTag": "Gabyneitor27",
+            "personaje": "bowser",
+            "personajes": {
+              "bowser": 2,
+              "ridley": 2
+            }
+          },
+          {
+            "puesto": 13,
+            "jugador": "sgg:5548974",
+            "gamerTag": "brutzmlg"
+          },
+          {
+            "puesto": 13,
+            "jugador": "sgg:5160608",
+            "gamerTag": "Profesor Celiaco",
+            "personaje": "bowser",
+            "personajes": {
+              "bowser": 6,
+              "dark-pit": 1
+            }
+          },
+          {
+            "puesto": 13,
+            "jugador": "sgg:5535368",
+            "gamerTag": "Dracolol",
+            "personaje": "pit",
+            "personajes": {
+              "pit": 7
+            }
+          },
+          {
+            "puesto": 13,
+            "jugador": "sgg:2244138",
+            "gamerTag": "CAOS"
+          },
+          {
+            "puesto": 17,
+            "jugador": "sgg:5089251",
+            "gamerTag": "SerenaMoon31"
+          },
+          {
+            "puesto": 17,
+            "jugador": "sgg:5544378",
+            "gamerTag": "Mayday"
+          },
+          {
+            "puesto": 17,
+            "jugador": "sgg:5544369",
+            "gamerTag": "Inex"
+          },
+          {
+            "puesto": 17,
+            "jugador": "sgg:5089118",
+            "gamerTag": "Savitar",
+            "personaje": "samus",
+            "personajes": {
+              "samus": 3,
+              "toon-link": 1
+            }
+          }
+        ]
+      }
+    ]
+  }
+]
