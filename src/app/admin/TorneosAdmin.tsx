@@ -10,6 +10,11 @@ type Fila = { slug: string; nombre: string; fecha: string; serie: string; vincul
 
 export function TorneosAdmin({ torneos }: { torneos: Fila[] }) {
   return (
+    <>
+    <div className="actions admin-lista-acciones">
+      <Link className="btn btn--p2" href="/admin/torneos/nuevo">Nuevo torneo a mano</Link>
+      <span className="admin-nota">Para anunciar una fecha antes de que exista en start.gg.</span>
+    </div>
     <table className="history__table admin-torneos">
       <thead>
         <tr>
@@ -23,6 +28,7 @@ export function TorneosAdmin({ torneos }: { torneos: Fila[] }) {
         {torneos.map((t) => <FilaTorneo key={t.slug} torneo={t} />)}
       </tbody>
     </table>
+    </>
   );
 }
 
@@ -50,6 +56,7 @@ function FilaTorneo({ torneo }: { torneo: Fila }) {
       </td>
       <td>{torneo.serie}</td>
       <td className="admin-torneos__acciones">
+        <Link className="admin-boton" href={`/admin/torneos/${torneo.slug}`}>Editar</Link>
         {torneo.vinculado && (
           <button type="button" className="admin-boton" disabled={ocupado}
             onClick={() => correr(() => actualizarDesdeStartgg(torneo.slug), "actualizado")}>

@@ -1137,3 +1137,46 @@ button.link-arrow { background: none; border: 0; padding: 0; font: inherit; curs
 @media (max-width: 56rem) {
     .admin-puntos { grid-template-columns: 1fr; }
 }
+
+.admin-lista-acciones { margin-bottom: 1.4rem; }
+.admin-torneo-form {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 16rem;
+    gap: 1.6rem clamp(1.5rem, 4vw, 3rem);
+    align-items: start;
+}
+.admin-torneo-form__campos { display: grid; gap: 1.1rem; }
+.admin-torneo-form__campos small { font-weight: 400; color: var(--mute); }
+.admin-torneo-form__pie { grid-column: 1 / -1; display: grid; gap: 1rem; }
+.admin-fila { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.admin-fila .campo small.admin-nota { font-size: .85rem; }
+.campo input[type="date"], .campo input[type="time"] { color-scheme: dark; }
+.admin-torneo-form__afiche { display: grid; gap: .7rem; align-content: start; justify-items: start; }
+.admin-afiche {
+    width: 16rem;
+    aspect-ratio: 9 / 16;
+    background: var(--carbon);
+    border: 2px dashed var(--carbon-3);
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+}
+.admin-afiche img { width: 100%; height: 100%; object-fit: contain; }
+.admin-subir { display: inline-block; margin-left: 0; }
+.admin-subir:focus-within { outline: 2px solid var(--yellow); outline-offset: 2px; }
+.admin-torneo-form__afiche .admin-boton { margin-left: 0; }
+a.admin-boton { display: inline-block; text-decoration: none; }
+.admin-link {
+    font: inherit;
+    color: var(--yellow);
+    background: none;
+    border: 0;
+    padding: 0;
+    text-decoration: underline;
+    cursor: pointer;
+}
+@media (max-width: 48rem) {
+    .admin-torneo-form { grid-template-columns: 1fr; }
+    .admin-afiche { width: min(16rem, 100%); }
+}
+.topbar__cuenta-hueco { display: inline-block; width: 7rem; height: 2.2rem; }

@@ -5,7 +5,7 @@
 */
 import { neon, type NeonQueryFunction } from "@neondatabase/serverless";
 import { slugify } from "./ranking.ts";
-import type { EventoTorneo, Jugador, Resultado, Serie, SerieId, TablaPuntos, Torneo } from "./types.ts";
+import type { CampoManual, EventoTorneo, Jugador, Resultado, Serie, SerieId, TablaPuntos, Torneo } from "./types.ts";
 
 let cliente: NeonQueryFunction<false, false> | undefined;
 
@@ -93,6 +93,7 @@ export async function leerDatos(): Promise<Datos> {
       afiche: opcional(t.afiche),
       slugStartgg: opcional(t.slug_startgg),
       inscripcionAbierta: t.inscripcion_abierta || undefined,
+      camposManuales: t.campos_manuales?.length ? t.campos_manuales : undefined,
       events: eventosPorTorneo.get(t.slug) ?? [],
     })),
     jugadores: jugadores.map((j) => ({
@@ -110,23 +111,33 @@ export async function leerDatos(): Promise<Datos> {
 
 /**
  * Guarda un torneo con sus eventos y standings, reemplazando los anteriores.
- * Si ya existía (mismo slug o mismo torneo de start.gg), conserva el slug,
- * y el afiche y el precio cargados a mano.
+ * Si ya existía (mismo slug o mismo torneo de start.gg), conserva el slug, el
+ * afiche y el precio, y todo campo que el admin haya editado a mano.
  */
 export async function guardarTorneo(torneo: Torneo): Promise<string> {
   const db = sql();
   const [previo] = await db`
-    select slug, afiche, valor from torneos
+    select * from torneos
     where slug = ${torneo.slug} or (slug_startgg is not null and slug_startgg = ${torneo.slugStartgg ?? null})
     limit 1`;
+  const manuales: CampoManual[] = previo?.campos_manuales ?? [];
+  // Lo que el admin editó a mano gana sobre lo que trae start.gg.
+  const fijo = <T>(campo: CampoManual, nuevo: T): T => (manuales.includes(campo) ? previo[campo] : nuevo);
+
   const slug: string = previo?.slug ?? torneo.slug;
-  const afiche = previo?.afiche ?? torneo.afiche ?? null;
-  const valor = previo?.valor ?? torneo.valor ?? null;
+  const nombre = fijo("nombre", torneo.nombre);
+  const serie = fijo("serie", torneo.serie);
+  const fecha = fijo("fecha", torneo.fecha);
+  const temporada = Number(String(fecha).slice(0, 4)) || torneo.temporada;
+  const sede = fijo("sede", torneo.sede ?? null);
+  const direccion = fijo("direccion", torneo.direccion ?? null);
+  const afiche = fijo("afiche", previo?.afiche ?? torneo.afiche ?? null);
+  const valor = fijo("valor", previo?.valor ?? torneo.valor ?? null);
 
   await db.transaction([
     db`insert into torneos (slug, nombre, serie, fecha, temporada, sede, direccion, valor, afiche, slug_startgg, inscripcion_abierta, actualizado)
-       values (${slug}, ${torneo.nombre}, ${torneo.serie}, ${torneo.fecha}, ${torneo.temporada}, ${torneo.sede ?? null},
-               ${torneo.direccion ?? null}, ${valor}, ${afiche}, ${torneo.slugStartgg ?? null}, ${torneo.inscripcionAbierta ?? false}, now())
+       values (${slug}, ${nombre}, ${serie}, ${fecha}, ${temporada}, ${sede},
+               ${direccion}, ${valor}, ${afiche}, ${torneo.slugStartgg ?? null}, ${torneo.inscripcionAbierta ?? false}, now())
        on conflict (slug) do update set
          nombre = excluded.nombre, serie = excluded.serie, fecha = excluded.fecha, temporada = excluded.temporada,
          sede = excluded.sede, direccion = excluded.direccion, valor = excluded.valor, afiche = excluded.afiche,
@@ -192,6 +203,50 @@ export async function guardarJugadores(nuevos: Jugador[]): Promise<void> {
       gamer_tag = excluded.gamer_tag,
       prefijo = coalesce(excluded.prefijo, jugadores.prefijo),
       slug_startgg = coalesce(excluded.slug_startgg, jugadores.slug_startgg)`;
+}
+
+export type DatosTorneo = Pick<Torneo, "nombre" | "serie" | "fecha" | "sede" | "direccion" | "valor" | "afiche" | "slugStartgg">;
+
+/**
+ * Edición desde el panel: pisa los datos del torneo y marca como manuales los
+ * campos que cambiaron, para que una actualización desde start.gg no los toque.
+ */
+export async function editarTorneo(slug: string, datos: DatosTorneo, cambiados: CampoManual[]): Promise<void> {
+  const db = sql();
+  await db`
+    update torneos set
+      nombre = ${datos.nombre}, serie = ${datos.serie}, fecha = ${datos.fecha},
+      temporada = ${Number(datos.fecha.slice(0, 4))}, sede = ${datos.sede ?? null},
+      direccion = ${datos.direccion ?? null}, valor = ${datos.valor ?? null}, afiche = ${datos.afiche ?? null},
+      slug_startgg = ${datos.slugStartgg ?? null},
+      campos_manuales = array(select distinct unnest(campos_manuales || ${cambiados}::text[])),
+      actualizado = now()
+    where slug = ${slug}`;
+}
+
+/** Olvida las ediciones a mano: la próxima actualización trae todo de start.gg. */
+export async function liberarCampos(slug: string): Promise<void> {
+  await sql()`update torneos set campos_manuales = '{}' where slug = ${slug}`;
+}
+
+/** Un slug libre a partir del nombre: "premier-smash-league-3", "…-3-2"… */
+export async function slugLibre(nombre: string): Promise<string> {
+  const base = slugify(nombre) || "torneo";
+  const usados = new Set((await sql()`select slug from torneos where slug like ${base + "%"}`).map((t) => t.slug as string));
+  let slug = base;
+  for (let n = 2; usados.has(slug); n++) slug = `${base}-${n}`;
+  return slug;
+}
+
+export async function guardarImagen(tipo: string, datos: Buffer): Promise<string> {
+  const id = `${Date.now().toString(36)}${Math.random().toString(36).slice(2, 8)}`;
+  await sql()`insert into imagenes (id, tipo, datos) values (${id}, ${tipo}, ${datos.toString("base64")})`;
+  return id;
+}
+
+export async function leerImagen(id: string): Promise<{ tipo: string; datos: Buffer } | undefined> {
+  const [img] = await sql()`select tipo, datos from imagenes where id = ${id}`;
+  return img ? { tipo: img.tipo, datos: Buffer.from(img.datos, "base64") } : undefined;
 }
 
 export async function guardarSerie(s: Serie, orden: number): Promise<void> {

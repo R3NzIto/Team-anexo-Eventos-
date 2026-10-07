@@ -95,3 +95,15 @@ create table if not exists usuarios (
   creado           timestamptz not null default now(),
   ultimo_ingreso   timestamptz not null default now()
 );
+
+-- Campos de un torneo editados a mano en el panel ("nombre", "sede"…):
+-- al actualizar desde start.gg se conservan.
+alter table torneos add column if not exists campos_manuales text[] not null default '{}';
+
+-- Imágenes subidas desde el panel (afiches). Se guardan en base64 y se sirven en /imagenes/<id>.
+create table if not exists imagenes (
+  id     text primary key,
+  tipo   text not null,
+  datos  text not null,
+  creado timestamptz not null default now()
+);

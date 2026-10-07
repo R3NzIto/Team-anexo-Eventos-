@@ -12,7 +12,7 @@ export function fechaLarga(fecha: string): string {
   const d = new Date(fecha);
   if (Number.isNaN(d.getTime()) || fecha.length <= 10) return fechaCorta(fecha);
   const dia = d.toLocaleDateString("es-AR", { weekday: "long", day: "numeric", month: "long", timeZone: "America/Argentina/Mendoza" });
-  const hora = d.toLocaleTimeString("es-AR", { hour: "2-digit", minute: "2-digit", timeZone: "America/Argentina/Mendoza" });
+  const hora = d.toLocaleTimeString("es-AR", { hour: "2-digit", minute: "2-digit", hourCycle: "h23", timeZone: "America/Argentina/Mendoza" });
   return `${dia} · ${hora} h`;
 }
 

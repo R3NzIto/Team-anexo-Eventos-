@@ -4,10 +4,10 @@ import { updateTag } from "next/cache";
 import { requerirAdmin } from "@/lib/admin";
 import { PERSONAJES } from "@/data/personajes";
 import { getJugadores, getRanking, getTemporadas, getTorneos } from "@/lib/data";
-import { guardarJugadores, guardarPuntos, guardarTorneo, sql } from "@/lib/db";
+import { editarTorneo, guardarImagen, guardarJugadores, guardarPuntos, guardarTorneo, liberarCampos, slugLibre, sql, type DatosTorneo } from "@/lib/db";
 import { calcularRanking } from "@/lib/ranking";
-import { importarTorneo, type Importacion } from "@/lib/startgg";
-import type { SerieId, TablaPuntos } from "@/lib/types";
+import { importarTorneo, slugDesdeUrl, type Importacion } from "@/lib/startgg";
+import type { CampoManual, SerieId, TablaPuntos } from "@/lib/types";
 
 /*
   Acciones del panel de admin. Cada una verifica que quien llama sea admin y,
@@ -215,5 +215,102 @@ export async function separarCuenta(secundaria: string): Promise<Guardado> {
     return { ok: true, slug: secundaria };
   } catch (e) {
     return { ok: false, mensaje: e instanceof Error ? e.message : "No se pudo separar." };
+  }
+}
+
+/* ---------- Crear y editar torneos a mano ---------- */
+
+const CAMPOS: CampoManual[] = ["nombre", "serie", "fecha", "sede", "direccion", "valor", "afiche"];
+
+/** Lee el formulario de torneo. La hora es opcional; sin hora el torneo queda con fecha "AAAA-MM-DD". */
+async function leerFormTorneo(form: FormData): Promise<DatosTorneo | string> {
+  const texto = (k: string) => String(form.get(k) ?? "").trim();
+  const nombre = texto("nombre");
+  if (!nombre) return "Poné el nombre del torneo.";
+  const dia = texto("fecha");
+  // Los torneos viejos pueden tener solo el año; se respeta mientras no se elija un día.
+  const anio = texto("anio");
+  if (!(dia ? /^\d{4}-\d{2}-\d{2}$/.test(dia) : /^\d{4}$/.test(anio))) return "Elegí la fecha del torneo.";
+  const hora = texto("hora");
+  if (hora && !/^\d{2}:\d{2}$/.test(hora)) return "La hora no es válida.";
+  const link = texto("startgg");
+  const afiche = texto("afiche");
+  if (afiche && !/^(\/|https:\/\/)/.test(afiche)) return "El afiche no es válido.";
+  return {
+    nombre,
+    serie: await serieValida(texto("serie")),
+    fecha: !dia ? anio : hora ? `${dia}T${hora}:00-03:00` : dia,
+    sede: texto("sede") || undefined,
+    direccion: texto("direccion") || undefined,
+    valor: texto("valor") || undefined,
+    afiche: afiche || undefined,
+    slugStartgg: link ? slugDesdeUrl(link) : undefined,
+  };
+}
+
+export async function crearTorneo(form: FormData): Promise<Guardado> {
+  try {
+    await requerirAdmin();
+    const datos = await leerFormTorneo(form);
+    if (typeof datos === "string") return { ok: false, mensaje: datos };
+    if (datos.slugStartgg) {
+      const [existe] = await sql()`select slug from torneos where slug_startgg = ${datos.slugStartgg}`;
+      if (existe) return { ok: false, mensaje: "Ese torneo de start.gg ya está cargado. Editalo desde la lista." };
+    }
+    const slug = await slugLibre(datos.nombre);
+    await guardarTorneo({ ...datos, slug, temporada: Number(datos.fecha.slice(0, 4)), events: [] });
+    // Todo lo cargado a mano queda fijo aunque después se vincule y actualice desde start.gg.
+    await editarTorneo(slug, datos, CAMPOS.filter((c) => datos[c]));
+    updateTag("datos");
+    return { ok: true, slug };
+  } catch (e) {
+    return { ok: false, mensaje: e instanceof Error ? e.message : "No se pudo crear." };
+  }
+}
+
+export async function guardarEdicion(slug: string, form: FormData): Promise<Guardado> {
+  try {
+    await requerirAdmin();
+    const datos = await leerFormTorneo(form);
+    if (typeof datos === "string") return { ok: false, mensaje: datos };
+    const [actual] = await sql()`select * from torneos where slug = ${slug}`;
+    if (!actual) return { ok: false, mensaje: "No encontré el torneo." };
+    if (datos.slugStartgg && datos.slugStartgg !== actual.slug_startgg) {
+      const [otro] = await sql()`select slug from torneos where slug_startgg = ${datos.slugStartgg} and slug <> ${slug}`;
+      if (otro) return { ok: false, mensaje: "Ese link de start.gg ya pertenece a otro torneo cargado." };
+    }
+    const cambiados = CAMPOS.filter((c) => (datos[c] ?? null) !== (actual[c] ?? null));
+    await editarTorneo(slug, datos, cambiados);
+    updateTag("datos");
+    return { ok: true, slug };
+  } catch (e) {
+    return { ok: false, mensaje: e instanceof Error ? e.message : "No se pudo guardar." };
+  }
+}
+
+export async function volverADatosDeStartgg(slug: string): Promise<Guardado> {
+  try {
+    await requerirAdmin();
+    await liberarCampos(slug);
+    return actualizarDesdeStartgg(slug);
+  } catch (e) {
+    return { ok: false, mensaje: e instanceof Error ? e.message : "No se pudo restaurar." };
+  }
+}
+
+const TIPOS_IMAGEN = new Set(["image/webp", "image/jpeg", "image/png"]);
+
+/** Recibe el afiche ya achicado en el navegador y devuelve su URL pública. */
+export async function subirAfiche(form: FormData): Promise<{ ok: true; url: string } | { ok: false; mensaje: string }> {
+  try {
+    await requerirAdmin();
+    const archivo = form.get("archivo");
+    if (!(archivo instanceof File)) return { ok: false, mensaje: "No llegó ninguna imagen." };
+    if (!TIPOS_IMAGEN.has(archivo.type)) return { ok: false, mensaje: "El afiche tiene que ser JPG, PNG o WebP." };
+    if (archivo.size > 900 * 1024) return { ok: false, mensaje: "La imagen es demasiado pesada aun achicada. Probá con otra." };
+    const id = await guardarImagen(archivo.type, Buffer.from(await archivo.arrayBuffer()));
+    return { ok: true, url: `/imagenes/${id}.${archivo.type.split("/")[1]}` };
+  } catch (e) {
+    return { ok: false, mensaje: e instanceof Error ? e.message : "No se pudo subir." };
   }
 }

@@ -14,6 +14,6 @@ export async function CuentaHeader() {
   );
 }
 
-export function IngresarLink() {
+function IngresarLink() {
   return <Link className="topbar__link" href="/ingresar">Ingresar</Link>;
 }

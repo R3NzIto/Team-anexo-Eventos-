@@ -7,6 +7,7 @@ import { Countdown } from "@/components/Countdown";
 import { StockIcon } from "@/components/Ranking";
 import { SerieChip } from "@/components/Torneo";
 import { getJugadores, getProximos, getTorneo, getSerie } from "@/lib/data";
+import { LINKS } from "@/lib/site";
 import { fechaLarga, urlStartgg } from "@/lib/format";
 import { puntosPorPuesto } from "@/lib/ranking";
 
@@ -67,6 +68,16 @@ async function Torneo({ slug }: { slug: string }) {
             )}
           </div>
         </section>
+
+        {esProximo && !torneo.slugStartgg && (
+          <section aria-labelledby="inscripcion-title">
+            <h2 id="inscripcion-title" className="section-title">Inscripción</h2>
+            <p className="prose">La inscripción abre pronto en start.gg. Sumate al grupo de WhatsApp para enterarte apenas se habilite.</p>
+            <div className="actions" style={{ marginTop: "1rem" }}>
+              <a className="btn btn--p1" href={LINKS.grupoWhatsapp} target="_blank" rel="noopener">Unirme al grupo</a>
+            </div>
+          </section>
+        )}
 
         {esProximo && torneo.slugStartgg && (
           <section aria-labelledby="inscripcion-title">

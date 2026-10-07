@@ -36,6 +36,9 @@ export type EventoTorneo = {
   standings: Standing[];
 };
 
+/** Datos de un torneo que el admin puede fijar a mano. */
+export type CampoManual = "nombre" | "serie" | "fecha" | "sede" | "direccion" | "valor" | "afiche";
+
 export type Torneo = {
   slug: string;
   nombre: string;
@@ -50,6 +53,8 @@ export type Torneo = {
   /** Slug del torneo en start.gg, p. ej. "premier-smash-league-5". */
   slugStartgg?: string;
   inscripcionAbierta?: boolean;
+  /** Campos editados a mano en el panel; al actualizar desde start.gg se conservan. */
+  camposManuales?: CampoManual[];
   events: EventoTorneo[];
 };
 

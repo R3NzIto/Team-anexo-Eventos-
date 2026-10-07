@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Suspense } from "react";
-import { CuentaHeader, IngresarLink } from "./CuentaHeader";
+import { CuentaHeader } from "./CuentaHeader";
 import { Logo } from "./Logo";
 
 export function SiteHeader() {
@@ -14,7 +14,8 @@ export function SiteHeader() {
         <Link className="topbar__link" href="/torneos">Torneos</Link>
         <Link className="tag tag--p1" href="/jugadores"><span className="tag__p">P1</span> Jugadores</Link>
         <Link className="tag tag--p2" href="/#organizar"><span className="tag__p">P2</span> Organizar</Link>
-        <Suspense fallback={<IngresarLink />}>
+        {/* Mientras se lee la sesión, un hueco del mismo tamaño: así no aparece "Ingresar" a quien ya entró. */}
+        <Suspense fallback={<span className="topbar__cuenta-hueco" aria-hidden="true" />}>
           <CuentaHeader />
         </Suspense>
       </nav>
