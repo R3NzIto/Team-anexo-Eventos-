@@ -43,8 +43,13 @@ export async function canjearCodigo(origen: string, code: string): Promise<strin
       redirect_uri: callbackStartgg(origen),
     }),
   });
-  const json = (await res.json().catch(() => ({}))) as { access_token?: string };
-  if (!res.ok || !json.access_token) throw new Error(`start.gg rechazó el código (HTTP ${res.status}).`);
+  const cuerpo = await res.text();
+  let json: { access_token?: string } = {};
+  try { json = JSON.parse(cuerpo); } catch {}
+  if (!res.ok || !json.access_token) {
+    // La respuesta de start.gg ayuda a diagnosticar (credenciales que no coinciden, redirect distinto…). No incluye claves.
+    throw new Error(`start.gg rechazó el código (HTTP ${res.status}): ${cuerpo.slice(0, 300)}`);
+  }
   return json.access_token;
 }
 
