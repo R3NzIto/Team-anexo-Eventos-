@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Icon } from "@/components/Icon";
-import { RankingTable, RankingVacio, StockIcon } from "@/components/Ranking";
+import { BuscadorJugadores } from "@/components/BuscadorJugadores";
+import { RankingTable, RankingVacio } from "@/components/Ranking";
 import { Revelar } from "@/components/Movimiento";
 import { TorneoCard } from "@/components/TorneoCard";
-import { getJugadores, getProximos, getRanking, getTemporadas } from "@/lib/data";
+import { getJugadores, getProximos, getRanking, getTemporadas, getTorneos } from "@/lib/data";
 import { LINKS } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -13,9 +14,27 @@ export const metadata: Metadata = {
 };
 
 export default async function JugadoresPage() {
-  const [proximos, temporadas, jugadores] = await Promise.all([getProximos(), getTemporadas("premier"), getJugadores()]);
+  const [proximos, temporadas, jugadores, torneos] = await Promise.all([getProximos(), getTemporadas("premier"), getJugadores(), getTorneos()]);
   const temporada = temporadas[0] ?? 2026;
   const ranking = await getRanking("premier", temporada);
+
+  // Torneos jugados por cada uno (un torneo cuenta una vez aunque haya jugado varios eventos)
+  const jugados = new Map<string, Set<string>>();
+  for (const t of torneos) for (const e of t.events) for (const s of e.standings) {
+    jugados.set(s.jugador, (jugados.get(s.jugador) ?? new Set()).add(t.slug));
+  }
+  const enRanking = new Map(ranking.map((f) => [f.jugador.id, f]));
+  const fichas = jugadores
+    .map((j) => ({
+      slug: j.slug,
+      gamerTag: j.gamerTag,
+      prefijo: j.prefijo,
+      personaje: j.personaje,
+      torneos: jugados.get(j.id)?.size ?? 0,
+      posicion: enRanking.get(j.id)?.posicion,
+      puntos: enRanking.get(j.id)?.puntos,
+    }))
+    .sort((a, b) => (a.posicion ?? 9999) - (b.posicion ?? 9999) || a.gamerTag.localeCompare(b.gamerTag, "es"));
 
   return (
     <>
@@ -54,16 +73,7 @@ export default async function JugadoresPage() {
         <section aria-labelledby="jugadores-title">
           <h2 id="jugadores-title" className="section-title">Jugadores</h2>
           {jugadores.length ? (
-            <ul className="players">
-              {jugadores.map((j) => (
-                <li key={j.id}>
-                  <Link href={`/jugadores/${j.slug}`}>
-                    <StockIcon personaje={j.personaje} />
-                    {j.gamerTag}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <BuscadorJugadores jugadores={fichas} temporada={temporada} />
           ) : (
             <div className="empty">
               <p className="empty__title">Los perfiles aparecen al cargar resultados</p>

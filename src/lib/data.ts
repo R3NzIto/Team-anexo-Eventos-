@@ -154,3 +154,55 @@ export async function getResultadosDestacados(): Promise<Resultado[]> {
   cacheTag("datos");
   return (await getBase()).resultados;
 }
+
+export type Podio = { torneo: Torneo; puestos: { puesto: number; jugador: Jugador; personaje?: string }[] };
+
+/** El podio (top 3 del evento que suma) de la última fecha jugada de una serie. */
+export async function getPodioUltimaFecha(serie: SerieId): Promise<Podio | undefined> {
+  "use cache";
+  cacheLife("hours");
+  cacheTag("datos");
+  const { torneos, jugadores } = await getBase();
+  const porId = new Map(jugadores.map((j) => [j.id, j]));
+  for (const t of ordenarRecientes(torneos.filter((x) => x.serie === serie && yaPaso(x)))) {
+    const evento = t.events.find((e) => e.sumaRanking && e.standings.length >= 3);
+    if (!evento) continue;
+    const puestos = evento.standings
+      .filter((s) => s.puesto <= 3 && porId.has(s.jugador))
+      .slice(0, 3)
+      .map((s) => ({ puesto: s.puesto, jugador: porId.get(s.jugador)!, personaje: s.personaje ?? porId.get(s.jugador)!.personaje }));
+    if (puestos.length) return { torneo: t, puestos };
+  }
+  return undefined;
+}
+
+export type PuntoEvolucion = { torneo: string; slug: string; fecha: string; posicion: number | null; puntos: number };
+
+/** Posición del jugador en el ranking de la temporada después de cada fecha. */
+export async function getEvolucion(jugadorId: string, serie: SerieId, temporada: number): Promise<PuntoEvolucion[]> {
+  "use cache";
+  cacheLife("hours");
+  cacheTag("datos");
+  const { series, torneos, jugadores } = await getBase();
+  const tabla = series.find((s) => s.id === serie)?.puntos;
+  if (!tabla) return [];
+  const mapa = new Map(jugadores.map((j) => [j.id, j]));
+  const fechas = torneos
+    .filter((t) => t.serie === serie && t.temporada === temporada && t.events.some((e) => e.sumaRanking && e.standings.length))
+    .sort((a, b) => fechaOrdenable(a.fecha) - fechaOrdenable(b.fecha));
+  return fechas.map((t, i) => {
+    const fila = calcularRanking(fechas.slice(0, i + 1), tabla, mapa).find((f) => f.jugador.id === jugadorId);
+    return { torneo: t.nombre, slug: t.slug, fecha: t.fecha, posicion: fila?.posicion ?? null, puntos: fila?.puntos ?? 0 };
+  });
+}
+
+/** Games jugados con cada personaje, sumando todos sus torneos de singles. */
+export async function getPersonajesJugador(jugadorId: string): Promise<{ personaje: string; games: number }[]> {
+  "use cache";
+  cacheLife("hours");
+  cacheTag("datos");
+  const { torneos } = await getBase();
+  const usos: Record<string, number> = {};
+  for (const t of torneos) for (const e of t.events) for (const s of e.standings) if (s.jugador === jugadorId) sumarUsos(usos, s.personajes);
+  return Object.entries(usos).map(([personaje, games]) => ({ personaje, games })).sort((a, b) => b.games - a.games);
+}

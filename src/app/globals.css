@@ -991,10 +991,42 @@ ul { list-style: none; padding: 0; }
 .profile__stats { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.4rem; }
 .profile__stats div { padding: .7rem 1rem; background: var(--ink); color: var(--yellow); }
 .profile__stats strong { display: block; font-size: 1.6rem; font-weight: 900; line-height: 1; font-variant-numeric: tabular-nums; }
-.profile__stats span { font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; }
+/* Solo la etiqueta de abajo: el número también es un span (contador) */
+.profile__stats > div > span { display: block; font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; }
 
-.players { display: grid; grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); gap: .5rem; }
-.players a { display: flex; align-items: center; gap: .7rem; padding: .7rem .9rem; background: var(--carbon-2); text-decoration: none; font-weight: 700; }
+.players { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); gap: .5rem; }
+.players a { display: flex; align-items: center; gap: .8rem; min-height: 4rem; padding: .55rem .9rem .55rem .6rem; background: var(--carbon-2); text-decoration: none; font-weight: 700; color: var(--white); }
+.players .stock { flex: none; }
+.players__nombre { display: grid; min-width: 0; flex: 1; line-height: 1.2; overflow-wrap: anywhere; }
+.players__nombre small { font-weight: 400; font-size: .75rem; color: var(--mute); }
+.players__rank { display: grid; justify-items: end; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.players__rank strong { font-size: 1.25rem; font-weight: 900; color: var(--yellow); }
+.players__rank small { font-size: .72rem; font-weight: 700; color: var(--mute); }
+.players__torneos { font-size: .78rem; font-weight: 700; color: var(--mute); white-space: nowrap; }
+
+.buscador > * + * { margin-top: 1rem; }
+.buscador__campo {
+    position: relative;
+    display: flex;
+    align-items: center;
+    max-width: 30rem;
+}
+.buscador__campo svg { position: absolute; z-index: 1; left: .9rem; width: 1.2rem; height: 1.2rem; fill: var(--mute); pointer-events: none; }
+.buscador__campo input {
+    width: 100%;
+    min-height: 48px;
+    padding: .7rem 1rem .7rem 2.7rem;
+    font: inherit;
+    font-size: 1.05rem;
+    color: var(--white);
+    background: var(--carbon-2);
+    border: 2px solid var(--carbon-3);
+    border-radius: 0;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%);
+}
+.buscador__campo input::placeholder { color: var(--mute); }
+.buscador__campo input:focus-visible { outline: none; border-color: var(--yellow); }
+.buscador__cuenta { font-size: .85rem; font-weight: 700; color: var(--mute); text-transform: uppercase; letter-spacing: .06em; }
 .players a:hover { background: var(--carbon-3); }
 
 .ruleset { width: 100%; max-width: 34rem; height: auto; }
@@ -1321,4 +1353,127 @@ a.admin-boton { display: inline-block; text-decoration: none; }
     .profile__stats > :nth-child(3) { animation-delay: .49s; }
     .profile__stats > :nth-child(4) { animation-delay: .56s; }
     @keyframes stat-cae { from { opacity: 0; transform: translateY(-.8rem) scale(1.08); } }
+}
+
+/* ===================================================================
+   Podio: el top 3 como el final de un torneo
+   =================================================================== */
+.podio {
+    list-style: none;
+    margin: 0 0 2rem;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: end;
+    gap: clamp(.4rem, 1.5vw, .9rem);
+    max-width: 40rem;
+    margin-inline: auto;
+}
+.podio__lugar { display: grid; justify-items: center; text-align: center; min-width: 0; }
+/* El 1° al medio: la lista sigue en orden 1-2-3, solo cambia dónde se ve */
+.podio__lugar--1 { order: 2; }
+.podio__lugar--2 { order: 1; }
+.podio__lugar--3 { order: 3; }
+.podio__jugador { display: grid; justify-items: center; gap: .35rem; padding-bottom: .7rem; text-decoration: none; color: inherit; min-width: 0; max-width: 100%; }
+.podio__jugador .stock { width: clamp(56px, 12vw, 96px); height: auto; }
+.podio__lugar--1 .podio__jugador .stock { width: clamp(68px, 15vw, 112px); }
+.podio__nombre { display: grid; font-weight: 900; font-size: clamp(.9rem, 2.2vw, 1.2rem); line-height: 1.1; overflow-wrap: anywhere; }
+.podio__nombre small { font-weight: 400; font-size: .7em; opacity: .7; }
+.podio__jugador:hover .podio__nombre { text-decoration: underline; text-underline-offset: .2em; }
+.podio__dato { font-size: .85rem; font-weight: 700; opacity: .8; font-variant-numeric: tabular-nums; }
+.podio__pedestal {
+    width: 100%;
+    display: grid;
+    place-items: start center;
+    padding-top: .5rem;
+    font-weight: 900;
+    font-size: clamp(2rem, 6vw, 3.4rem);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%);
+    transform-origin: bottom;
+}
+.podio__lugar--1 .podio__pedestal { height: clamp(6.5rem, 16vw, 9rem); background: var(--yellow); color: var(--ink); }
+.podio__lugar--2 .podio__pedestal { height: clamp(4.8rem, 11vw, 6.5rem); background: var(--white); color: var(--purple-deep); }
+.podio__lugar--3 .podio__pedestal { height: clamp(3.8rem, 8vw, 5rem); background: var(--carbon-3); color: var(--white); }
+
+/* Sobre la placa amarilla del inicio, el podio es todo tinta (lado P1) */
+.upcoming--podio { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; }
+.upcoming__podio { padding: clamp(1.75rem, 4vw, 3rem); padding-bottom: 0; }
+.upcoming__podio-titulo { font-weight: 800; text-transform: uppercase; letter-spacing: .04em; font-size: .85rem; margin-bottom: 1rem; text-align: center; }
+.upcoming__podio-titulo a { color: inherit; }
+.upcoming__podio .podio { margin-bottom: 0; }
+.upcoming__podio .podio__pedestal { background: var(--ink); color: var(--yellow); }
+@media (max-width: 60rem) {
+    .upcoming--podio { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    /* Los pedestales suben 3° → 2° → 1° y el jugador cae arriba */
+    .revelar-podio[data-revelar="pendiente"] .podio__pedestal { transform: scaleY(0); }
+    .revelar-podio[data-revelar="pendiente"] .podio__jugador { opacity: 0; }
+    .revelar-podio[data-revelar="listo"] .podio__pedestal { animation: pedestal-sube .5s var(--ease-out) both; animation-delay: calc((2 - var(--i, 0)) * .14s + .1s); }
+    .revelar-podio[data-revelar="listo"] .podio__jugador { animation: jugador-cae .45s var(--ease-out) both; animation-delay: calc((2 - var(--i, 0)) * .14s + .35s); }
+    @keyframes pedestal-sube { from { transform: scaleY(0); } }
+    @keyframes jugador-cae { from { opacity: 0; transform: translateY(-1.5rem); } }
+}
+
+/* ===================================================================
+   Perfil: evolución en la temporada y personajes
+   =================================================================== */
+.perfil-datos { display: grid; gap: 1rem; }
+.perfil-datos--doble { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); }
+.evolucion, .personajes { margin: 0; padding: clamp(1rem, 3vw, 1.6rem); background: var(--carbon-2); }
+.evolucion__titulo { font-weight: 800; text-transform: uppercase; font-size: .85rem; letter-spacing: .06em; color: var(--mute); margin-bottom: 1rem; }
+.evolucion__lienzo { position: relative; }
+.evolucion svg { display: block; width: 100%; height: auto; overflow: visible; }
+.evolucion__guia line { stroke: rgba(255, 255, 255, .1); stroke-width: 1; }
+.evolucion__guia text, .evolucion__eje { fill: var(--mute); font-size: 13px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.evolucion__linea { fill: none; stroke: var(--yellow); stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+.evolucion__punto { fill: var(--yellow); stroke: var(--carbon-2); stroke-width: 2; transition: r .15s var(--ease-out); }
+.evolucion__etiqueta { fill: var(--white); font-size: 16px; font-weight: 900; }
+.evolucion__cruz { stroke: rgba(255, 255, 255, .35); stroke-width: 1; stroke-dasharray: 3 3; }
+.evolucion__zona { fill: transparent; cursor: pointer; outline: none; }
+.evolucion__zona:focus-visible { fill: rgba(255, 240, 1, .08); }
+.evolucion__tip {
+    position: absolute;
+    transform: translate(-50%, calc(-100% - 14px));
+    display: grid;
+    padding: .45rem .7rem;
+    background: var(--ink);
+    color: var(--white);
+    font-size: .9rem;
+    white-space: nowrap;
+    pointer-events: none;
+    font-variant-numeric: tabular-nums;
+}
+.evolucion__tip strong { color: var(--yellow); font-weight: 900; }
+.evolucion__tip small { color: var(--mute); font-size: .75rem; }
+
+.personajes__lista { list-style: none; padding: 0; margin: 0; display: grid; gap: .55rem; }
+.personajes__lista li {
+    display: grid;
+    grid-template-columns: 36px minmax(5.5rem, 8rem) minmax(0, 1fr) auto;
+    align-items: center;
+    gap: .7rem;
+}
+.personajes__nombre { font-weight: 700; font-size: .92rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.personajes__barra { height: .7rem; background: rgba(255, 255, 255, .06); }
+.personajes__barra span { display: block; height: 100%; width: var(--ancho); background: var(--yellow); transform-origin: left; }
+.personajes__valor { font-weight: 900; font-variant-numeric: tabular-nums; text-align: right; min-width: 3.6rem; }
+.personajes__valor small { font-weight: 700; font-size: .75rem; color: var(--mute); }
+
+@media (max-width: 60rem) {
+    .perfil-datos--doble { grid-template-columns: 1fr; }
+}
+@media (max-width: 30rem) {
+    .personajes__lista li { grid-template-columns: 32px minmax(0, 1fr) auto; }
+    .personajes__barra { grid-column: 2 / -1; grid-row: 2; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .evolucion__linea { stroke-dasharray: 1600; stroke-dashoffset: 1600; animation: linea-dibuja 1.1s .3s var(--ease-out) forwards; }
+    @keyframes linea-dibuja { to { stroke-dashoffset: 0; } }
+    .personajes__barra span { animation: barra-crece .7s var(--ease-out) both; animation-delay: calc(var(--i, 0) * 70ms + .3s); }
+    @keyframes barra-crece { from { transform: scaleX(0); } }
 }

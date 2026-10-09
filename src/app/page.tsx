@@ -2,19 +2,21 @@ import Image from "next/image";
 import Link from "next/link";
 import { Icon } from "@/components/Icon";
 import { SelectPanel } from "@/components/SelectPanel";
+import { Podio } from "@/components/Podio";
 import { RankingTable, RankingVacio } from "@/components/Ranking";
 import { HistorialTable } from "@/components/Torneo";
-import { getPasados, getProximos, getRanking, getResultadosDestacados, getTemporadas } from "@/lib/data";
+import { getPasados, getPodioUltimaFecha, getProximos, getRanking, getResultadosDestacados, getTemporadas, type Podio as DatosPodio } from "@/lib/data";
 import { fechaLarga, urlStartgg } from "@/lib/format";
 import { LINKS, REDES, SOCIOS } from "@/lib/site";
 import type { Torneo } from "@/lib/types";
 
 export default async function Home() {
-  const [proximos, pasados, resultados, temporadas] = await Promise.all([
+  const [proximos, pasados, resultados, temporadas, podio] = await Promise.all([
     getProximos(),
     getPasados(),
     getResultadosDestacados(),
     getTemporadas("premier"),
+    getPodioUltimaFecha("premier"),
   ]);
   const proximo = proximos[0];
   const temporada = temporadas[0] ?? 2026;
@@ -77,7 +79,7 @@ export default async function Home() {
           <h2 id="competir-title" className="route__title">Competí con nosotros</h2>
         </header>
 
-        <ProximoBloque torneo={proximo} />
+        <ProximoBloque torneo={proximo} podio={podio} />
 
         <div className="league">
           <div className="league__intro">
@@ -242,10 +244,10 @@ function ProximoCompacto({ torneo }: { torneo?: Torneo }) {
   );
 }
 
-function ProximoBloque({ torneo }: { torneo?: Torneo }) {
+function ProximoBloque({ torneo, podio }: { torneo?: Torneo; podio?: DatosPodio }) {
   if (!torneo) {
     return (
-      <div className="upcoming">
+      <div className={`upcoming${podio ? " upcoming--podio" : ""}`}>
         <div className="upcoming__empty">
           <h3 className="upcoming__title">Estamos armando la próxima fecha</h3>
           <p>Los torneos se anuncian con afiche, sede y link de inscripción. Sumate al grupo o seguinos en Instagram para enterarte primero.</p>
@@ -260,6 +262,17 @@ function ProximoBloque({ torneo }: { torneo?: Torneo }) {
             </a>
           </div>
         </div>
+        {podio && (
+          <div className="upcoming__podio">
+            <p className="upcoming__podio-titulo">
+              Último podio · <Link href={`/torneos/${podio.torneo.slug}`}>{podio.torneo.nombre}</Link>
+            </p>
+            <Podio
+              titulo={`Podio de ${podio.torneo.nombre}`}
+              lugares={podio.puestos.map((p) => ({ posicion: p.puesto, gamerTag: p.jugador.gamerTag, prefijo: p.jugador.prefijo, personaje: p.personaje, href: `/jugadores/${p.jugador.slug}` }))}
+            />
+          </div>
+        )}
       </div>
     );
   }

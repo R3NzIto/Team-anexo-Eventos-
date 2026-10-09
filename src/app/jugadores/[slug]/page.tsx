@@ -4,7 +4,9 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { StockIcon } from "@/components/Ranking";
 import { SerieChip } from "@/components/Torneo";
-import { getJugador, getRanking } from "@/lib/data";
+import { getEvolucion, getJugador, getPersonajesJugador, getRanking } from "@/lib/data";
+import { GraficoEvolucion } from "@/components/GraficoEvolucion";
+import { PersonajesJugador } from "@/components/PersonajesJugador";
 import { fechaCorta } from "@/lib/format";
 import { Contador } from "@/components/Movimiento";
 
@@ -33,6 +35,11 @@ async function Jugador({ slug }: { slug: string }) {
   const ranking = temporada ? await getRanking("premier", temporada) : [];
   const fila = ranking.find((f) => f.jugador.id === jugador.id);
   const mejor = historial.length ? Math.min(...historial.map((h) => h.puesto)) : null;
+  const [evolucion, usos] = await Promise.all([
+    temporada ? getEvolucion(jugador.id, "premier", temporada) : Promise.resolve([]),
+    getPersonajesJugador(jugador.id),
+  ]);
+  const conEvolucion = evolucion.filter((p) => p.posicion !== null).length >= 2;
 
   return (
     <>
@@ -55,6 +62,12 @@ async function Jugador({ slug }: { slug: string }) {
       </section>
 
       <div className="page">
+        {(conEvolucion || usos.length > 0) && (
+          <section className={`perfil-datos${conEvolucion && usos.length ? " perfil-datos--doble" : ""}`} aria-label="Temporada y personajes">
+            {conEvolucion && <GraficoEvolucion puntos={evolucion} titulo={`Posición en el ranking Premier ${temporada}, fecha por fecha`} />}
+            {usos.length > 0 && <PersonajesJugador usos={usos} />}
+          </section>
+        )}
         <section aria-labelledby="historial-title">
           <h2 id="historial-title" className="section-title">Historial</h2>
           <table className="history__table">

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Icon } from "@/components/Icon";
+import { Podio } from "@/components/Podio";
 import { RankingTable, RankingVacio } from "@/components/Ranking";
 import { Revelar } from "@/components/Movimiento";
 import { TorneoCard } from "@/components/TorneoCard";
@@ -54,6 +55,7 @@ export default async function PremierPage() {
             <h2 id="ranking-title" className="section-title">Ranking {temporada}</h2>
             <Link className="link-arrow" href={`/ranking/premier/${temporada}`}>Ver todo<Icon name="arrow" className="link-arrow__icon" /></Link>
           </div>
+          {ranking.length > 2 && <Podio titulo={`Podio del ranking ${temporada}`} lugares={ranking.slice(0, 3).map((f) => ({ posicion: f.posicion, gamerTag: f.jugador.gamerTag, prefijo: f.jugador.prefijo, personaje: f.jugador.personaje, href: `/jugadores/${f.jugador.slug}`, dato: `${f.puntos} pts` }))} />}
           {ranking.length ? <RankingTable filas={ranking} limite={10} /> : <RankingVacio temporada={temporada} />}
         </section>
 

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
+import { Podio } from "@/components/Podio";
 import { RankingTable, RankingVacio } from "@/components/Ranking";
 import { getRanking, getSeries, getTemporadas } from "@/lib/data";
 import type { SerieId } from "@/lib/types";
@@ -52,6 +53,7 @@ async function Ranking({ serie, temporada }: { serie: string; temporada: number 
           </div>
         </nav>
         <section className={`panel-box${premier ? " panel-box--premier" : ""}`} aria-label={`Ranking ${actual.corto} ${temporada}`}>
+          {premier && filas.length > 2 && <Podio titulo={`Podio del ranking ${temporada}`} lugares={filas.slice(0, 3).map((f) => ({ posicion: f.posicion, gamerTag: f.jugador.gamerTag, prefijo: f.jugador.prefijo, personaje: f.jugador.personaje, href: `/jugadores/${f.jugador.slug}`, dato: `${f.puntos} pts` }))} />}
           {filas.length ? <RankingTable filas={filas} mostrarPersonaje={premier} /> : <RankingVacio temporada={temporada} />}
         </section>
       </div>
