@@ -1,5 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
+import type { CSSProperties } from "react";
+import { Contador, Revelar } from "./Movimiento";
 import type { FilaRanking } from "@/lib/types";
 
 export function StockIcon({ personaje, size = 32 }: { personaje?: string; size?: number }) {
@@ -10,6 +12,7 @@ export function StockIcon({ personaje, size = 32 }: { personaje?: string; size?:
 export function RankingTable({ filas, limite, mostrarPersonaje = true }: { filas: FilaRanking[]; limite?: number; mostrarPersonaje?: boolean }) {
   const visibles = limite ? filas.slice(0, limite) : filas;
   return (
+    <Revelar className="revelar-ranking">
     <table className="ranking">
       <thead>
         <tr>
@@ -21,8 +24,8 @@ export function RankingTable({ filas, limite, mostrarPersonaje = true }: { filas
         </tr>
       </thead>
       <tbody>
-        {visibles.map((f) => (
-          <tr key={f.jugador.id} className={f.posicion <= 3 ? `ranking__top ranking__top--${f.posicion}` : undefined}>
+        {visibles.map((f, i) => (
+          <tr key={f.jugador.id} className={f.posicion <= 3 ? `ranking__top ranking__top--${f.posicion}` : undefined} style={{ "--i": i } as CSSProperties}>
             <td className="ranking__pos">{f.posicion}</td>
             <td>
               <Link className="ranking__player" href={`/jugadores/${f.jugador.slug}`}>
@@ -35,11 +38,12 @@ export function RankingTable({ filas, limite, mostrarPersonaje = true }: { filas
             </td>
             <td className="ranking__num ranking__extra">{f.torneos}</td>
             <td className="ranking__num ranking__extra">{f.mejorPuesto}°</td>
-            <td className="ranking__num ranking__pts">{f.puntos}</td>
+            <td className="ranking__num ranking__pts"><Contador valor={f.puntos} retraso={150 + Math.min(i, 12) * 55} /></td>
           </tr>
         ))}
       </tbody>
     </table>
+    </Revelar>
   );
 }
 

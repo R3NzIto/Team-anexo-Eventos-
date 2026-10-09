@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Revelar } from "@/components/Movimiento";
 import { TorneoCard } from "@/components/TorneoCard";
 import { Icon } from "@/components/Icon";
 import { getPasados, getProximos } from "@/lib/data";
@@ -24,7 +25,7 @@ export default async function TorneosPage() {
         <section aria-labelledby="proximos-title">
           <h2 id="proximos-title" className="section-title">Próximos</h2>
           {proximos.length ? (
-            <div className="tgrid">{proximos.map((t) => <TorneoCard key={t.slug} torneo={t} />)}</div>
+            <Revelar className="tgrid">{proximos.map((t) => <TorneoCard key={t.slug} torneo={t} />)}</Revelar>
           ) : (
             <div className="empty">
               <p className="empty__title">No hay fechas anunciadas todavía</p>
@@ -35,7 +36,7 @@ export default async function TorneosPage() {
         </section>
         <section aria-labelledby="pasados-title">
           <h2 id="pasados-title" className="section-title">Historial</h2>
-          <div className="tgrid">{pasados.map((t) => <TorneoCard key={t.slug} torneo={t} />)}</div>
+          <Revelar className="tgrid">{pasados.map((t) => <TorneoCard key={t.slug} torneo={t} />)}</Revelar>
         </section>
       </div>
     </>

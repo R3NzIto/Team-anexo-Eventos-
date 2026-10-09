@@ -1221,3 +1221,102 @@ a.admin-boton { display: inline-block; text-decoration: none; }
     .history__table tr:has(.history__puesto) > td:not(.history__puesto) { grid-column: 1; }
     .history__puesto { grid-column: 2; grid-row: 1 / span 2; align-self: center; font-size: 1.6rem; }
 }
+
+/* ===================================================================
+   Movimiento: cambio de round, pantalla de resultados, tarjetas vivas
+   Todo vive dentro de prefers-reduced-motion: no-preference.
+   =================================================================== */
+
+/* Capa del cambio de round: solo existe mientras barre */
+.ronda { position: fixed; inset: 0; z-index: 100; pointer-events: none; overflow: hidden; display: none; }
+.ronda span { position: absolute; top: 0; bottom: 0; left: -30%; width: 160%; transform: skewX(-12deg); }
+.ronda__p1 { background: var(--yellow); }
+.ronda__p2 { background: var(--purple-deep); }
+.ronda .ronda__logo { left: 50%; top: 50%; bottom: auto; width: auto; transform: translate(-50%, -50%); color: var(--ink); }
+.ronda__logo svg { display: block; width: 9rem; height: 3.2rem; }
+
+/* Tarjetas de torneo: el afiche se acerca y un destello cruza la tarjeta */
+.tcard { position: relative; overflow: hidden; }
+.tcard::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(105deg, transparent 38%, rgba(255, 255, 255, .16) 50%, transparent 62%);
+    translate: -110% 0;
+}
+.players .stock { transition: scale .25s var(--ease-out), rotate .25s var(--ease-out); }
+
+@media (prefers-reduced-motion: no-preference) {
+    .ronda[data-estado="cubrir"] { display: block; }
+    .ronda[data-estado="barrer"] { display: block; animation: ronda-vida .62s linear both; }
+    .ronda[data-estado="barrer"] .ronda__p1 { animation: ronda-sale .46s cubic-bezier(.7, 0, .2, 1) .05s both; }
+    .ronda[data-estado="barrer"] .ronda__p2 { animation: ronda-sale .46s cubic-bezier(.7, 0, .2, 1) .14s both; }
+    @keyframes ronda-sale { from { transform: skewX(-12deg) translateX(0); } to { transform: skewX(-12deg) translateX(105%); } }
+    @keyframes ronda-vida { to { opacity: 1; } }
+    /* Mientras carga, el logo late sobre el amarillo; al barrer se va con la placa P1 */
+    .ronda[data-estado="cubrir"] .ronda__logo { animation: logo-late .8s .25s ease-in-out infinite alternate both; }
+    .ronda[data-estado="barrer"] .ronda__logo { animation: logo-sale .3s cubic-bezier(.7, 0, .2, 1) both; }
+    @keyframes logo-late { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes logo-sale { to { opacity: 0; transform: translate(40%, -50%); } }
+
+    /* Títulos de las páginas internas: entran barridos, como el nombre en la selección */
+    .page-hero__title { animation: titulo-barrido .6s .28s var(--ease-out) both; }
+    @keyframes titulo-barrido {
+        from { clip-path: inset(0 100% 0 0); translate: -.4em 0; }
+        to { clip-path: inset(0 0 0 0); translate: 0 0; }
+    }
+
+    /* Pantalla de resultados: las filas entran una tras otra y el 1° se ilumina */
+    .revelar-ranking[data-revelar="pendiente"] tbody tr { opacity: 0; }
+    .revelar-ranking[data-revelar="listo"] tbody tr {
+        animation: fila-entra .48s var(--ease-out) both;
+        animation-delay: calc(min(var(--i, 0), 12) * 55ms);
+    }
+    @keyframes fila-entra {
+        from { opacity: 0; transform: translateX(-2.2rem) skewX(-12deg); }
+        55% { opacity: 1; }
+        to { opacity: 1; transform: none; }
+    }
+    .revelar-ranking[data-revelar="listo"] .ranking__top--1 td {
+        background-image: linear-gradient(105deg, transparent 35%, rgba(255, 240, 1, .35) 50%, transparent 65%);
+        background-size: 250% 100%;
+        background-repeat: no-repeat;
+        animation: brillo-campeon 1.1s .55s var(--ease-out) both;
+    }
+    @keyframes brillo-campeon { from { background-position: 120% 0; } to { background-position: -120% 0; } }
+
+    /* Listas de torneos: llegan como lista, con un escalonado corto */
+    .tgrid[data-revelar="pendiente"] > * { opacity: 0; }
+    .tgrid[data-revelar="listo"] > * { animation: carta-entra .5s var(--ease-out) both; }
+    .tgrid[data-revelar="listo"] > :nth-child(2) { animation-delay: .06s; }
+    .tgrid[data-revelar="listo"] > :nth-child(3) { animation-delay: .12s; }
+    .tgrid[data-revelar="listo"] > :nth-child(4) { animation-delay: .18s; }
+    .tgrid[data-revelar="listo"] > :nth-child(5) { animation-delay: .24s; }
+    .tgrid[data-revelar="listo"] > :nth-child(6) { animation-delay: .3s; }
+    .tgrid[data-revelar="listo"] > :nth-child(n+7) { animation-delay: .36s; }
+    @keyframes carta-entra { from { opacity: 0; transform: translateY(1.2rem); } }
+
+    .tcard { transition: background-color .2s, transform .25s var(--ease-out); }
+    .tcard__media img { transition: scale .5s var(--ease-out); }
+    .tcard:hover { transform: translateY(-3px); }
+    .tcard:hover .tcard__media img { scale: 1.07; }
+    .tcard:hover::after { translate: 110% 0; transition: translate .7s var(--ease-out); }
+    .tcard:active { transform: translateY(1px) scale(.99); transition-duration: .1s; }
+
+    .players a:hover .stock { scale: 1.3; rotate: -8deg; }
+
+    /* Perfil: el personaje entra como en la pantalla de selección y las estadísticas caen en orden */
+    .profile > .stock { animation: personaje-entra .65s .2s var(--ease-out) both; }
+    @keyframes personaje-entra {
+        0% { opacity: 0; transform: translateX(-3rem) scale(.6); }
+        60% { opacity: 1; transform: translateX(0) scale(1.12); }
+        100% { transform: none; }
+    }
+    .profile__stats > div { animation: stat-cae .4s var(--ease-out) both; }
+    .profile__stats > :nth-child(1) { animation-delay: .35s; }
+    .profile__stats > :nth-child(2) { animation-delay: .42s; }
+    .profile__stats > :nth-child(3) { animation-delay: .49s; }
+    .profile__stats > :nth-child(4) { animation-delay: .56s; }
+    @keyframes stat-cae { from { opacity: 0; transform: translateY(-.8rem) scale(1.08); } }
+}

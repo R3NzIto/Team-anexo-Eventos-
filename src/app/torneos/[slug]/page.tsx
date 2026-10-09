@@ -8,6 +8,8 @@ import { StockIcon } from "@/components/Ranking";
 import { SerieChip } from "@/components/Torneo";
 import { getJugadores, getProximos, getTorneo, getSerie } from "@/lib/data";
 import { LINKS } from "@/lib/site";
+import { Contador, Revelar } from "@/components/Movimiento";
+import type { CSSProperties } from "react";
 import { fechaLarga, urlStartgg } from "@/lib/format";
 import { puntosPorPuesto } from "@/lib/ranking";
 
@@ -96,6 +98,7 @@ async function Torneo({ slug }: { slug: string }) {
                   <h3 className="event-block__title">{e.nombre}</h3>
                   {e.sumaRanking && serie?.puntos && <span className="badge">Suma al ranking</span>}
                 </div>
+                <Revelar className="revelar-ranking">
                 <table className="ranking">
                   <thead>
                     <tr>
@@ -105,10 +108,10 @@ async function Torneo({ slug }: { slug: string }) {
                     </tr>
                   </thead>
                   <tbody>
-                    {e.standings.map((s) => {
+                    {e.standings.map((s, i) => {
                       const j = porId.get(s.jugador);
                       return (
-                        <tr key={s.jugador} className={s.puesto === 1 ? "ranking__top ranking__top--1" : undefined}>
+                        <tr key={s.jugador} className={s.puesto === 1 ? "ranking__top ranking__top--1" : undefined} style={{ "--i": i } as CSSProperties}>
                           <td className="ranking__pos">{s.puesto}°</td>
                           <td>
                             {j ? (
@@ -120,12 +123,13 @@ async function Torneo({ slug }: { slug: string }) {
                               <span className="ranking__player">{s.gamerTag}</span>
                             )}
                           </td>
-                          {e.sumaRanking && serie?.puntos && <td className="ranking__num ranking__pts">{puntosPorPuesto(s.puesto, serie.puntos)}</td>}
+                          {e.sumaRanking && serie?.puntos && <td className="ranking__num ranking__pts"><Contador valor={puntosPorPuesto(s.puesto, serie.puntos)} retraso={150 + Math.min(i, 12) * 55} /></td>}
                         </tr>
                       );
                     })}
                   </tbody>
                 </table>
+                </Revelar>
               </div>
             ))}
           </section>

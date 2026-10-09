@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Icon } from "@/components/Icon";
 import { RankingTable, RankingVacio, StockIcon } from "@/components/Ranking";
+import { Revelar } from "@/components/Movimiento";
 import { TorneoCard } from "@/components/TorneoCard";
 import { getJugadores, getProximos, getRanking, getTemporadas } from "@/lib/data";
 import { LINKS } from "@/lib/site";
@@ -32,7 +33,7 @@ export default async function JugadoresPage() {
         <section aria-labelledby="proximos-title">
           <h2 id="proximos-title" className="section-title">Próximos torneos</h2>
           {proximos.length ? (
-            <div className="tgrid">{proximos.map((t) => <TorneoCard key={t.slug} torneo={t} />)}</div>
+            <Revelar className="tgrid">{proximos.map((t) => <TorneoCard key={t.slug} torneo={t} />)}</Revelar>
           ) : (
             <div className="empty">
               <p className="empty__title">Todavía no hay fecha confirmada</p>

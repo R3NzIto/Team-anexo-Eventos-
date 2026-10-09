@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Icon } from "@/components/Icon";
 import { RankingTable, RankingVacio } from "@/components/Ranking";
+import { Revelar } from "@/components/Movimiento";
 import { TorneoCard } from "@/components/TorneoCard";
 import { getProximos, getRanking, getTemporadas, getTorneos, getSerie } from "@/lib/data";
 import { LINKS } from "@/lib/site";
@@ -58,9 +59,9 @@ export default async function PremierPage() {
 
         <section aria-labelledby="ediciones-title">
           <h2 id="ediciones-title" className="section-title">Ediciones</h2>
-          <div className="tgrid">
+          <Revelar className="tgrid">
             {ediciones.map((t) => <TorneoCard key={t.slug} torneo={t} />)}
-          </div>
+          </Revelar>
         </section>
 
         <section className="split" aria-labelledby="puntos-title">

@@ -6,6 +6,7 @@ import { StockIcon } from "@/components/Ranking";
 import { SerieChip } from "@/components/Torneo";
 import { getJugador, getRanking } from "@/lib/data";
 import { fechaCorta } from "@/lib/format";
+import { Contador } from "@/components/Movimiento";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -44,10 +45,10 @@ async function Jugador({ slug }: { slug: string }) {
               {jugador.gamerTag}
             </h1>
             <div className="profile__stats">
-              {fila && <div><strong>{fila.posicion}°</strong><span>Premier {temporada}</span></div>}
-              {fila && <div><strong>{fila.puntos}</strong><span>Puntos</span></div>}
-              <div><strong>{historial.length}</strong><span>Torneos</span></div>
-              {mejor && <div><strong>{mejor}°</strong><span>Mejor puesto</span></div>}
+              {fila && <div><strong><Contador valor={fila.posicion} retraso={350} duracion={500} />°</strong><span>Premier {temporada}</span></div>}
+              {fila && <div><strong><Contador valor={fila.puntos} retraso={420} /></strong><span>Puntos</span></div>}
+              <div><strong><Contador valor={historial.length} retraso={490} duracion={500} /></strong><span>Torneos</span></div>
+              {mejor && <div><strong><Contador valor={mejor} retraso={560} duracion={500} />°</strong><span>Mejor puesto</span></div>}
             </div>
           </div>
         </div>

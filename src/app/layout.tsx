@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { TransicionRonda } from "@/components/Movimiento";
+import { Suspense } from "react";
 import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
@@ -42,6 +44,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <SiteHeader />
         <main id="contenido">{children}</main>
         <SiteFooter />
+        <Suspense fallback={null}>
+          <TransicionRonda />
+        </Suspense>
       </body>
     </html>
   );
