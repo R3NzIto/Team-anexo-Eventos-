@@ -107,3 +107,21 @@ create table if not exists imagenes (
   datos  text not null,
   creado timestamptz not null default now()
 );
+
+-- Videos del canal de YouTube. Se traen del feed del canal (panel → Videos) y,
+-- si el título es una partida ("A (Personaje) VS B (Personaje)"), se vinculan
+-- solos con el torneo y los perfiles de los dos jugadores.
+create table if not exists videos (
+  id          text primary key,              -- id de YouTube
+  titulo      text not null,
+  publicado   timestamptz not null,
+  vistas      int,
+  juego       text,                          -- "smash", "sf6", "kof" o null
+  torneo      text references torneos(slug) on delete set null on update cascade,
+  es_partida  boolean not null default false,
+  nombre_a    text, jugador_a text, personaje_a text,
+  nombre_b    text, jugador_b text, personaje_b text,
+  oculto      boolean not null default false,
+  actualizado timestamptz not null default now()
+);
+create index if not exists videos_torneo on videos(torneo);

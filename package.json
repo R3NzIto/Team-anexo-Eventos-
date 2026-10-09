@@ -12,7 +12,8 @@
     "mis-torneos": "node --env-file-if-exists=.env.local --no-warnings scripts/mis-torneos.ts",
     "actualizar": "node --env-file-if-exists=.env.local --no-warnings scripts/actualizar-todo.ts",
     "db:migrar": "node --env-file-if-exists=.env.local --no-warnings scripts/db-migrar.ts",
-    "db:semilla": "node --env-file-if-exists=.env.local --no-warnings scripts/db-semilla.ts"
+    "db:semilla": "node --env-file-if-exists=.env.local --no-warnings scripts/db-semilla.ts",
+    "videos": "node --env-file-if-exists=.env.local --no-warnings scripts/traer-videos.ts"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.2.0",

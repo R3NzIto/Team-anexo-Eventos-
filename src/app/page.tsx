@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Icon } from "@/components/Icon";
 import { SelectPanel } from "@/components/SelectPanel";
 import { Podio } from "@/components/Podio";
+import { GrillaPartidas, getPartidas } from "@/components/Partidas";
 import { RankingTable, RankingVacio } from "@/components/Ranking";
 import { HistorialTable } from "@/components/Torneo";
 import { getPasados, getPodioUltimaFecha, getProximos, getRanking, getResultadosDestacados, getTemporadas, type Podio as DatosPodio } from "@/lib/data";
@@ -18,6 +19,7 @@ export default async function Home() {
     getTemporadas("premier"),
     getPodioUltimaFecha("premier"),
   ]);
+  const partidas = (await getPartidas()).slice(0, 4);
   const proximo = proximos[0];
   const temporada = temporadas[0] ?? 2026;
   const ranking = await getRanking("premier", temporada);
@@ -101,6 +103,16 @@ export default async function Home() {
             {ranking.length ? <RankingTable filas={ranking} limite={5} /> : <RankingVacio temporada={temporada} />}
           </div>
         </div>
+
+        {partidas.length > 0 && (
+          <div className="partidas-bloque">
+            <div className="section-head">
+              <h3 className="block-title">Partidas</h3>
+              <a className="link-arrow" href="https://www.youtube.com/@teamanexo554" target="_blank" rel="noopener">Ver el canal<Icon name="arrow" className="link-arrow__icon" /></a>
+            </div>
+            <GrillaPartidas partidas={partidas} destacar />
+          </div>
+        )}
 
         <div className="series">
           <h3 className="block-title">También jugamos</h3>

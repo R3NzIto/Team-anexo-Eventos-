@@ -5,6 +5,8 @@ export const SITE_URL = "https://team-anexo-eventos.vercel.app";
 export const LINKS = {
   grupoWhatsapp: "https://chat.whatsapp.com/CPljZCBvcLL3dmFYpi9jkz",
   contactoWhatsapp: "https://wa.me/5492615671596?text=Hola%20Team%20Anexo%2C%20quiero%20organizar%20un%20evento",
+  /** Canal de YouTube (@teamanexo554): de acá se traen los videos de partidas. */
+  youtubeCanalId: "UCs8k46chS6y7Lpv87NZdZpQ",
   instagram: "https://www.instagram.com/team_anexo.mza/",
 };
 

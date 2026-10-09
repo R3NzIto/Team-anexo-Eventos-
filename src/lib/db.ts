@@ -262,3 +262,61 @@ export async function guardarSerie(s: Serie, orden: number): Promise<void> {
 export async function guardarPuntos(serie: SerieId, puntos: TablaPuntos): Promise<void> {
   await sql()`update series set puntos = ${JSON.stringify(puntos)}::jsonb where id = ${serie}`;
 }
+
+export type Video = {
+  id: string;
+  titulo: string;
+  publicado: string;
+  vistas?: number;
+  juego?: string;
+  torneo?: string;
+  esPartida: boolean;
+  a?: { nombre: string; jugador?: string; personaje?: string };
+  b?: { nombre: string; jugador?: string; personaje?: string };
+  oculto: boolean;
+};
+
+/** Crea o actualiza videos (no toca el "oculto" que haya puesto el admin). */
+export async function guardarVideos(videos: Omit<Video, "oculto">[]): Promise<void> {
+  const db = sql();
+  await db.transaction(videos.map((v) => db`
+    insert into videos (id, titulo, publicado, vistas, juego, torneo, es_partida,
+                        nombre_a, jugador_a, personaje_a, nombre_b, jugador_b, personaje_b, actualizado)
+    values (${v.id}, ${v.titulo}, ${v.publicado}, ${v.vistas ?? null}, ${v.juego ?? null},
+            (select slug from torneos where slug = ${v.torneo ?? null}), ${v.esPartida},
+            ${v.a?.nombre ?? null}, ${v.a?.jugador ?? null}, ${v.a?.personaje ?? null},
+            ${v.b?.nombre ?? null}, ${v.b?.jugador ?? null}, ${v.b?.personaje ?? null}, now())
+    on conflict (id) do update set
+      titulo = excluded.titulo, publicado = excluded.publicado, vistas = excluded.vistas, juego = excluded.juego,
+      torneo = excluded.torneo, es_partida = excluded.es_partida,
+      nombre_a = excluded.nombre_a, jugador_a = excluded.jugador_a, personaje_a = excluded.personaje_a,
+      nombre_b = excluded.nombre_b, jugador_b = excluded.jugador_b, personaje_b = excluded.personaje_b,
+      actualizado = now()`));
+}
+
+export async function leerVideos(): Promise<Video[]> {
+  const filas = await sql()`select * from videos order by publicado desc`;
+  const lado = (n: unknown, j: unknown, p: unknown) =>
+    n ? { nombre: n as string, jugador: (j as string) ?? undefined, personaje: (p as string) ?? undefined } : undefined;
+  return filas.map((v) => ({
+    id: v.id,
+    titulo: v.titulo,
+    publicado: new Date(v.publicado).toISOString(),
+    vistas: v.vistas ?? undefined,
+    juego: v.juego ?? undefined,
+    torneo: v.torneo ?? undefined,
+    esPartida: v.es_partida,
+    a: lado(v.nombre_a, v.jugador_a, v.personaje_a),
+    b: lado(v.nombre_b, v.jugador_b, v.personaje_b),
+    oculto: v.oculto,
+  }));
+}
+
+export async function leerAlias(): Promise<Record<string, string>> {
+  const filas = await sql()`select secundario, principal from alias`;
+  return Object.fromEntries(filas.map((a) => [a.secundario, a.principal]));
+}
+
+export async function ocultarVideo(id: string, oculto: boolean): Promise<void> {
+  await sql()`update videos set oculto = ${oculto} where id = ${id}`;
+}

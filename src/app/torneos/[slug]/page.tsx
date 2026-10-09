@@ -9,6 +9,7 @@ import { SerieChip } from "@/components/Torneo";
 import { getJugadores, getProximos, getTorneo, getSerie } from "@/lib/data";
 import { LINKS } from "@/lib/site";
 import { Contador, Revelar } from "@/components/Movimiento";
+import { GrillaPartidas, getPartidas } from "@/components/Partidas";
 import type { CSSProperties } from "react";
 import { fechaLarga, urlStartgg } from "@/lib/format";
 import { puntosPorPuesto } from "@/lib/ranking";
@@ -30,7 +31,7 @@ export default function TorneoPage({ params }: Props) {
 }
 
 async function Torneo({ slug }: { slug: string }) {
-  const [torneo, proximos, jugadores] = await Promise.all([getTorneo(slug), getProximos(), getJugadores()]);
+  const [torneo, proximos, jugadores, partidas] = await Promise.all([getTorneo(slug), getProximos(), getJugadores(), getPartidas({ torneo: slug })]);
   if (!torneo) notFound();
   const esProximo = proximos.some((t) => t.slug === torneo.slug);
   const serie = await getSerie(torneo.serie);
@@ -132,6 +133,12 @@ async function Torneo({ slug }: { slug: string }) {
                 </Revelar>
               </div>
             ))}
+          </section>
+        )}
+        {partidas.length > 0 && (
+          <section aria-labelledby="partidas-title">
+            <h2 id="partidas-title" className="section-title">Partidas</h2>
+            <GrillaPartidas partidas={partidas} />
           </section>
         )}
       </div>

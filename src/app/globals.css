@@ -1477,3 +1477,63 @@ a.admin-boton { display: inline-block; text-decoration: none; }
     .personajes__barra span { animation: barra-crece .7s var(--ease-out) both; animation-delay: calc(var(--i, 0) * 70ms + .3s); }
     @keyframes barra-crece { from { transform: scaleX(0); } }
 }
+
+/* ===================================================================
+   Partidas del canal: cada video es una pantalla de pelea
+   =================================================================== */
+.partidas-bloque { margin-top: clamp(4rem, 8vw, 6rem); }
+.partidas { display: grid; gap: 1rem; }
+.partidas--con-destacada { grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); align-items: start; }
+.partidas__lista { display: grid; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); gap: 1rem; }
+.partidas--con-destacada .partidas__lista { grid-template-columns: 1fr; gap: .8rem; }
+.partidas--con-destacada .partidas__lista .partida { display: grid; grid-template-columns: 11rem minmax(0, 1fr); }
+
+.partida { background: var(--carbon-2); min-width: 0; }
+.partida__media { position: relative; aspect-ratio: 16 / 9; background: var(--ink); overflow: hidden; }
+.partida__media iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.partida__play { position: absolute; inset: 0; padding: 0; border: 0; background: none; cursor: pointer; display: block; width: 100%; }
+.partida__miniatura { width: 100%; height: 100%; object-fit: cover; filter: brightness(.88); transition: filter .3s var(--ease-out), scale .5s var(--ease-out); }
+.partida__play:hover .partida__miniatura, .partida__play:focus-visible .partida__miniatura { filter: brightness(1); }
+.partida__play:focus-visible { outline: 3px solid var(--yellow); outline-offset: -3px; }
+.partida__boton {
+    position: absolute;
+    /* En la esquina: el centro de la miniatura es el VS del canal */
+    right: .7rem; bottom: .7rem;
+    width: 3.4rem; height: 3.4rem;
+    display: grid; place-items: center;
+    background: var(--yellow);
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
+    transition: scale .25s var(--ease-out);
+}
+.partida__boton svg { width: 1.6rem; height: 1.6rem; fill: var(--ink); }
+.partida--destacada .partida__boton { width: 4.6rem; height: 4.6rem; }
+.partida--destacada .partida__boton svg { width: 2.2rem; height: 2.2rem; }
+.partida__play:hover .partida__boton { scale: 1.12; }
+.partida__info { padding: .8rem 1rem 1rem; display: grid; gap: .3rem; align-content: start; min-width: 0; }
+.partida__jugadores { font-weight: 900; font-size: 1.05rem; line-height: 1.2; text-transform: uppercase; overflow-wrap: anywhere; }
+.partida--destacada .partida__jugadores { font-size: clamp(1.2rem, 2.2vw, 1.6rem); }
+.partida__jugadores { display: flex; flex-wrap: wrap; align-items: center; gap: .2rem .3rem; }
+.partida__lado { display: inline-flex; align-items: center; gap: .35rem; color: var(--white); text-decoration: none; }
+.partida__lado .stock { flex: none; }
+a.partida__lado:hover { text-decoration: underline; text-underline-offset: .2em; }
+.partida__contra { margin: 0 .2rem; color: var(--yellow); font-size: .8em; }
+.partida__meta { color: var(--mute); font-size: .88rem; }
+.partida__meta a { color: var(--mute); }
+.partidas--con-destacada .partidas__lista .partida__jugadores { font-size: .92rem; }
+.partidas--con-destacada .partidas__lista .partida__boton { width: 2.4rem; height: 2.4rem; }
+.partidas--con-destacada .partidas__lista .partida__boton svg { width: 1.1rem; height: 1.1rem; }
+
+@media (max-width: 60rem) {
+    .partidas--con-destacada { grid-template-columns: 1fr; }
+}
+@media (max-width: 30rem) {
+    .partidas--con-destacada .partidas__lista .partida { grid-template-columns: 8.5rem minmax(0, 1fr); }
+}
+@media (prefers-reduced-motion: no-preference) {
+    .partidas__lista[data-revelar="pendiente"] > * { opacity: 0; }
+    .partidas__lista[data-revelar="listo"] > * { animation: carta-entra .5s var(--ease-out) both; }
+    .partidas__lista[data-revelar="listo"] > :nth-child(2) { animation-delay: .07s; }
+    .partidas__lista[data-revelar="listo"] > :nth-child(3) { animation-delay: .14s; }
+    .partidas__lista[data-revelar="listo"] > :nth-child(n+4) { animation-delay: .21s; }
+    .partida__play:hover .partida__miniatura { scale: 1.05; }
+}

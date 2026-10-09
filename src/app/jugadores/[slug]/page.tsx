@@ -7,6 +7,7 @@ import { SerieChip } from "@/components/Torneo";
 import { getEvolucion, getJugador, getPersonajesJugador, getRanking } from "@/lib/data";
 import { GraficoEvolucion } from "@/components/GraficoEvolucion";
 import { PersonajesJugador } from "@/components/PersonajesJugador";
+import { GrillaPartidas, getPartidas } from "@/components/Partidas";
 import { fechaCorta } from "@/lib/format";
 import { Contador } from "@/components/Movimiento";
 
@@ -35,9 +36,10 @@ async function Jugador({ slug }: { slug: string }) {
   const ranking = temporada ? await getRanking("premier", temporada) : [];
   const fila = ranking.find((f) => f.jugador.id === jugador.id);
   const mejor = historial.length ? Math.min(...historial.map((h) => h.puesto)) : null;
-  const [evolucion, usos] = await Promise.all([
+  const [evolucion, usos, partidas] = await Promise.all([
     temporada ? getEvolucion(jugador.id, "premier", temporada) : Promise.resolve([]),
     getPersonajesJugador(jugador.id),
+    getPartidas({ jugador: jugador.id }),
   ]);
   const conEvolucion = evolucion.filter((p) => p.posicion !== null).length >= 2;
 
@@ -66,6 +68,12 @@ async function Jugador({ slug }: { slug: string }) {
           <section className={`perfil-datos${conEvolucion && usos.length ? " perfil-datos--doble" : ""}`} aria-label="Temporada y personajes">
             {conEvolucion && <GraficoEvolucion puntos={evolucion} titulo={`Posición en el ranking Premier ${temporada}, fecha por fecha`} />}
             {usos.length > 0 && <PersonajesJugador usos={usos} />}
+          </section>
+        )}
+        {partidas.length > 0 && (
+          <section aria-labelledby="partidas-title">
+            <h2 id="partidas-title" className="section-title">Sus partidas</h2>
+            <GrillaPartidas partidas={partidas} />
           </section>
         )}
         <section aria-labelledby="historial-title">

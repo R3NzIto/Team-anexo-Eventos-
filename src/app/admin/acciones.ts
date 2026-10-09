@@ -4,9 +4,11 @@ import { updateTag } from "next/cache";
 import { requerirAdmin } from "@/lib/admin";
 import { PERSONAJES } from "@/data/personajes";
 import { getJugadores, getRanking, getTemporadas, getTorneos } from "@/lib/data";
-import { editarTorneo, guardarImagen, guardarJugadores, guardarPuntos, guardarTorneo, liberarCampos, slugLibre, sql, type DatosTorneo } from "@/lib/db";
+import { editarTorneo, guardarImagen, guardarVideos, ocultarVideo, guardarJugadores, guardarPuntos, guardarTorneo, liberarCampos, slugLibre, sql, type DatosTorneo } from "@/lib/db";
 import { calcularRanking } from "@/lib/ranking";
 import { importarTorneo, slugDesdeUrl, type Importacion } from "@/lib/startgg";
+import { analizarVideo, leerFeed } from "@/lib/youtube";
+import { LINKS } from "@/lib/site";
 import type { CampoManual, SerieId, TablaPuntos } from "@/lib/types";
 
 /*
@@ -312,5 +314,35 @@ export async function subirAfiche(form: FormData): Promise<{ ok: true; url: stri
     return { ok: true, url: `/imagenes/${id}.${archivo.type.split("/")[1]}` };
   } catch (e) {
     return { ok: false, mensaje: e instanceof Error ? e.message : "No se pudo subir." };
+  }
+}
+
+/* ---------- Videos de YouTube ---------- */
+
+/** Lee el canal, detecta partidas (torneo, jugadores, personajes) y las guarda. */
+export async function traerVideos(): Promise<{ ok: true; nuevos: number; partidas: number } | { ok: false; mensaje: string }> {
+  try {
+    await requerirAdmin();
+    const [feed, torneos, jugadores, antes] = await Promise.all([
+      leerFeed(LINKS.youtubeCanalId), getTorneos(), getJugadores(), sql()`select id from videos`,
+    ]);
+    const conocidos = new Set(antes.map((v) => v.id as string));
+    const analizados = feed.map((v) => analizarVideo(v, torneos, jugadores));
+    await guardarVideos(analizados.map(({ a, b, ...v }) => ({ ...v, a, b })));
+    updateTag("datos");
+    return { ok: true, nuevos: analizados.filter((v) => !conocidos.has(v.id)).length, partidas: analizados.filter((v) => v.esPartida).length };
+  } catch (e) {
+    return { ok: false, mensaje: e instanceof Error ? e.message : "No se pudieron traer los videos." };
+  }
+}
+
+export async function cambiarVisibilidadVideo(id: string, oculto: boolean): Promise<Guardado> {
+  try {
+    await requerirAdmin();
+    await ocultarVideo(id, oculto);
+    updateTag("datos");
+    return { ok: true, slug: id };
+  } catch (e) {
+    return { ok: false, mensaje: e instanceof Error ? e.message : "No se pudo cambiar." };
   }
 }

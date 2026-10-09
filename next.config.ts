@@ -12,7 +12,11 @@ const nextConfig: NextConfig = {
   },
   images: {
     // Banners y afiches de torneos importados desde start.gg.
-    remotePatterns: [{ protocol: "https", hostname: "images.start.gg" }],
+    remotePatterns: [
+      { protocol: "https", hostname: "images.start.gg" },
+      // Miniaturas de los videos del canal de YouTube
+      { protocol: "https", hostname: "i.ytimg.com" },
+    ],
   },
 };
 

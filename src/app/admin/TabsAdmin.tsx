@@ -7,6 +7,7 @@ const TABS = [
   { href: "/admin", nombre: "Torneos" },
   { href: "/admin/puntos", nombre: "Puntos" },
   { href: "/admin/jugadores", nombre: "Jugadores" },
+  { href: "/admin/videos", nombre: "Videos" },
 ];
 
 /** "Torneos" también queda marcada al crear o editar un torneo (/admin/torneos/…). */

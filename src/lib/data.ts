@@ -1,6 +1,6 @@
 import "server-only";
 import { cacheLife, cacheTag } from "next/cache";
-import { leerDatos } from "./db";
+import { leerAlias, leerDatos, leerVideos, type Video } from "./db";
 import { calcularRanking, slugify } from "./ranking";
 import { masUsado, sumarUsos } from "./personajes";
 import { fechaOrdenable } from "./format";
@@ -205,4 +205,20 @@ export async function getPersonajesJugador(jugadorId: string): Promise<{ persona
   const usos: Record<string, number> = {};
   for (const t of torneos) for (const e of t.events) for (const s of e.standings) if (s.jugador === jugadorId) sumarUsos(usos, s.personajes);
   return Object.entries(usos).map(([personaje, games]) => ({ personaje, games })).sort((a, b) => b.games - a.games);
+}
+
+/** Videos visibles del canal, del más nuevo al más viejo. Los alias de jugador ya aplicados. */
+export async function getVideos(): Promise<Video[]> {
+  "use cache";
+  cacheLife("hours");
+  cacheTag("datos");
+  const [videos, datos] = await Promise.all([leerVideos(), leerAlias()]);
+  const principal = (id?: string) => (id ? datos[id] ?? id : undefined);
+  return videos
+    .filter((v) => !v.oculto)
+    .map((v) => ({
+      ...v,
+      a: v.a && { ...v.a, jugador: principal(v.a.jugador) },
+      b: v.b && { ...v.b, jugador: principal(v.b.jugador) },
+    }));
 }
