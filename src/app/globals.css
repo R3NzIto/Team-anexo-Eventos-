@@ -1519,6 +1519,7 @@ a.partida__lado:hover { text-decoration: underline; text-underline-offset: .2em;
 .partida__contra { margin: 0 .2rem; color: var(--yellow); font-size: .8em; }
 .partida__meta { color: var(--mute); font-size: .88rem; }
 .partida__meta a { color: var(--mute); }
+.partida__ronda { display: inline-block; margin-right: .6rem; padding: .1rem .45rem; background: var(--carbon-3); color: var(--white); font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; vertical-align: .1em; }
 .partida__final { display: inline-block; margin-right: .6rem; padding: .1rem .45rem; background: var(--yellow); color: var(--ink); font-size: .72rem; font-weight: 900; text-transform: uppercase; letter-spacing: .06em; vertical-align: .1em; }
 .partidas--con-destacada .partidas__lista .partida__jugadores { font-size: .92rem; }
 .partidas--con-destacada .partidas__lista .partida__boton { width: 2.4rem; height: 2.4rem; }

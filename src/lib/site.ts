@@ -5,8 +5,9 @@ export const SITE_URL = "https://team-anexo-eventos.vercel.app";
 export const LINKS = {
   grupoWhatsapp: "https://chat.whatsapp.com/CPljZCBvcLL3dmFYpi9jkz",
   contactoWhatsapp: "https://wa.me/5492615671596?text=Hola%20Team%20Anexo%2C%20quiero%20organizar%20un%20evento",
-  /** Canal de YouTube (@teamanexo554): de acá se traen los videos de partidas. */
-  youtubeCanalId: "UCs8k46chS6y7Lpv87NZdZpQ",
+  /** Canales de YouTube de donde se traen las partidas: Replays (el principal) y el primero que usaron. */
+  youtubeCanales: ["UC_MAi5lNm09s9pS0eY1_WVQ", "UCs8k46chS6y7Lpv87NZdZpQ"],
+  youtubeReplays: "https://www.youtube.com/@TeamAnexoReplays",
   instagram: "https://www.instagram.com/team_anexo.mza/",
 };
 
@@ -14,7 +15,7 @@ export const REDES: { icon: IconName; nombre: string; detalle: string; href: str
   { icon: "whatsapp", nombre: "Grupo de WhatsApp", detalle: "Avisos y chat del día a día", href: LINKS.grupoWhatsapp, principal: true },
   { icon: "discord", nombre: "Discord", detalle: "Servidor de la comunidad", href: "https://discord.gg/wZ8dkvHjW2" },
   { icon: "twitch", nombre: "Twitch", detalle: "Torneos en vivo", href: "https://www.twitch.tv/team_anexo" },
-  { icon: "youtube", nombre: "YouTube", detalle: "VODs y finales", href: "https://www.youtube.com/@teamanexo554" },
+  { icon: "youtube", nombre: "YouTube", detalle: "Partidas y finales", href: "https://www.youtube.com/@TeamAnexoReplays" },
   { icon: "instagram", nombre: "Instagram", detalle: "Afiches y anuncios", href: LINKS.instagram },
   { icon: "tiktok", nombre: "TikTok", detalle: "Clips", href: "https://www.tiktok.com/@anexo739" },
   { icon: "x", nombre: "X", detalle: "@team_anexo", href: "https://x.com/team_anexo" },

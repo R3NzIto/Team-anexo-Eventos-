@@ -125,3 +125,8 @@ create table if not exists videos (
   actualizado timestamptz not null default now()
 );
 create index if not exists videos_torneo on videos(torneo);
+
+-- Ronda de la partida ("Gran final", "Semifinal de winners"…) y evento cuando
+-- no se pudo vincular a un torneo cargado (p. ej. "SF6 #2").
+alter table videos add column if not exists ronda text;
+alter table videos add column if not exists evento text;

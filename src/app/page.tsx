@@ -108,7 +108,7 @@ export default async function Home() {
           <div className="partidas-bloque">
             <div className="section-head">
               <h3 className="block-title">Partidas</h3>
-              <a className="link-arrow" href="https://www.youtube.com/@teamanexo554" target="_blank" rel="noopener">Ver el canal<Icon name="arrow" className="link-arrow__icon" /></a>
+              <a className="link-arrow" href={LINKS.youtubeReplays} target="_blank" rel="noopener">Ver el canal<Icon name="arrow" className="link-arrow__icon" /></a>
             </div>
             <GrillaPartidas partidas={partidas} destacar />
           </div>

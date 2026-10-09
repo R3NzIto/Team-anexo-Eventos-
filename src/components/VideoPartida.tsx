@@ -15,6 +15,9 @@ export type DatosPartida = {
   torneo?: { nombre: string; slug: string };
   /** Es la gran final del torneo (se marca en la tarjeta). */
   esFinal?: boolean;
+  /** "Semifinal de winners"…; y el evento cuando no hay torneo cargado ("SF6 #2"). */
+  ronda?: string;
+  evento?: string;
 };
 
 const embed = (id: string, extra: string) => `https://www.youtube-nocookie.com/embed/${id}?rel=0&playsinline=1&${extra}`;
@@ -71,8 +74,8 @@ export function VideoPartida({ partida, destacada = false, fecha }: { partida: D
           <Lado lado={b} />
         </p>
         <p className="partida__meta">
-          {partida.esFinal && <span className="partida__final">Gran final</span>}
-          {partida.torneo ? <Link href={`/torneos/${partida.torneo.slug}`}>{partida.torneo.nombre}</Link> : "Team Anexo"}
+          {partida.esFinal ? <span className="partida__final">Gran final</span> : partida.ronda && <span className="partida__ronda">{partida.ronda}</span>}
+          {partida.torneo ? <Link href={`/torneos/${partida.torneo.slug}`}>{partida.torneo.nombre}</Link> : partida.evento ?? "Team Anexo"}
           {" · "}{fecha}
         </p>
       </div>
@@ -81,7 +84,7 @@ export function VideoPartida({ partida, destacada = false, fecha }: { partida: D
 }
 
 function Lado({ lado }: { lado: LadoPartida }) {
-  const contenido = <><StockIcon personaje={lado.personaje} size={28} />{lado.nombre}</>;
+  const contenido = <>{lado.personaje && <StockIcon personaje={lado.personaje} size={28} />}{lado.nombre}</>;
   return lado.slug
     ? <Link className="partida__lado" href={`/jugadores/${lado.slug}`}>{contenido}</Link>
     : <span className="partida__lado">{contenido}</span>;

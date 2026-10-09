@@ -270,6 +270,8 @@ export type Video = {
   vistas?: number;
   juego?: string;
   torneo?: string;
+  ronda?: string;
+  evento?: string;
   esPartida: boolean;
   a?: { nombre: string; jugador?: string; personaje?: string };
   b?: { nombre: string; jugador?: string; personaje?: string };
@@ -280,15 +282,15 @@ export type Video = {
 export async function guardarVideos(videos: Omit<Video, "oculto">[]): Promise<void> {
   const db = sql();
   await db.transaction(videos.map((v) => db`
-    insert into videos (id, titulo, publicado, vistas, juego, torneo, es_partida,
+    insert into videos (id, titulo, publicado, vistas, juego, torneo, ronda, evento, es_partida,
                         nombre_a, jugador_a, personaje_a, nombre_b, jugador_b, personaje_b, actualizado)
     values (${v.id}, ${v.titulo}, ${v.publicado}, ${v.vistas ?? null}, ${v.juego ?? null},
-            (select slug from torneos where slug = ${v.torneo ?? null}), ${v.esPartida},
+            (select slug from torneos where slug = ${v.torneo ?? null}), ${v.ronda ?? null}, ${v.evento ?? null}, ${v.esPartida},
             ${v.a?.nombre ?? null}, ${v.a?.jugador ?? null}, ${v.a?.personaje ?? null},
             ${v.b?.nombre ?? null}, ${v.b?.jugador ?? null}, ${v.b?.personaje ?? null}, now())
     on conflict (id) do update set
       titulo = excluded.titulo, publicado = excluded.publicado, vistas = excluded.vistas, juego = excluded.juego,
-      torneo = excluded.torneo, es_partida = excluded.es_partida,
+      torneo = excluded.torneo, ronda = excluded.ronda, evento = excluded.evento, es_partida = excluded.es_partida,
       nombre_a = excluded.nombre_a, jugador_a = excluded.jugador_a, personaje_a = excluded.personaje_a,
       nombre_b = excluded.nombre_b, jugador_b = excluded.jugador_b, personaje_b = excluded.personaje_b,
       actualizado = now()`));
@@ -305,6 +307,8 @@ export async function leerVideos(): Promise<Video[]> {
     vistas: v.vistas ?? undefined,
     juego: v.juego ?? undefined,
     torneo: v.torneo ?? undefined,
+    ronda: v.ronda ?? undefined,
+    evento: v.evento ?? undefined,
     esPartida: v.es_partida,
     a: lado(v.nombre_a, v.jugador_a, v.personaje_a),
     b: lado(v.nombre_b, v.jugador_b, v.personaje_b),

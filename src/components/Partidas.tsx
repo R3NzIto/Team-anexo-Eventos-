@@ -9,6 +9,10 @@ type Filtro = { torneo?: string; jugador?: string };
 export async function getPartidas(filtro: Filtro = {}): Promise<DatosPartida[]> {
   const [videos, jugadores, torneos] = await Promise.all([getVideos(), getJugadores(), getTorneos()]);
   const slugDe = new Map(jugadores.map((j) => [j.id, j.slug]));
+  // Si el título no dice el personaje (canal Replays), en Smash va el main del jugador.
+  const mainDe = new Map(jugadores.map((j) => [j.id, j.personaje]));
+  const icono = (juego?: string, personaje?: string, jugador?: string) =>
+    personaje ?? (juego === "smash" && jugador ? mainDe.get(jugador) : undefined);
   const torneoDe = new Map(torneos.map((t) => [t.slug, t.nombre]));
   // La final de cada torneo es la partida entre su 1° y su 2°.
   const finalistas = new Map(torneos.map((t) => {
@@ -28,10 +32,12 @@ export async function getPartidas(filtro: Filtro = {}): Promise<DatosPartida[]> 
       id: v.id,
       titulo: v.titulo,
       fecha: v.publicado,
-      a: { nombre: v.a!.nombre, slug: v.a!.jugador ? slugDe.get(v.a!.jugador) : undefined, personaje: v.a!.personaje },
-      b: { nombre: v.b!.nombre, slug: v.b!.jugador ? slugDe.get(v.b!.jugador) : undefined, personaje: v.b!.personaje },
+      a: { nombre: v.a!.nombre, slug: v.a!.jugador ? slugDe.get(v.a!.jugador) : undefined, personaje: icono(v.juego, v.a!.personaje, v.a!.jugador) },
+      b: { nombre: v.b!.nombre, slug: v.b!.jugador ? slugDe.get(v.b!.jugador) : undefined, personaje: icono(v.juego, v.b!.personaje, v.b!.jugador) },
       torneo: v.torneo && torneoDe.has(v.torneo) ? { slug: v.torneo, nombre: torneoDe.get(v.torneo)! } : undefined,
-      esFinal: esFinal(v.torneo, v.a?.jugador, v.b?.jugador),
+      ronda: v.ronda,
+      evento: v.evento,
+      esFinal: v.ronda === "Gran final" || esFinal(v.torneo, v.a?.jugador, v.b?.jugador),
     }));
 }
 
