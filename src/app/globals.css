@@ -860,6 +860,8 @@ ul { list-style: none; padding: 0; }
 .ranking td { padding: .6rem; border-top: 1px solid rgba(255, 255, 255, .12); }
 .ranking__pos { width: 3rem; font-weight: 900; font-size: 1.1rem; }
 .ranking__num { text-align: right; white-space: nowrap; }
+/* El título de una columna numérica se alinea con sus números */
+.ranking th.ranking__num { text-align: right; }
 .ranking__pts { font-weight: 900; font-size: 1.1rem; }
 .ranking__player { display: inline-flex; align-items: center; gap: .7rem; font-weight: 700; text-decoration: none; }
 .ranking__player:hover span { text-decoration: underline; text-underline-offset: .2em; }
