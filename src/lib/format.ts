@@ -18,7 +18,8 @@ export function fechaLarga(fecha: string): string {
 
 /** Fecha comparable aunque solo se conozca el año (se ubica al final de ese año). */
 export function fechaOrdenable(fecha: string): number {
-  if (/^\d{4}$/.test(fecha)) return Date.UTC(Number(fecha), 11, 31);
+  // Solo el año: cuenta como 1° de enero, así no aparece arriba de torneos de ese año con fecha conocida.
+  if (/^\d{4}$/.test(fecha)) return Date.UTC(Number(fecha), 0, 1);
   const t = Date.parse(fecha);
   return Number.isNaN(t) ? 0 : t;
 }

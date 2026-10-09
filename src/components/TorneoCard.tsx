@@ -11,7 +11,7 @@ export function TorneoCard({ torneo }: { torneo: Torneo }) {
     <Link className="tcard" href={`/torneos/${torneo.slug}`}>
       <div className="tcard__media">
         {torneo.afiche ? (
-          <Image src={torneo.afiche} alt="" width={675} height={1200} sizes="(max-width: 768px) 100vw, 20rem" />
+          <Image src={torneo.afiche} alt="" width={675} height={1200} sizes="(max-width: 768px) 8rem, 20rem" />
         ) : (
           <Logo />
         )}

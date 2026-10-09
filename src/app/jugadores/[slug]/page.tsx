@@ -67,7 +67,7 @@ async function Jugador({ slug }: { slug: string }) {
                     <Link href={`/torneos/${h.torneo.slug}`}>{h.torneo.nombre}</Link>
                     <small>{h.evento}</small>
                   </td>
-                  <td className="history__game">{h.puesto}°</td>
+                  <td className={`history__puesto${h.puesto === 1 ? " history__puesto--1" : ""}`}>{h.puesto}°</td>
                 </tr>
               ))}
             </tbody>

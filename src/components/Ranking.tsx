@@ -15,8 +15,8 @@ export function RankingTable({ filas, limite, mostrarPersonaje = true }: { filas
         <tr>
           <th scope="col" className="ranking__pos">#</th>
           <th scope="col">Jugador</th>
-          <th scope="col" className="ranking__num">Torneos</th>
-          <th scope="col" className="ranking__num">Mejor</th>
+          <th scope="col" className="ranking__num ranking__extra">Torneos</th>
+          <th scope="col" className="ranking__num ranking__extra">Mejor</th>
           <th scope="col" className="ranking__num">Puntos</th>
         </tr>
       </thead>
@@ -28,13 +28,13 @@ export function RankingTable({ filas, limite, mostrarPersonaje = true }: { filas
               <Link className="ranking__player" href={`/jugadores/${f.jugador.slug}`}>
                 {mostrarPersonaje && <StockIcon personaje={f.jugador.personaje} />}
                 <span>
-                  {f.jugador.prefijo && <small>{f.jugador.prefijo} | </small>}
+                  {f.jugador.prefijo && <small className="ranking__prefijo">{f.jugador.prefijo}</small>}
                   {f.jugador.gamerTag}
                 </span>
               </Link>
             </td>
-            <td className="ranking__num">{f.torneos}</td>
-            <td className="ranking__num">{f.mejorPuesto}°</td>
+            <td className="ranking__num ranking__extra">{f.torneos}</td>
+            <td className="ranking__num ranking__extra">{f.mejorPuesto}°</td>
             <td className="ranking__num ranking__pts">{f.puntos}</td>
           </tr>
         ))}
