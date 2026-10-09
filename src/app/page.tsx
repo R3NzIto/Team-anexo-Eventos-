@@ -135,7 +135,7 @@ export default async function Home() {
             </div>
           </article>
           <article className="serie serie--stand">
-            <Image className="serie__img" src="/assets/img/eventos/sala-pantallas.jpg" alt="Sala oscura con varias pantallas y jugadores en un evento" width={1258} height={947} sizes="(max-width: 768px) 100vw, 50vw" />
+            <Image className="serie__img" src="/assets/img/eventos/arcade-stick.jpg" alt="Jugadores en una estación de juego de Team Anexo dentro de una convención" width={1400} height={1054} sizes="(max-width: 768px) 100vw, 50vw" />
             <div className="serie__text">
               <h4>Stands en eventos</h4>
               <p>Zonas de torneo, free-to-play y retro dentro de convenciones como Mendotaku, Multigeek y Akiba Fest.</p>
@@ -206,7 +206,7 @@ export default async function Home() {
               <div className="moves__row"><dt>Sede Smash Bros Argentina</dt><dd>Torneos que suman al ranking nacional de Super Smash Bros Ultimate.</dd></div>
             </dl>
           </div>
-          <Image className="about__photo" src="/assets/img/eventos/arcade-stick.jpg" alt="Estación de juego armada por Team Anexo con joysticks y arcade stick" width={1400} height={1054} sizes="(max-width: 960px) 100vw, 40vw" />
+          <Image className="about__photo" src="/assets/img/eventos/sala-pantallas.jpg" alt="Sala oscura con una fila de pantallas y público jugando en un evento producido por Team Anexo" width={1258} height={947} sizes="(max-width: 960px) 100vw, 40vw" />
         </div>
 
         <div className="partners">
