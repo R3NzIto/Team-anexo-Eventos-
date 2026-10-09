@@ -67,7 +67,7 @@ export const SERIES: Serie[] = [
     activa: true,
     rankeable: false,
     descripcion:
-      "Zonas de torneo, free-to-play y retro dentro de convenciones como Mendotaku, Multigeek y Game Mania Fest.",
+      "Zonas de torneo, free-to-play y retro dentro de convenciones como Mendotaku, Multigeek y Akiba Fest.",
   },
   {
     id: "2xko",

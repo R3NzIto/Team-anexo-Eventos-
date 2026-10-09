@@ -54,7 +54,7 @@ export default async function Home() {
             <h2 className="panel__title">Llevá la competencia a tu espacio</h2>
             <p className="panel__lead">Torneos, zonas free-to-play y transmisión en vivo para convenciones, municipios y locales.</p>
             <ul className="mini-partners" aria-label="Algunos eventos con los que trabajamos">
-              {SOCIOS.filter((s) => ["Mendotaku", "Multigeek", "Game Mania Fest", "Akiba Fest"].includes(s.alt)).map((s) => (
+              {SOCIOS.filter((s) => ["Mendotaku", "Multigeek", "Akiba Fest"].includes(s.alt)).map((s) => (
                 <li key={s.alt}><Image src={s.src} alt={s.alt} width={s.w} height={s.h} /></li>
               ))}
             </ul>
@@ -104,6 +104,17 @@ export default async function Home() {
           </div>
         </div>
 
+        <div className="federation">
+          <Image className="federation__logo" src="/assets/logos/smash-bros-argentina.png" alt="Smash Bros Argentina" width={480} height={480} />
+          <div>
+            <h3 className="federation__title">Sede mendocina de Smash Bros Argentina</h3>
+            <p>
+              Smash Bros Argentina es el circuito federal de Super Smash Bros Ultimate, con jugadores de Buenos Aires, Córdoba,
+              Santa Fe, Jujuy, Tucumán, Salta y Mendoza compitiendo por el ranking nacional. Team Anexo es su sede en Mendoza.
+            </p>
+          </div>
+        </div>
+
         {partidas.length > 0 && (
           <div className="partidas-bloque">
             <div className="section-head">
@@ -127,7 +138,7 @@ export default async function Home() {
             <Image className="serie__img" src="/assets/img/eventos/sala-pantallas.jpg" alt="Sala oscura con varias pantallas y jugadores en un evento" width={1258} height={947} sizes="(max-width: 768px) 100vw, 50vw" />
             <div className="serie__text">
               <h4>Stands en eventos</h4>
-              <p>Zonas de torneo, free-to-play y retro dentro de convenciones como Mendotaku, Multigeek y Game Mania Fest.</p>
+              <p>Zonas de torneo, free-to-play y retro dentro de convenciones como Mendotaku, Multigeek y Akiba Fest.</p>
             </div>
           </article>
         </div>
@@ -149,14 +160,6 @@ export default async function Home() {
           </ul>
         </div>
 
-        <div className="history">
-          <h3 className="block-title">Historial</h3>
-          <HistorialTable torneos={pasados.slice(0, 6)} />
-          <p className="history__more">
-            <Link className="link-arrow" href="/torneos">Todos los torneos<Icon name="arrow" className="link-arrow__icon" /></Link>
-          </p>
-        </div>
-
         <div className="community" id="comunidad">
           <h3 className="block-title">Comunidad</h3>
           <ul className="community__list">
@@ -170,6 +173,14 @@ export default async function Home() {
               </li>
             ))}
           </ul>
+        </div>
+
+        <div className="history">
+          <h3 className="block-title">Historial</h3>
+          <HistorialTable torneos={pasados.slice(0, 6)} />
+          <p className="history__more">
+            <Link className="link-arrow" href="/torneos">Todos los torneos<Icon name="arrow" className="link-arrow__icon" /></Link>
+          </p>
         </div>
       </section>
 
@@ -207,17 +218,6 @@ export default async function Home() {
               </li>
             ))}
           </ul>
-        </div>
-
-        <div className="federation">
-          <Image className="federation__logo" src="/assets/logos/smash-bros-argentina.png" alt="Smash Bros Argentina" width={480} height={480} />
-          <div>
-            <h3 className="federation__title">Sede mendocina de Smash Bros Argentina</h3>
-            <p>
-              Smash Bros Argentina es el circuito federal de Super Smash Bros Ultimate, con jugadores de Buenos Aires, Córdoba,
-              Santa Fe, Jujuy, Tucumán, Salta y Mendoza compitiendo por el ranking nacional. Team Anexo es su sede en Mendoza.
-            </p>
-          </div>
         </div>
 
         <div className="contact">

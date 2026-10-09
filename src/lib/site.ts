@@ -25,7 +25,6 @@ export const SOCIOS: { src: string; alt: string; w: number; h: number; grande?: 
   { src: "/assets/logos/socios/multigeek.png", alt: "Multigeek", w: 360, h: 359 },
   { src: "/assets/logos/socios/akiba-fest.png", alt: "Akiba Fest", w: 356, h: 360 },
   { src: "/assets/logos/socios/mendotaku.png", alt: "Mendotaku", w: 462, h: 123 },
-  { src: "/assets/logos/socios/gmf.png", alt: "Game Mania Fest", w: 280, h: 95 },
   { src: "/assets/logos/socios/las-heras.png", alt: "Tu Hogar Las Heras", w: 360, h: 360, grande: true },
   { src: "/assets/logos/socios/godoy-cruz.png", alt: "Municipalidad de Godoy Cruz", w: 345, h: 140 },
   { src: "/assets/logos/socios/casa-del-futuro.png", alt: "Casa del Futuro Godoy Cruz", w: 378, h: 158 },
