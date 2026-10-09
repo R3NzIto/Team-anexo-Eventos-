@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Icon } from "@/components/Icon";
 import { SelectPanel } from "@/components/SelectPanel";
 import { Podio } from "@/components/Podio";
-import { GrillaPartidas, getPartidas } from "@/components/Partidas";
+import { GrillaPartidas, getPartidasInicio } from "@/components/Partidas";
 import { RankingTable, RankingVacio } from "@/components/Ranking";
 import { HistorialTable } from "@/components/Torneo";
 import { getPasados, getPodioUltimaFecha, getProximos, getRanking, getResultadosDestacados, getTemporadas, type Podio as DatosPodio } from "@/lib/data";
@@ -19,7 +19,7 @@ export default async function Home() {
     getTemporadas("premier"),
     getPodioUltimaFecha("premier"),
   ]);
-  const partidas = (await getPartidas()).slice(0, 4);
+  const partidas = await getPartidasInicio(4);
   const proximo = proximos[0];
   const temporada = temporadas[0] ?? 2026;
   const ranking = await getRanking("premier", temporada);

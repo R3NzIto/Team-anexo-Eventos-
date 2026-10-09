@@ -13,6 +13,8 @@ export type DatosPartida = {
   a: LadoPartida;
   b: LadoPartida;
   torneo?: { nombre: string; slug: string };
+  /** Es la gran final del torneo (se marca en la tarjeta). */
+  esFinal?: boolean;
 };
 
 const embed = (id: string, extra: string) => `https://www.youtube-nocookie.com/embed/${id}?rel=0&playsinline=1&${extra}`;
@@ -69,6 +71,7 @@ export function VideoPartida({ partida, destacada = false, fecha }: { partida: D
           <Lado lado={b} />
         </p>
         <p className="partida__meta">
+          {partida.esFinal && <span className="partida__final">Gran final</span>}
           {partida.torneo ? <Link href={`/torneos/${partida.torneo.slug}`}>{partida.torneo.nombre}</Link> : "Team Anexo"}
           {" · "}{fecha}
         </p>
