@@ -1,6 +1,6 @@
 import type { IconName } from "@/components/Icon";
 
-export const SITE_URL = "https://team-anexo-eventos.vercel.app";
+export const SITE_URL = "https://www.teamanexo.com";
 
 export const LINKS = {
   grupoWhatsapp: "https://chat.whatsapp.com/CPljZCBvcLL3dmFYpi9jkz",

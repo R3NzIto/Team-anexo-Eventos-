@@ -10,6 +10,17 @@ const nextConfig: NextConfig = {
     "/jugadores/**": ["./src/app/fonts/*.woff", "./public/assets/smash/stock/*.png", "./public/assets/logos/anexo.svg"],
     "/torneos/**": ["./src/app/fonts/*.woff", "./public/assets/smash/stock/*.png", "./public/assets/logos/anexo.svg"],
   },
+  // La dirección vieja de Vercel lleva al dominio propio, a la misma página.
+  async redirects() {
+    return [
+      {
+        source: "/:camino*",
+        has: [{ type: "host", value: "team-anexo-eventos.vercel.app" }],
+        destination: "https://www.teamanexo.com/:camino*",
+        permanent: true,
+      },
+    ];
+  },
   images: {
     // Banners y afiches de torneos importados desde start.gg.
     remotePatterns: [
