@@ -127,6 +127,7 @@ export default async function Home() {
 
         <div className="series">
           <h3 className="block-title">También jugamos</h3>
+          <div className="series__lista">
           <article className="serie serie--fgc">
             <Image className="serie__img" src="/assets/img/series/sf6.jpg" alt="Miniatura de un enfrentamiento de Street Fighter 6" width={1200} height={675} sizes="(max-width: 768px) 100vw, 50vw" />
             <div className="serie__text">
@@ -141,6 +142,7 @@ export default async function Home() {
               <p>Zonas de torneo, free-to-play y retro dentro de convenciones como Mendotaku, Multigeek y Akiba Fest.</p>
             </div>
           </article>
+          </div>
         </div>
 
         <div className="results">

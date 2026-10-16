@@ -82,8 +82,9 @@ async function Torneo({ slug }: { slug: string }) {
           </section>
         )}
 
+        {/* En el celular se oculta: el iframe de start.gg falla sin cookies de terceros y arriba ya está el botón */}
         {esProximo && torneo.slugStartgg && (
-          <section aria-labelledby="inscripcion-title">
+          <section className="inscripcion-embebida" aria-labelledby="inscripcion-title">
             <h2 id="inscripcion-title" className="section-title">Inscripción</h2>
             <p className="prose" style={{ marginBottom: "1rem" }}>Te inscribís con tu cuenta de start.gg sin salir de esta página.</p>
             <iframe className="embed" title={`Inscripción a ${torneo.nombre}`} src={`https://start.gg/tournament/${torneo.slugStartgg}/register/embed`} loading="lazy" />

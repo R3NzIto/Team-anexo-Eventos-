@@ -1539,3 +1539,150 @@ a.partida__lado:hover { text-decoration: underline; text-underline-offset: .2em;
     .partidas__lista[data-revelar="listo"] > :nth-child(n+4) { animation-delay: .21s; }
     .partida__play:hover .partida__miniatura { scale: 1.05; }
 }
+
+/* ===================================================================
+   Celular: la mayoría llega desde Instagram en el teléfono.
+   Barra fina arriba, secciones abajo (a mano del pulgar), inicio más
+   corto con tiras que se deslizan, y nada que se salga de costado.
+   =================================================================== */
+
+/* Red de seguridad: nada desplaza la página de costado (clip no rompe el sticky de la barra) */
+html, body { overflow-x: clip; }
+
+.profile__prefijo { font-size: .45em; opacity: .7; }
+.series__lista { display: contents; }
+.tabbar { display: none; }
+
+@media (max-width: 47.99rem) {
+    /* --- Barra de arriba: solo logo e Ingresar --- */
+    .topbar { display: flex; padding-block: .45rem; row-gap: 0; }
+    .topbar__nav { display: none; }
+    .topbar__cuenta-slot { margin-left: auto; }
+
+    /* --- Barra de secciones abajo --- */
+    body { padding-bottom: calc(4.25rem + env(safe-area-inset-bottom)); }
+    .tabbar {
+        position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
+        display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+        padding-bottom: env(safe-area-inset-bottom);
+        background: var(--ink);
+        box-shadow: 0 -10px 28px rgba(0, 0, 0, .4);
+    }
+    /* La línea de la marca, como en el marcador del stream */
+    .tabbar::before {
+        content: ""; position: absolute; inset: 0 0 auto; height: 3px;
+        background: linear-gradient(90deg, var(--yellow) 50%, var(--purple) 50%);
+    }
+    .tabbar__item {
+        position: relative;
+        display: grid; justify-items: center; align-content: center; gap: .32rem;
+        min-height: 4.25rem; padding-top: 3px;
+        color: var(--mute); text-decoration: none;
+        font-size: .68rem; font-weight: 800; text-transform: uppercase; letter-spacing: .04em;
+        -webkit-tap-highlight-color: transparent;
+        transition: color .2s var(--ease-out), background-color .2s var(--ease-out);
+    }
+    .tabbar__item:active { background: var(--carbon-2); }
+    .tabbar__icono { width: 1.45rem; height: 1.45rem; }
+    .tabbar__item:first-child .tabbar__icono { color: var(--purple-ink); }
+    .tabbar__placa { display: grid; place-items: center; min-width: 1.9rem; height: 1.45rem; font-size: .8rem; font-weight: 900; line-height: 1; }
+    .tabbar__placa--p1 { background: var(--yellow); color: var(--ink); }
+    .tabbar__placa--p2 { background: var(--purple-ink); color: var(--purple-deep); }
+    .tabbar__item--activa { color: var(--white); background: var(--carbon); }
+    .tabbar__item--activa::after { content: ""; position: absolute; top: 3px; left: 28%; right: 28%; height: 3px; background: var(--white); }
+
+    /* --- Inicio: P1 / P2 más compactos, así el botón entra en la primera pantalla --- */
+    .panel--p1 { padding: 1.75rem var(--gutter) 4rem; }
+    .panel--p2 { padding: 4.25rem var(--gutter) 2.5rem; }
+    .panel__title { font-size: clamp(2.4rem, 12vw, 3.2rem); }
+    .panel--p2 .panel__title { font-size: clamp(1.9rem, 9vw, 2.6rem); }
+    .panel .player { margin-bottom: .9rem; }
+
+    /* Menos aire entre secciones */
+    .route { padding: 3rem var(--gutter); }
+    .route__head { margin-bottom: 1.75rem; }
+    .block-title { margin: 3rem 0 1rem; }
+    .partidas-bloque, .federation { margin-top: 3rem; }
+    .gallery { padding: 3rem var(--gutter); }
+    .gallery__title { margin-bottom: 1.25rem; }
+    .contact { margin-top: 3rem; }
+
+    /* Próximo torneo: tarjeta compacta (afiche al costado), sin repetir títulos gigantes */
+    .upcoming__event { grid-template-columns: 6.5rem minmax(0, 1fr); gap: .5rem 1rem; align-items: start; padding: 1.25rem; }
+    .upcoming__info { display: contents; }
+    .upcoming__poster { grid-row: 1 / span 2; width: 100%; max-width: none; height: auto; }
+    .upcoming__title { grid-column: 2; font-size: 1.35rem; }
+    .upcoming__facts { grid-column: 2; font-size: .95rem; }
+    .upcoming__event .actions { grid-column: 1 / -1; margin-top: .5rem; }
+
+    /* Smash Bros Argentina: franja compacta con el logo al costado */
+    .federation { grid-template-columns: 4.5rem minmax(0, 1fr); gap: 1rem; align-items: start; padding: 1.25rem; }
+    .federation__logo { width: 4.5rem; height: auto; }
+    .federation__title { font-size: 1.2rem; margin-bottom: .5rem; }
+    .federation p { font-size: .92rem; line-height: 1.45; }
+
+    /* --- Tiras que se deslizan con el dedo (mismo comportamiento que Resultados) --- */
+    .results__list,
+    .partidas__lista,
+    .series__lista,
+    .gallery__grid {
+        display: grid;
+        grid-auto-flow: column;
+        grid-template-columns: none;
+        overflow-x: auto;
+        overscroll-behavior-x: contain;
+        scroll-snap-type: x mandatory;
+        scroll-padding-inline: var(--gutter);
+        /* De borde a borde de la pantalla: se ve que hay más para deslizar */
+        margin-inline: calc(-1 * var(--gutter));
+        padding: 0 var(--gutter) .75rem;
+        gap: .75rem;
+        scrollbar-width: none;
+    }
+    .results__list::-webkit-scrollbar,
+    .partidas__lista::-webkit-scrollbar,
+    .series__lista::-webkit-scrollbar,
+    .gallery__grid::-webkit-scrollbar { display: none; }
+    .results__list > *, .partidas__lista > *, .series__lista > *, .gallery__grid > * { scroll-snap-align: start; }
+
+    .results__list { grid-auto-columns: 80%; }
+    .partidas__lista { grid-auto-columns: 78%; }
+    .partidas--con-destacada .partidas__lista { grid-template-columns: none; gap: .75rem; }
+    .partidas--con-destacada .partidas__lista .partida { grid-template-columns: 1fr; }
+    .partidas--con-destacada .partidas__lista .partida__jugadores { font-size: .95rem; }
+    .series__lista { grid-auto-columns: 84%; }
+    .serie--fgc, .serie--stand { grid-column: auto; }
+    .gallery__grid { grid-auto-columns: 72%; grid-template-rows: 15rem; grid-auto-rows: 15rem; }
+    .gallery__grid li:nth-child(3n + 1) { grid-column: auto; grid-row: auto; }
+
+    /* Logos de los eventos: tres por fila */
+    .partners__wall { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .partners__wall li { padding: .6rem; }
+
+    /* --- Perfil: prefijo arriba del nombre y estadísticas en 2 × 2 --- */
+    .profile { gap: 1rem; }
+    .profile .stock { width: 72px; height: 72px; }
+    .profile__prefijo { display: block; font-size: .3em; letter-spacing: .04em; margin-bottom: .25em; }
+    .profile__prefijo span { display: none; }
+    .profile > div { width: 100%; }
+    .profile__stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .5rem; }
+
+    /* --- Torneo: el iframe de start.gg falla en el celu; queda el botón de arriba --- */
+    .inscripcion-embebida { display: none; }
+
+    /* --- Inicio: las secciones más largas, más compactas --- */
+    /* Comunidad: WhatsApp a lo ancho y el resto de a dos */
+    .community__list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .5rem; }
+    .community__item { grid-template-columns: 1fr; row-gap: .35rem; padding: .9rem; }
+    .community__item svg { grid-row: auto; width: 1.6rem; height: 1.6rem; }
+    .community__item small { font-size: .8rem; line-height: 1.3; }
+    .community__item--main { grid-template-columns: 2.2rem 1fr; }
+    .community__item--main svg { grid-row: span 2; }
+    /* Historial: los cuatro últimos (el resto en "Todos los torneos") */
+    .history .history__table tbody tr:nth-child(n + 5) { display: none; }
+    /* Qué hacemos: la foto ya está arriba, en P2 */
+    .about__photo { display: none; }
+    .about__lead { font-size: 1.1rem; margin-bottom: 1.5rem; }
+    .moves__row { padding: .8rem 0; gap: .2rem; }
+    .ranking td { padding-block: .45rem; }
+}

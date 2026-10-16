@@ -70,7 +70,8 @@ export function GraficoEvolucion({ puntos, titulo }: { puntos: PuntoEvolucion[];
           </div>
         )}
       </div>
-      <table className="sr-only">
+      <div className="sr-only">
+      <table>
         <caption>{titulo}</caption>
         <thead><tr><th scope="col">Fecha</th><th scope="col">Torneo</th><th scope="col">Posición</th><th scope="col">Puntos</th></tr></thead>
         <tbody>
@@ -79,6 +80,7 @@ export function GraficoEvolucion({ puntos, titulo }: { puntos: PuntoEvolucion[];
           ))}
         </tbody>
       </table>
+      </div>
     </figure>
   );
 }

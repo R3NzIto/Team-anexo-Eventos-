@@ -34,6 +34,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: "#1E1E1E",
+  // La barra de abajo del celular respeta la rayita del iPhone (env(safe-area-inset-bottom))
+  viewportFit: "cover",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

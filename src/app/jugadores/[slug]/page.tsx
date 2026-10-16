@@ -50,7 +50,7 @@ async function Jugador({ slug }: { slug: string }) {
           <StockIcon personaje={jugador.personaje} size={96} />
           <div>
             <h1 className="page-hero__title">
-              {jugador.prefijo && <small style={{ fontSize: ".45em", opacity: .7 }}>{jugador.prefijo} | </small>}
+              {jugador.prefijo && <small className="profile__prefijo">{jugador.prefijo}<span aria-hidden="true"> | </span></small>}
               {jugador.gamerTag}
             </h1>
             <div className="profile__stats">
