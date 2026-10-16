@@ -1,15 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Countdown } from "@/components/Countdown";
 import { Icon } from "@/components/Icon";
 import { SelectPanel } from "@/components/SelectPanel";
 import { Podio } from "@/components/Podio";
 import { GrillaPartidas, getPartidasInicio } from "@/components/Partidas";
-import { RankingTable, RankingVacio } from "@/components/Ranking";
+import { RankingTable, RankingVacio, StockIcon } from "@/components/Ranking";
 import { HistorialTable } from "@/components/Torneo";
 import { getPasados, getPodioUltimaFecha, getProximos, getRanking, getResultadosDestacados, getTemporadas, type Podio as DatosPodio } from "@/lib/data";
 import { fechaLarga, urlStartgg } from "@/lib/format";
 import { LINKS, REDES, SOCIOS } from "@/lib/site";
-import type { Torneo } from "@/lib/types";
+import type { FilaRanking, Torneo } from "@/lib/types";
+import type { DatosPartida } from "@/components/VideoPartida";
 
 export default async function Home() {
   const [proximos, pasados, resultados, temporadas, podio] = await Promise.all([
@@ -26,6 +28,9 @@ export default async function Home() {
 
   return (
     <>
+      {/* En el celular el inicio arranca así; en la compu, con la pantalla de selección P1 / P2 */}
+      <InicioMovil torneo={proximo} lider={ranking[0]} partida={partidas[0]} />
+
       <section className="select" aria-label="Elegí tu camino">
         <SelectPanel lado="p1" href="#competir">
           <Image className="panel__photo" src="/assets/img/p1-competir.jpg" alt="" width={1258} height={947} priority sizes="62vw" />
@@ -116,7 +121,7 @@ export default async function Home() {
         </div>
 
         {partidas.length > 0 && (
-          <div className="partidas-bloque">
+          <div className="partidas-bloque" id="partidas">
             <div className="section-head">
               <h3 className="block-title">Partidas</h3>
               <a className="link-arrow" href={LINKS.youtubeReplays} target="_blank" rel="noopener">Ver el canal<Icon name="arrow" className="link-arrow__icon" /></a>
@@ -238,6 +243,82 @@ export default async function Home() {
         </div>
       </section>
     </>
+  );
+}
+
+/**
+ * Inicio en el celular: el próximo torneo (con cuenta regresiva e inscripción) y cuatro
+ * accesos con un dato vivo cada uno. Reemplaza a la pantalla de selección P1 / P2 / VS,
+ * que está pensada para el mouse.
+ */
+function InicioMovil({ torneo, lider, partida }: { torneo?: Torneo; lider?: FilaRanking; partida?: DatosPartida }) {
+  return (
+    <section className="inicio-movil" aria-label="Inicio">
+      <div className="proximo-hero">
+        {torneo ? (
+          <>
+            {torneo.afiche && (
+              <div className="proximo-hero__afiche">
+                <Image src={torneo.afiche} alt={`Afiche de ${torneo.nombre}`} fill sizes="100vw" priority />
+              </div>
+            )}
+            <div className="proximo-hero__cuerpo">
+              <p className="proximo-hero__etiqueta">Próximo torneo</p>
+              <h1 className="proximo-hero__titulo">{torneo.nombre}</h1>
+              <p className="proximo-hero__fecha">{[fechaLarga(torneo.fecha), torneo.sede, torneo.valor].filter(Boolean).join(" · ")}</p>
+              {torneo.fecha.length > 10 && <Countdown fecha={torneo.fecha} />}
+              <div className="actions">
+                {torneo.slugStartgg
+                  ? <a className="btn btn--p1" href={`${urlStartgg(torneo.slugStartgg)}/register`} target="_blank" rel="noopener">Inscribirme</a>
+                  : <Link className="btn btn--p1" href={`/torneos/${torneo.slug}`}>Inscribirme</Link>}
+                <Link className="btn btn--ghost" href={`/torneos/${torneo.slug}`}>Ver torneo</Link>
+              </div>
+            </div>
+          </>
+        ) : (
+          <div className="proximo-hero__cuerpo">
+            <p className="proximo-hero__etiqueta">Próximo torneo</p>
+            <h1 className="proximo-hero__titulo">Estamos armando la próxima fecha</h1>
+            <p className="proximo-hero__fecha">La anunciamos primero en el grupo de la comunidad.</p>
+            <div className="actions">
+              <a className="btn btn--p1" href={LINKS.grupoWhatsapp} target="_blank" rel="noopener">
+                <Icon name="whatsapp" className="btn__icon" />
+                Unirme al grupo
+              </a>
+            </div>
+          </div>
+        )}
+      </div>
+
+      <nav className="accesos" aria-label="Accesos rápidos">
+        <Link className="acceso acceso--p1" href="/jugadores">
+          <span className="acceso__marca"><span className="tag__p">P1</span></span>
+          <strong className="acceso__titulo">Ranking</strong>
+          <span className="acceso__dato">
+            {lider ? <><StockIcon personaje={lider.jugador.personaje} size={20} />{lider.posicion}° {lider.jugador.gamerTag} · {lider.puntos} pts</> : "Jugadores y perfiles"}
+          </span>
+          <Icon name="arrow" className="acceso__flecha" />
+        </Link>
+        <Link className="acceso" href="#partidas">
+          <span className="acceso__marca"><Icon name="youtube" className="acceso__icono" /></span>
+          <strong className="acceso__titulo">Partidas</strong>
+          <span className="acceso__dato">{partida ? `${partida.a.nombre} vs ${partida.b.nombre}` : "Finales y VODs"}</span>
+          <Icon name="arrow" className="acceso__flecha" />
+        </Link>
+        <Link className="acceso" href="#comunidad">
+          <span className="acceso__marca"><Icon name="whatsapp" className="acceso__icono" /></span>
+          <strong className="acceso__titulo">Comunidad</strong>
+          <span className="acceso__dato">WhatsApp, Discord y más</span>
+          <Icon name="arrow" className="acceso__flecha" />
+        </Link>
+        <Link className="acceso acceso--p2" href="#organizar">
+          <span className="acceso__marca"><span className="tag__p">P2</span></span>
+          <strong className="acceso__titulo">¿Organizás un evento?</strong>
+          <span className="acceso__dato">Torneos y stands para tu espacio</span>
+          <Icon name="arrow" className="acceso__flecha" />
+        </Link>
+      </nav>
+    </section>
   );
 }
 
