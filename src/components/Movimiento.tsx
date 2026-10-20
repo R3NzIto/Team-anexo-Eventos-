@@ -77,7 +77,10 @@ export function Revelar({ children, className, style }: { children: ReactNode; c
   return <div ref={ref} className={className} style={style}>{children}</div>;
 }
 
-/** Número que cuenta desde 0 cuando aparece en pantalla, como un marcador. */
+/**
+ * Número que cuenta desde 0 cuando aparece en pantalla, como un marcador.
+ * La animación es solo visual: los lectores de pantalla leen siempre el valor final.
+ */
 export function Contador({ valor, retraso = 0, duracion = 900 }: { valor: number; retraso?: number; duracion?: number }) {
   const ref = useRef<HTMLSpanElement>(null);
   useLayoutEffect(() => {
@@ -107,5 +110,10 @@ export function Contador({ valor, retraso = 0, duracion = 900 }: { valor: number
       el.textContent = String(valor);
     };
   }, [valor, retraso, duracion]);
-  return <span ref={ref}>{valor}</span>;
+  return (
+    <>
+      <span ref={ref} aria-hidden="true">{valor}</span>
+      <span className="sr-only">{valor}</span>
+    </>
+  );
 }

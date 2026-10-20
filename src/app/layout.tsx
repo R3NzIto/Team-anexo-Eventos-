@@ -8,7 +8,8 @@ import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const rubik = localFont({
-  src: "./fonts/Rubik-Variable.ttf",
+  // Recortada a caracteres latinos y comprimida (47 KB en vez de 354 KB del .ttf original).
+  src: "./fonts/Rubik-Variable.woff2",
   weight: "300 900",
   variable: "--font-rubik",
   display: "swap",
